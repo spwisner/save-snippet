@@ -10,27 +10,218 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var contentNode = document.getElementById('contents');
 
-var LoginForm = function (_React$Component) {
-  _inherits(LoginForm, _React$Component);
+// Test Snippet Data
+var snippets = [{
+  id: 1,
+  subject: 'PropType',
+  tags: 'proptype, specification, React.propTypes',
+  file_extention: '.jsx',
+  created: '2017-05-23',
+  lib_framework: 'React.js',
+  description: 'Proptypes are used when properties being passed from one component to another can be validated against a specification',
+  code: 'IssueRow.propTypes = {issue_id: React.PropTypes.number.isRequired, issue_title: React.PropTypes.string};',
+  notes: 'Only Checked in Developer Mode'
+}, {
+  id: 2,
+  subject: 'Default Property Value',
+  tags: 'default, property-value, property',
+  file_extention: '.jsx',
+  created: '2017-06-01',
+  lib_framework: 'React.js',
+  description: 'Used when parent does not supply value to parent',
+  code: 'IssueRow.defaultProps = {issue_title: "-- no title --",};',
+  notes: 'Needs to be outside of component as a function'
+}];
 
-  function LoginForm() {
-    _classCallCheck(this, LoginForm);
+var SnippetRow = function (_React$Component) {
+  _inherits(SnippetRow, _React$Component);
 
-    return _possibleConstructorReturn(this, (LoginForm.__proto__ || Object.getPrototypeOf(LoginForm)).apply(this, arguments));
+  function SnippetRow() {
+    _classCallCheck(this, SnippetRow);
+
+    return _possibleConstructorReturn(this, (SnippetRow.__proto__ || Object.getPrototypeOf(SnippetRow)).apply(this, arguments));
   }
 
-  _createClass(LoginForm, [{
+  _createClass(SnippetRow, [{
+    key: 'render',
+    value: function render() {
+      var borderedStyle = {
+        border: "1px solid silver",
+        passing: 4
+      };
+
+      var snippet = this.props.snippet;
+
+      return React.createElement(
+        'tr',
+        null,
+        React.createElement(
+          'td',
+          null,
+          snippet.id
+        ),
+        React.createElement(
+          'td',
+          null,
+          snippet.created
+        ),
+        React.createElement(
+          'td',
+          null,
+          snippet.subject
+        ),
+        React.createElement(
+          'td',
+          null,
+          snippet.tags
+        ),
+        React.createElement(
+          'td',
+          null,
+          snippet.file_extention
+        ),
+        React.createElement(
+          'td',
+          null,
+          snippet.lib_framework
+        ),
+        React.createElement(
+          'td',
+          null,
+          snippet.description
+        ),
+        React.createElement(
+          'td',
+          null,
+          snippet.code
+        ),
+        React.createElement(
+          'td',
+          null,
+          snippet.notes
+        )
+      );
+    }
+  }]);
+
+  return SnippetRow;
+}(React.Component);
+
+var SnippetTable = function (_React$Component2) {
+  _inherits(SnippetTable, _React$Component2);
+
+  function SnippetTable() {
+    _classCallCheck(this, SnippetTable);
+
+    return _possibleConstructorReturn(this, (SnippetTable.__proto__ || Object.getPrototypeOf(SnippetTable)).apply(this, arguments));
+  }
+
+  _createClass(SnippetTable, [{
+    key: 'render',
+    value: function render() {
+      var borderedStyle = {
+        border: "1px solid silver",
+        padding: 6
+      };
+
+      var snippetRows = this.props.snippets.map(function (snippet) {
+        return React.createElement(SnippetRow, { key: snippet.id, snippet: snippet });
+      });
+
+      return React.createElement(
+        'table',
+        { className: 'bordered-table' },
+        React.createElement(
+          'thead',
+          null,
+          React.createElement(
+            'tr',
+            null,
+            React.createElement(
+              'th',
+              null,
+              'Id'
+            ),
+            React.createElement(
+              'th',
+              null,
+              'Created'
+            ),
+            React.createElement(
+              'th',
+              null,
+              'Subject'
+            ),
+            React.createElement(
+              'th',
+              null,
+              'Tags'
+            ),
+            React.createElement(
+              'th',
+              null,
+              'File Extention'
+            ),
+            React.createElement(
+              'th',
+              null,
+              'Library/Framework'
+            ),
+            React.createElement(
+              'th',
+              null,
+              'Description'
+            ),
+            React.createElement(
+              'th',
+              null,
+              'Code'
+            ),
+            React.createElement(
+              'th',
+              null,
+              'Notes'
+            )
+          )
+        ),
+        React.createElement(
+          'tbody',
+          null,
+          snippetRows
+        )
+      );
+    }
+  }]);
+
+  return SnippetTable;
+}(React.Component);
+
+var SnippetList = function (_React$Component3) {
+  _inherits(SnippetList, _React$Component3);
+
+  function SnippetList() {
+    _classCallCheck(this, SnippetList);
+
+    return _possibleConstructorReturn(this, (SnippetList.__proto__ || Object.getPrototypeOf(SnippetList)).apply(this, arguments));
+  }
+
+  _createClass(SnippetList, [{
     key: 'render',
     value: function render() {
       return React.createElement(
         'div',
         null,
-        'Placeholder for login form'
+        React.createElement(
+          'h1',
+          null,
+          'Save Your Snippet'
+        ),
+        React.createElement(SnippetTable, { snippets: snippets })
       );
     }
   }]);
 
-  return LoginForm;
+  return SnippetList;
 }(React.Component);
 
-ReactDOM.render(React.createElement(LoginForm, null), contentNode);
+ReactDOM.render(React.createElement(SnippetList, null), contentNode);
