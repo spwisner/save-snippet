@@ -13,21 +13,17 @@ var contentNode = document.getElementById('contents');
 // Testing Snippet Data
 var snippets = [{
   id: 1,
-  subject: 'PropType',
-  tags: 'proptype, specification, React.propTypes',
-  file_extention: '.jsx',
+  title: 'PropType',
   created: new Date('2017-06-01'),
-  lib_framework: 'React.js',
+  library: 'React.js',
   description: 'Proptypes are used when properties being passed from one component to another can be validated against a specification',
   code: 'SnippetRow.propTypes = {snippet_id: React.PropTypes.number.isRequired, snippet_title: React.PropTypes.string};',
   notes: 'Only Checked in Developer Mode'
 }, {
   id: 2,
-  subject: 'Default Property Value',
-  tags: 'default, property-value, property',
-  file_extention: '.jsx',
+  title: 'Default Property Value',
   created: new Date('2016-06-02'),
-  lib_framework: 'React.js',
+  library: 'React.js',
   description: 'Used when parent does not supply value to parent',
   code: 'SnippetRow.defaultProps = {snippet_title: "-- no title --",};',
   notes: 'Needs to be outside of component as a function'
@@ -45,17 +41,7 @@ var SnippetRow = function SnippetRow(props) {
     React.createElement(
       'td',
       null,
-      props.snippet.subject
-    ),
-    React.createElement(
-      'td',
-      null,
-      props.snippet.tags
-    ),
-    React.createElement(
-      'td',
-      null,
-      props.snippet.file_extention
+      props.snippet.title
     ),
     React.createElement(
       'td',
@@ -65,7 +51,7 @@ var SnippetRow = function SnippetRow(props) {
     React.createElement(
       'td',
       null,
-      props.snippet.lib_framework
+      props.snippet.library
     ),
     React.createElement(
       'td',
@@ -81,6 +67,15 @@ var SnippetRow = function SnippetRow(props) {
       'td',
       null,
       props.snippet.notes
+    ),
+    React.createElement(
+      'td',
+      null,
+      React.createElement(
+        'button',
+        null,
+        'View'
+      )
     )
   );
 };
@@ -107,17 +102,7 @@ function SnippetTable(props) {
         React.createElement(
           'th',
           null,
-          'Subject'
-        ),
-        React.createElement(
-          'th',
-          null,
-          'Tags'
-        ),
-        React.createElement(
-          'th',
-          null,
-          'File Extention'
+          'Title'
         ),
         React.createElement(
           'th',
@@ -143,6 +128,11 @@ function SnippetTable(props) {
           'th',
           null,
           'Notes'
+        ),
+        React.createElement(
+          'th',
+          null,
+          'View'
         )
       )
     ),
@@ -174,10 +164,8 @@ var SnippetAdd = function (_React$Component) {
 
       // this.props.createSnippet calls the createSnippet method in SnippetList
       this.props.createSnippet({
-        subject: form.subject.value,
-        tags: form.tags.value,
-        file_extention: form.file_extention.value,
-        lib_framework: form.lib_framework.value,
+        title: form.title.value,
+        library: form.library.value,
         description: form.description.value,
         code: form.code.value,
         notes: form.notes.value,
@@ -185,10 +173,9 @@ var SnippetAdd = function (_React$Component) {
       });
 
       // Clear the form for the next input
-      form.subject.value = "";
-      form.tags.value = "";
-      form.file_extention.value = "";
-      form.lib_framework.value = "";
+      form.title.value = "";
+
+      form.library.value = "";
       form.description.value = "";
       form.code.value = "";
       form.notes.value = "";
@@ -200,13 +187,12 @@ var SnippetAdd = function (_React$Component) {
       return React.createElement(
         'div',
         null,
+        ' ',
         React.createElement(
           'form',
           { name: 'snippetAdd', onSubmit: this.handleSubmit },
-          React.createElement('input', { type: 'text', name: 'subject', placeholder: 'Subject' }),
-          React.createElement('input', { type: 'text', name: 'tags', placeholder: 'Tags' }),
-          React.createElement('input', { type: 'text', name: 'file_extention', placeholder: 'File Extension' }),
-          React.createElement('input', { type: 'text', name: 'lib_framework', placeholder: 'Framework' }),
+          React.createElement('input', { type: 'text', name: 'title', placeholder: 'Subject' }),
+          React.createElement('input', { type: 'text', name: 'library', placeholder: 'Library' }),
           React.createElement('input', { type: 'text', name: 'description', placeholder: 'Description' }),
           React.createElement('input', { type: 'text', name: 'code', placeholder: 'Code' }),
           React.createElement('input', { type: 'text', name: 'notes', placeholder: 'Notes' }),
@@ -284,16 +270,16 @@ var SnippetList = function (_React$Component2) {
         React.createElement(
           'h3',
           null,
-          'Saved Snippets'
+          'Create a Snippet'
         ),
-        React.createElement(SnippetTable, { snippets: this.state.snippets }),
+        React.createElement(SnippetAdd, { createSnippet: this.createSnippet }),
         React.createElement('hr', null),
         React.createElement(
           'h3',
           null,
-          'Create a Snippet'
+          'Saved Snippets'
         ),
-        React.createElement(SnippetAdd, { createSnippet: this.createSnippet })
+        React.createElement(SnippetTable, { snippets: this.state.snippets })
       );
     }
   }]);

@@ -6,22 +6,18 @@ const contentNode = document.getElementById('contents');
 const snippets = [
   {
     id: 1,
-    subject: 'PropType',
-    tags: 'proptype, specification, React.propTypes',
-    file_extention: '.jsx',
+    title: 'PropType',
     created: new Date('2017-06-01'),
-    lib_framework: 'React.js',
+    library: 'React.js',
     description: 'Proptypes are used when properties being passed from one component to another can be validated against a specification',
     code: 'SnippetRow.propTypes = {snippet_id: React.PropTypes.number.isRequired, snippet_title: React.PropTypes.string};',
     notes: 'Only Checked in Developer Mode',
   },
   {
     id: 2,
-    subject: 'Default Property Value',
-    tags: 'default, property-value, property',
-    file_extention: '.jsx',
+    title: 'Default Property Value',
     created: new Date('2016-06-02'),
-    lib_framework: 'React.js',
+    library: 'React.js',
     description: 'Used when parent does not supply value to parent',
     code: 'SnippetRow.defaultProps = {snippet_title: "-- no title --",};',
     notes: 'Needs to be outside of component as a function',
@@ -31,14 +27,13 @@ const snippets = [
 const SnippetRow = (props) => (
   <tr>
     <td>{props.snippet.id}</td>
-    <td>{props.snippet.subject}</td>
-    <td>{props.snippet.tags}</td>
-    <td>{props.snippet.file_extention}</td>
+    <td>{props.snippet.title}</td>
     <td>{props.snippet.created.toDateString()}</td>
-    <td>{props.snippet.lib_framework}</td>
-    <td>{props.snippet.description}</td>
+    <td>{props.snippet.library}</td>
+    <td >{props.snippet.description}</td>
     <td>{props.snippet.code}</td>
     <td>{props.snippet.notes}</td>
+    <td><button>View</button></td>
   </tr>
 )
 
@@ -51,14 +46,13 @@ function SnippetTable(props) {
       <thead>
         <tr>
           <th>Id</th>
-          <th>Subject</th>
-          <th>Tags</th>
-          <th>File Extention</th>
+          <th>Title</th>
           <th>Created</th>
           <th>Library</th>
           <th>Description</th>
           <th>Code</th>
           <th>Notes</th>
+          <th>View</th>
         </tr>
       </thead>
       <tbody>{snippetRows}</tbody>
@@ -78,10 +72,8 @@ class SnippetAdd extends React.Component {
 
     // this.props.createSnippet calls the createSnippet method in SnippetList
     this.props.createSnippet({
-      subject: form.subject.value,
-      tags: form.tags.value,
-      file_extention: form.file_extention.value,
-      lib_framework: form.lib_framework.value,
+      title: form.title.value,
+      library: form.library.value,
       description: form.description.value,
       code: form.code.value,
       notes: form.notes.value,
@@ -89,10 +81,9 @@ class SnippetAdd extends React.Component {
     });
 
     // Clear the form for the next input
-    form.subject.value = "";
-    form.tags.value = "";
-    form.file_extention.value = "";
-    form.lib_framework.value = "";
+    form.title.value = "";
+
+    form.library.value = "";
     form.description.value = "";
     form.code.value = "";
     form.notes.value = "";
@@ -101,12 +92,9 @@ class SnippetAdd extends React.Component {
   render() {
     // Form name included so that inputs can be accessed
     return (
-      <div>
-        <form name="snippetAdd" onSubmit={this.handleSubmit}>
-          <input type="text" name="subject" placeholder="Subject" />
-          <input type="text" name="tags" placeholder="Tags" />
-          <input type="text" name="file_extention" placeholder="File Extension" />
-          <input type="text" name="lib_framework" placeholder="Framework" />
+      <div> <form name="snippetAdd" onSubmit={this.handleSubmit}>
+          <input type="text" name="title" placeholder="Subject" />
+          <input type="text" name="library" placeholder="Library" />
           <input type="text" name="description" placeholder="Description" />
           <input type="text" name="code" placeholder="Code" />
           <input type="text" name="notes" placeholder="Notes" />
@@ -151,11 +139,11 @@ class SnippetList extends React.Component {
     return (
       <div>
         <h1>Save Your Snippet</h1>
-        <h3>Saved Snippets</h3>
-        <SnippetTable snippets={this.state.snippets} />
-        <hr />
         <h3>Create a Snippet</h3>
         <SnippetAdd createSnippet={this.createSnippet}/>
+        <hr />
+        <h3>Saved Snippets</h3>
+        <SnippetTable snippets={this.state.snippets} />
       </div>
     );
   }
