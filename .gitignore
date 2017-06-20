@@ -3,6 +3,9 @@ dist
 vendor.js
 specs.js
 application.js
+example.jsx
+App.js
+static/App.js
 _SpecRunner.html
 *.woff2
 *.woff
