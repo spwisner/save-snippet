@@ -24,23 +24,39 @@ const snippets = [
   },
 ];
 
-const SnippetRow = (props) => (
-  <tr>
-    <td>{props.snippet.id}</td>
-    <td>{props.snippet.title}</td>
-    <td>{props.snippet.created.toDateString()}</td>
-    <td>{props.snippet.library}</td>
-    <td>{props.snippet.description}</td>
-    <td>{props.snippet.code}</td>
-    <td>{props.snippet.notes}</td>
-    <td><button data-id={props.snippet.id}>View</button></td>
-  </tr>
-)
+// const SnippetRow = (props) => (
+//   <tr>
+//     <td>{props.snippet.id}</td>
+//     <td>{props.snippet.title}</td>
+//     <td>{props.snippet.created.toDateString()}</td>
+//     <td>{props.snippet.library}</td>
+//     <td>{props.snippet.description}</td>
+//     <td>{props.snippet.code}</td>
+//     <td>{props.snippet.notes}</td>
+//     <td><button data-id={props.snippet.id}>View</button></td>
+//   </tr>
+// )
+
+class SnippetRow extends React.Component {
+  render() {
+    return (
+      <tr>
+        <td>{this.props.snippet.id}</td>
+        <td>{this.props.snippet.title}</td>
+        <td>{this.props.snippet.created.toDateString()}</td>
+        <td>{this.props.snippet.library}</td>
+        <td>{this.props.snippet.description}</td>
+        <td>{this.props.snippet.code}</td>
+        <td>{this.props.snippet.notes}</td>
+        <td><button data-id={this.props.snippet.id}>View</button></td>
+      </tr>
+    )
+  }
+}
 
 
 function SnippetTable(props) {
   const snippetRows = props.snippets.map(snippet => <SnippetRow key={snippet.id} snippet={snippet} /> );
-
   return (
     <table className="bordered-table">
       <thead>
@@ -107,6 +123,11 @@ class SnippetAdd extends React.Component {
 // Individual Snippets View Component:
 
 class SnippetRecord extends React.Component {
+  constructor() {
+    super();
+    this.state = { snippet: {} };
+  }
+
   render() {
     return(
       <div>
@@ -117,19 +138,12 @@ class SnippetRecord extends React.Component {
           <h3 className="title-underline">Code</h3>
           <p>Code content Here - Revised</p>
         </div>
+        <div>
+          <button>Edit</button>
+          <button>Delete</button>
+        </div>
       </div>
     )
-  }
-}
-
-class SnippetShow extends React.Component {
-  constructor() {
-    super();
-    this.handleClick.bind(this);
-  }
-
-  handleClick(event) {
-    event.preventDefault();
   }
 }
 

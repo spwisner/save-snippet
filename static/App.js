@@ -29,62 +29,89 @@ var snippets = [{
   notes: 'Needs to be outside of component as a function'
 }];
 
-var SnippetRow = function SnippetRow(props) {
-  return React.createElement(
-    'tr',
-    null,
-    React.createElement(
-      'td',
-      null,
-      props.snippet.id
-    ),
-    React.createElement(
-      'td',
-      null,
-      props.snippet.title
-    ),
-    React.createElement(
-      'td',
-      null,
-      props.snippet.created.toDateString()
-    ),
-    React.createElement(
-      'td',
-      null,
-      props.snippet.library
-    ),
-    React.createElement(
-      'td',
-      null,
-      props.snippet.description
-    ),
-    React.createElement(
-      'td',
-      null,
-      props.snippet.code
-    ),
-    React.createElement(
-      'td',
-      null,
-      props.snippet.notes
-    ),
-    React.createElement(
-      'td',
-      null,
-      React.createElement(
-        'button',
+// const SnippetRow = (props) => (
+//   <tr>
+//     <td>{props.snippet.id}</td>
+//     <td>{props.snippet.title}</td>
+//     <td>{props.snippet.created.toDateString()}</td>
+//     <td>{props.snippet.library}</td>
+//     <td>{props.snippet.description}</td>
+//     <td>{props.snippet.code}</td>
+//     <td>{props.snippet.notes}</td>
+//     <td><button data-id={props.snippet.id}>View</button></td>
+//   </tr>
+// )
+
+var SnippetRow = function (_React$Component) {
+  _inherits(SnippetRow, _React$Component);
+
+  function SnippetRow() {
+    _classCallCheck(this, SnippetRow);
+
+    return _possibleConstructorReturn(this, (SnippetRow.__proto__ || Object.getPrototypeOf(SnippetRow)).apply(this, arguments));
+  }
+
+  _createClass(SnippetRow, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'tr',
         null,
-        'View'
-      )
-    )
-  );
-};
+        React.createElement(
+          'td',
+          null,
+          this.props.snippet.id
+        ),
+        React.createElement(
+          'td',
+          null,
+          this.props.snippet.title
+        ),
+        React.createElement(
+          'td',
+          null,
+          this.props.snippet.created.toDateString()
+        ),
+        React.createElement(
+          'td',
+          null,
+          this.props.snippet.library
+        ),
+        React.createElement(
+          'td',
+          null,
+          this.props.snippet.description
+        ),
+        React.createElement(
+          'td',
+          null,
+          this.props.snippet.code
+        ),
+        React.createElement(
+          'td',
+          null,
+          this.props.snippet.notes
+        ),
+        React.createElement(
+          'td',
+          null,
+          React.createElement(
+            'button',
+            { 'data-id': this.props.snippet.id },
+            'View'
+          )
+        )
+      );
+    }
+  }]);
+
+  return SnippetRow;
+}(React.Component);
 
 function SnippetTable(props) {
   var snippetRows = props.snippets.map(function (snippet) {
     return React.createElement(SnippetRow, { key: snippet.id, snippet: snippet });
   });
-
   return React.createElement(
     'table',
     { className: 'bordered-table' },
@@ -144,16 +171,16 @@ function SnippetTable(props) {
   );
 }
 
-var SnippetAdd = function (_React$Component) {
-  _inherits(SnippetAdd, _React$Component);
+var SnippetAdd = function (_React$Component2) {
+  _inherits(SnippetAdd, _React$Component2);
 
   function SnippetAdd() {
     _classCallCheck(this, SnippetAdd);
 
-    var _this = _possibleConstructorReturn(this, (SnippetAdd.__proto__ || Object.getPrototypeOf(SnippetAdd)).call(this));
+    var _this2 = _possibleConstructorReturn(this, (SnippetAdd.__proto__ || Object.getPrototypeOf(SnippetAdd)).call(this));
 
-    _this.handleSubmit = _this.handleSubmit.bind(_this);
-    return _this;
+    _this2.handleSubmit = _this2.handleSubmit.bind(_this2);
+    return _this2;
   }
 
   _createClass(SnippetAdd, [{
@@ -174,7 +201,6 @@ var SnippetAdd = function (_React$Component) {
 
       // Clear the form for the next input
       form.title.value = "";
-
       form.library.value = "";
       form.description.value = "";
       form.code.value = "";
@@ -209,17 +235,89 @@ var SnippetAdd = function (_React$Component) {
   return SnippetAdd;
 }(React.Component);
 
-var SnippetList = function (_React$Component2) {
-  _inherits(SnippetList, _React$Component2);
+// Individual Snippets View Component:
+
+var SnippetRecord = function (_React$Component3) {
+  _inherits(SnippetRecord, _React$Component3);
+
+  function SnippetRecord() {
+    _classCallCheck(this, SnippetRecord);
+
+    var _this3 = _possibleConstructorReturn(this, (SnippetRecord.__proto__ || Object.getPrototypeOf(SnippetRecord)).call(this));
+
+    _this3.state = { snippet: {} };
+    return _this3;
+  }
+
+  _createClass(SnippetRecord, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'h2',
+          { className: 'title-underline' },
+          'Title [Library]'
+        ),
+        React.createElement(
+          'h3',
+          null,
+          'Description'
+        ),
+        React.createElement(
+          'p',
+          null,
+          'Description Details Here'
+        ),
+        React.createElement(
+          'div',
+          { className: 'bordered-text' },
+          React.createElement(
+            'h3',
+            { className: 'title-underline' },
+            'Code'
+          ),
+          React.createElement(
+            'p',
+            null,
+            'Code content Here - Revised'
+          )
+        ),
+        React.createElement(
+          'div',
+          null,
+          React.createElement(
+            'button',
+            null,
+            'Edit'
+          ),
+          React.createElement(
+            'button',
+            null,
+            'Delete'
+          )
+        )
+      );
+    }
+  }]);
+
+  return SnippetRecord;
+}(React.Component);
+
+// SnippetList
+
+var SnippetList = function (_React$Component4) {
+  _inherits(SnippetList, _React$Component4);
 
   function SnippetList() {
     _classCallCheck(this, SnippetList);
 
-    var _this2 = _possibleConstructorReturn(this, (SnippetList.__proto__ || Object.getPrototypeOf(SnippetList)).call(this));
+    var _this4 = _possibleConstructorReturn(this, (SnippetList.__proto__ || Object.getPrototypeOf(SnippetList)).call(this));
 
-    _this2.state = { snippets: [] };
-    _this2.createSnippet = _this2.createSnippet.bind(_this2);
-    return _this2;
+    _this4.state = { snippets: [] };
+    _this4.createSnippet = _this4.createSnippet.bind(_this4);
+    return _this4;
   }
 
   // componentDidMount used to ensure component is ready to use before data is loaded
@@ -236,10 +334,10 @@ var SnippetList = function (_React$Component2) {
   }, {
     key: 'loadData',
     value: function loadData() {
-      var _this3 = this;
+      var _this5 = this;
 
       setTimeout(function () {
-        _this3.setState({ snippets: snippets });
+        _this5.setState({ snippets: snippets });
       }, 500);
     }
 
@@ -279,7 +377,14 @@ var SnippetList = function (_React$Component2) {
           null,
           'Saved Snippets'
         ),
-        React.createElement(SnippetTable, { snippets: this.state.snippets })
+        React.createElement(SnippetTable, { snippets: this.state.snippets }),
+        React.createElement('hr', null),
+        React.createElement(
+          'h3',
+          null,
+          'View Snippet'
+        ),
+        React.createElement(SnippetRecord, null)
       );
     }
   }]);
