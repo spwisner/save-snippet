@@ -1,0 +1,10 @@
+/*Headers*/
+.title-underline {
+  text-decoration: underline;
+}
+
+.bordered-text {
+  border: 1px solid black;
+  padding: 5px;
+  width:50%;
+}
