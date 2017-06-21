@@ -48,7 +48,10 @@ var SnippetRow = function (_React$Component) {
   function SnippetRow() {
     _classCallCheck(this, SnippetRow);
 
-    return _possibleConstructorReturn(this, (SnippetRow.__proto__ || Object.getPrototypeOf(SnippetRow)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (SnippetRow.__proto__ || Object.getPrototypeOf(SnippetRow)).call(this));
+
+    _this.handleClick = _this.handleClick.bind(_this);
+    return _this;
   }
 
   _createClass(SnippetRow, [{
@@ -97,11 +100,26 @@ var SnippetRow = function (_React$Component) {
           null,
           React.createElement(
             'button',
-            { 'data-id': this.props.snippet.id },
+            { onClick: this.handleClick.bind(this) },
             'View'
           )
         )
       );
+    }
+  }, {
+    key: 'handleClick',
+    value: function handleClick(event) {
+      event.preventDefault();
+      var snippetObj = {
+        id: this.props.snippet.id,
+        title: this.props.snippet.title,
+        created: this.props.snippet.created,
+        library: this.props.snippet.library,
+        description: this.props.snippet.description,
+        code: this.props.snippet.code,
+        notes: this.props.snippet.notes
+      };
+      console.log(snippetObj);
     }
   }]);
 

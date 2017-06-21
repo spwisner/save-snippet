@@ -53,14 +53,23 @@ class SnippetRow extends React.Component {
         <td>{this.props.snippet.description}</td>
         <td>{this.props.snippet.code}</td>
         <td>{this.props.snippet.notes}</td>
-        <td><button data-id={this.props.snippet.id} onClick={this.handleClick}>View</button></td>
+        <td><button onClick={this.handleClick.bind(this)}>View</button></td>
       </tr>
     )
   }
 
   handleClick(event) {
     event.preventDefault();
-    console.log('click');
+    const snippetObj = {
+      id: this.props.snippet.id,
+      title: this.props.snippet.title,
+      created: this.props.snippet.created,
+      library: this.props.snippet.library,
+      description: this.props.snippet.description,
+      code: this.props.snippet.code,
+      notes: this.props.snippet.notes
+    };
+    console.log(snippetObj);
   }
 }
 
