@@ -30,10 +30,10 @@ const SnippetRow = (props) => (
     <td>{props.snippet.title}</td>
     <td>{props.snippet.created.toDateString()}</td>
     <td>{props.snippet.library}</td>
-    <td >{props.snippet.description}</td>
+    <td>{props.snippet.description}</td>
     <td>{props.snippet.code}</td>
     <td>{props.snippet.notes}</td>
-    <td><button>View</button></td>
+    <td><a href="#" data-id={props.snippet.id}>View</a></td>
   </tr>
 )
 
@@ -82,7 +82,6 @@ class SnippetAdd extends React.Component {
 
     // Clear the form for the next input
     form.title.value = "";
-
     form.library.value = "";
     form.description.value = "";
     form.code.value = "";
@@ -104,6 +103,37 @@ class SnippetAdd extends React.Component {
     )
   }
 }
+
+// Individual Snippets View Component:
+
+class SnippetContent extends React.Component {
+  render() {
+    return(
+      <div>
+        <h2 className="title-underline">Title [Library]</h2>
+        <h3>Description</h3>
+        <p>Description Details Here</p>
+        <div className="bordered-text">
+          <h3 className="title-underline">Code</h3>
+          <p>Code content Here - Revised</p>
+        </div>
+      </div>
+    )
+  }
+}
+
+class SnippetShow extends React.Component {
+  constructor() {
+    super();
+    this.handleClick.bind(this);
+  }
+
+  handleClick(event) {
+    event.preventDefault();
+  }
+}
+
+// SnippetList
 
 class SnippetList extends React.Component {
   constructor() {
@@ -144,6 +174,9 @@ class SnippetList extends React.Component {
         <hr />
         <h3>Saved Snippets</h3>
         <SnippetTable snippets={this.state.snippets} />
+        <hr />
+        <h3>View Snippet</h3>
+        <SnippetContent />
       </div>
     );
   }
