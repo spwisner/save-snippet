@@ -33,7 +33,7 @@ const SnippetRow = (props) => (
     <td>{props.snippet.description}</td>
     <td>{props.snippet.code}</td>
     <td>{props.snippet.notes}</td>
-    <td><a href="#" data-id={props.snippet.id}>View</a></td>
+    <td><button data-id={props.snippet.id}>View</button></td>
   </tr>
 )
 
@@ -106,7 +106,7 @@ class SnippetAdd extends React.Component {
 
 // Individual Snippets View Component:
 
-class SnippetContent extends React.Component {
+class SnippetRecord extends React.Component {
   render() {
     return(
       <div>
@@ -176,7 +176,7 @@ class SnippetList extends React.Component {
         <SnippetTable snippets={this.state.snippets} />
         <hr />
         <h3>View Snippet</h3>
-        <SnippetContent />
+        <SnippetRecord />
       </div>
     );
   }
