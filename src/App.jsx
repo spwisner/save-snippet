@@ -27,7 +27,7 @@ const snippets = [
 class SnippetRow extends React.Component {
   constructor() {
     super();
-    this.handleClick = this.handleClick.bind(this);
+    this.viewSnippetData = this.viewSnippetData.bind(this);
   }
 
   render() {
@@ -40,12 +40,12 @@ class SnippetRow extends React.Component {
         <td>{this.props.snippet.description}</td>
         <td>{this.props.snippet.code}</td>
         <td>{this.props.snippet.notes}</td>
-        <td><button onClick={this.handleClick.bind(this)}>View</button></td>
+        <td><button onClick={this.viewSnippetData.bind(this)}>View</button></td>
       </tr>
     )
   }
 
-  handleClick(event) {
+  viewSnippetData(event) {
     event.preventDefault();
     const snippetObj = {
       id: this.props.snippet.id,

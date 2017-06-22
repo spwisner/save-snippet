@@ -37,7 +37,7 @@ var SnippetRow = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (SnippetRow.__proto__ || Object.getPrototypeOf(SnippetRow)).call(this));
 
-    _this.handleClick = _this.handleClick.bind(_this);
+    _this.viewSnippetData = _this.viewSnippetData.bind(_this);
     return _this;
   }
 
@@ -87,15 +87,15 @@ var SnippetRow = function (_React$Component) {
           null,
           React.createElement(
             'button',
-            { onClick: this.handleClick.bind(this) },
+            { onClick: this.viewSnippetData.bind(this) },
             'View'
           )
         )
       );
     }
   }, {
-    key: 'handleClick',
-    value: function handleClick(event) {
+    key: 'viewSnippetData',
+    value: function viewSnippetData(event) {
       event.preventDefault();
       var snippetObj = {
         id: this.props.snippet.id,
