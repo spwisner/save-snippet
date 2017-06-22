@@ -35,7 +35,10 @@ var SnippetRow = function (_React$Component) {
   function SnippetRow() {
     _classCallCheck(this, SnippetRow);
 
-    return _possibleConstructorReturn(this, (SnippetRow.__proto__ || Object.getPrototypeOf(SnippetRow)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (SnippetRow.__proto__ || Object.getPrototypeOf(SnippetRow)).call(this));
+
+    _this.viewSnippetData = _this.viewSnippetData.bind(_this);
+    return _this;
   }
 
   _createClass(SnippetRow, [{
@@ -84,50 +87,23 @@ var SnippetRow = function (_React$Component) {
           null,
           React.createElement(
             'button',
-            { onClick: this.props.viewSnippetData.bind(this) },
+            { onClick: this.viewSnippetData.bind(this) },
             'View'
           )
         )
       );
     }
+  }, {
+    key: 'viewSnippetData',
+    value: function viewSnippetData(event) {
+      event.preventDefault();
+      var snippet = this.props.snippet;
+      this.props.snippetValues(snippet);
+    }
   }]);
 
   return SnippetRow;
 }(React.Component);
-
-// function SnippetTable(props) {
-//   const snippetRows = props.snippets.map(snippet => <SnippetRow key={snippet.id} snippet={snippet} /> );
-//   return (
-//     <table className="bordered-table">
-//       <thead>
-//         <tr>
-//           <th>Id</th>
-//           <th>Title</th>
-//           <th>Created</th>
-//           <th>Library</th>
-//           <th>Description</th>
-//           <th>Code</th>
-//           <th>Notes</th>
-//           <th>View</th>
-//         </tr>
-//       </thead>
-//       <tbody>{snippetRows}</tbody>
-//     </table>
-//   )
-// }
-
-// const SnippetRow = (props) => (
-//   <tr>
-//     <td>{props.snippet.id}</td>
-//     <td>{props.snippet.title}</td>
-//     <td>{props.snippet.created.toDateString()}</td>
-//     <td>{props.snippet.library}</td>
-//     <td>{props.snippet.description}</td>
-//     <td>{props.snippet.code}</td>
-//     <td>{props.snippet.notes}</td>
-//     <td><button data-id={props.snippet.id}>View</button></td>
-//   </tr>
-// )
 
 var SnippetTable = function (_React$Component2) {
   _inherits(SnippetTable, _React$Component2);
@@ -140,24 +116,13 @@ var SnippetTable = function (_React$Component2) {
     _this2.state = {
       rowValue: {}
     };
-    _this2.viewSnippetData = _this2.viewSnippetData.bind(_this2);
     return _this2;
   }
 
   _createClass(SnippetTable, [{
-    key: 'viewSnippetData',
-    value: function viewSnippetData(event) {
-      event.preventDefault();
-      // const snippetObj = {
-      //   id: this.props.snippet.id,
-      //   title: this.props.snippet.title,
-      //   created: this.props.snippet.created,
-      //   library: this.props.snippet.library,
-      //   description: this.props.snippet.description,
-      //   code: this.props.snippet.code,
-      //   notes: this.props.snippet.notes
-      // };
-      console.log('works');
+    key: 'snippetValues',
+    value: function snippetValues(snippet) {
+      console.log(snippet);
     }
   }, {
     key: 'render',
@@ -230,14 +195,10 @@ var SnippetTable = function (_React$Component2) {
         return React.createElement(SnippetRow, {
           key: snippet.id,
           snippet: snippet,
-          viewSnippetData: _this3.viewSnippetData
-
+          snippetValues: _this3.snippetValues
         });
       });
     }
-
-    // const snippetRows = props.snippets.map(snippet => <SnippetRow key={snippet.id} snippet={snippet} /> );
-
   }]);
 
   return SnippetTable;
