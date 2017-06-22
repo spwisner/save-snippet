@@ -147,9 +147,9 @@ class SnippetRecord extends React.Component {
   editSnippetData(event) {
     event.preventDefault();
     const currentRecord = this.props.record;
-    console.log(currentRecord);
+    console.log('editSnippetData');
     this.props.snippetEdit(currentRecord);
-    return currentRecord;
+    return;
   }
 
   render() {
@@ -171,7 +171,55 @@ class SnippetRecord extends React.Component {
   }
 }
 
-// SnippetList
+/////////////Edit Snippet
+
+class SnippetUpdate extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      showEditForm: false
+    }
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    var form = document.forms.snippetUpdate;
+
+    this.props.updateSnippet({
+      title: form.title.value,
+      library: form.library.value,
+      description: form.description.value,
+      code: form.code.value,
+      notes: form.notes.value,
+      created: new Date(),
+    });
+
+    form.title.value = "";
+    form.library.value = "";
+    form.description.value = "";
+    form.code.value = "";
+    form.notes.value = "";
+  }
+
+  render() {
+    return (
+      <div>
+        <form name="snippetUpdate" onSubmit={this.handleSubmit}>
+          <input type="text" name="title" placeholder={this.props.snippet.title}/>
+          <input type="text" name="library" placeholder={this.props.snippet.library} />
+          <input type="text" name="description" placeholder={this.props.snippet.description} />
+          <input type="text" name="code" placeholder={this.props.snippet.code} />
+          <input type="text" name="notes" placeholder={this.props.snippet.notes} />
+          <button>Update</button>
+        </form>
+      </div>
+    )
+  }
+}
+
+
+///////////////// SnippetList
 
 class SnippetList extends React.Component {
   constructor() {
@@ -207,7 +255,13 @@ class SnippetList extends React.Component {
 
   snippetEdit(snippet) {
     this.setState({ editRecord: snippet});
+    console.log('received edit data - snippetEdit');
     return snippet
+  }
+
+  updateSnippet(snippet) {
+    console.log('sending update to server');
+    console.log(snippet);
   }
 
   // Will clone and create to avoid modifying the state
@@ -233,6 +287,9 @@ class SnippetList extends React.Component {
         <hr />
         <h3>View Snippet</h3>
         <SnippetRecord record={this.state.record} snippetEdit={this.snippetEdit}/>
+        <hr />
+        <h3>Update Snippet</h3>
+        <SnippetUpdate updateSnippet={this.updateSnippet} snippet={this.state.editRecord}/>
       </div>
     );
   }

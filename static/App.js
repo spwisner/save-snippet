@@ -271,10 +271,22 @@ var SnippetRecord = function (_React$Component4) {
   function SnippetRecord() {
     _classCallCheck(this, SnippetRecord);
 
-    return _possibleConstructorReturn(this, (SnippetRecord.__proto__ || Object.getPrototypeOf(SnippetRecord)).apply(this, arguments));
+    var _this5 = _possibleConstructorReturn(this, (SnippetRecord.__proto__ || Object.getPrototypeOf(SnippetRecord)).call(this));
+
+    _this5.editSnippetData = _this5.editSnippetData.bind(_this5);
+    return _this5;
   }
 
   _createClass(SnippetRecord, [{
+    key: 'editSnippetData',
+    value: function editSnippetData(event) {
+      event.preventDefault();
+      var currentRecord = this.props.record;
+      console.log('editSnippetData');
+      this.props.snippetEdit(currentRecord);
+      return;
+    }
+  }, {
     key: 'render',
     value: function render() {
       return React.createElement(
@@ -317,7 +329,7 @@ var SnippetRecord = function (_React$Component4) {
           null,
           React.createElement(
             'button',
-            null,
+            { onClick: this.editSnippetData },
             'Edit'
           ),
           React.createElement(
@@ -333,23 +345,91 @@ var SnippetRecord = function (_React$Component4) {
   return SnippetRecord;
 }(React.Component);
 
-// SnippetList
+/////////////Edit Snippet
 
-var SnippetList = function (_React$Component5) {
-  _inherits(SnippetList, _React$Component5);
+var SnippetUpdate = function (_React$Component5) {
+  _inherits(SnippetUpdate, _React$Component5);
+
+  function SnippetUpdate() {
+    _classCallCheck(this, SnippetUpdate);
+
+    var _this6 = _possibleConstructorReturn(this, (SnippetUpdate.__proto__ || Object.getPrototypeOf(SnippetUpdate)).call(this));
+
+    _this6.state = {
+      showEditForm: false
+    };
+    _this6.handleSubmit = _this6.handleSubmit.bind(_this6);
+    return _this6;
+  }
+
+  _createClass(SnippetUpdate, [{
+    key: 'handleSubmit',
+    value: function handleSubmit(event) {
+      event.preventDefault();
+      var form = document.forms.snippetUpdate;
+
+      this.props.updateSnippet({
+        title: form.title.value,
+        library: form.library.value,
+        description: form.description.value,
+        code: form.code.value,
+        notes: form.notes.value,
+        created: new Date()
+      });
+
+      form.title.value = "";
+      form.library.value = "";
+      form.description.value = "";
+      form.code.value = "";
+      form.notes.value = "";
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'form',
+          { name: 'snippetUpdate', onSubmit: this.handleSubmit },
+          React.createElement('input', { type: 'text', name: 'title', placeholder: this.props.snippet.title }),
+          React.createElement('input', { type: 'text', name: 'library', placeholder: this.props.snippet.library }),
+          React.createElement('input', { type: 'text', name: 'description', placeholder: this.props.snippet.description }),
+          React.createElement('input', { type: 'text', name: 'code', placeholder: this.props.snippet.code }),
+          React.createElement('input', { type: 'text', name: 'notes', placeholder: this.props.snippet.notes }),
+          React.createElement(
+            'button',
+            null,
+            'Update'
+          )
+        )
+      );
+    }
+  }]);
+
+  return SnippetUpdate;
+}(React.Component);
+
+///////////////// SnippetList
+
+var SnippetList = function (_React$Component6) {
+  _inherits(SnippetList, _React$Component6);
 
   function SnippetList() {
     _classCallCheck(this, SnippetList);
 
-    var _this6 = _possibleConstructorReturn(this, (SnippetList.__proto__ || Object.getPrototypeOf(SnippetList)).call(this));
+    var _this7 = _possibleConstructorReturn(this, (SnippetList.__proto__ || Object.getPrototypeOf(SnippetList)).call(this));
 
-    _this6.state = {
+    _this7.state = {
       snippets: [],
-      record: []
+      record: [],
+      editRecord: []
     };
-    _this6.createSnippet = _this6.createSnippet.bind(_this6);
-    _this6.snippetRecord = _this6.snippetRecord.bind(_this6);
-    return _this6;
+
+    _this7.createSnippet = _this7.createSnippet.bind(_this7);
+    _this7.snippetRecord = _this7.snippetRecord.bind(_this7);
+    _this7.snippetEdit = _this7.snippetEdit.bind(_this7);
+    return _this7;
   }
 
   // componentDidMount used to ensure component is ready to use before data is loaded
@@ -366,19 +446,30 @@ var SnippetList = function (_React$Component5) {
   }, {
     key: 'loadData',
     value: function loadData() {
-      var _this7 = this;
+      var _this8 = this;
 
       setTimeout(function () {
-        _this7.setState({ snippets: snippets });
+        _this8.setState({ snippets: snippets });
       }, 500);
     }
   }, {
     key: 'snippetRecord',
     value: function snippetRecord(snippet) {
-      console.log('snippet list');
-      console.log(snippet);
       this.setState({ record: snippet });
       return snippet;
+    }
+  }, {
+    key: 'snippetEdit',
+    value: function snippetEdit(snippet) {
+      this.setState({ editRecord: snippet });
+      console.log('received edit data - snippetEdit');
+      return snippet;
+    }
+  }, {
+    key: 'updateSnippet',
+    value: function updateSnippet(snippet) {
+      console.log('sending update to server');
+      console.log(snippet);
     }
 
     // Will clone and create to avoid modifying the state
@@ -424,7 +515,14 @@ var SnippetList = function (_React$Component5) {
           null,
           'View Snippet'
         ),
-        React.createElement(SnippetRecord, { record: this.state.record })
+        React.createElement(SnippetRecord, { record: this.state.record, snippetEdit: this.snippetEdit }),
+        React.createElement('hr', null),
+        React.createElement(
+          'h3',
+          null,
+          'Update Snippet'
+        ),
+        React.createElement(SnippetUpdate, { updateSnippet: this.updateSnippet, snippet: this.state.editRecord })
       );
     }
   }]);
