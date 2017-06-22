@@ -24,54 +24,41 @@ const snippets = [
   },
 ];
 
-const SnippetRow = (props) => (
-  <tr>
-    <td>{props.snippet.id}</td>
-    <td>{props.snippet.title}</td>
-    <td>{props.snippet.created.toDateString()}</td>
-    <td>{props.snippet.library}</td>
-    <td>{props.snippet.description}</td>
-    <td>{props.snippet.code}</td>
-    <td>{props.snippet.notes}</td>
-    <td><button data-id={props.snippet.id}>View</button></td>
-  </tr>
-)
+class SnippetRow extends React.Component {
+  constructor() {
+    super();
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-// class SnippetRow extends React.Component {
-//   constructor() {
-//     super();
-//     this.handleClick = this.handleClick.bind(this);
-//   }
-//
-//   render() {
-//     return (
-//       <tr>
-//         <td>{this.props.snippet.id}</td>
-//         <td>{this.props.snippet.title}</td>
-//         <td>{this.props.snippet.created.toDateString()}</td>
-//         <td>{this.props.snippet.library}</td>
-//         <td>{this.props.snippet.description}</td>
-//         <td>{this.props.snippet.code}</td>
-//         <td>{this.props.snippet.notes}</td>
-//         <td><button onClick={this.handleClick.bind(this)}>View</button></td>
-//       </tr>
-//     )
-//   }
-//
-//   handleClick(event) {
-//     event.preventDefault();
-//     const snippetObj = {
-//       id: this.props.snippet.id,
-//       title: this.props.snippet.title,
-//       created: this.props.snippet.created,
-//       library: this.props.snippet.library,
-//       description: this.props.snippet.description,
-//       code: this.props.snippet.code,
-//       notes: this.props.snippet.notes
-//     };
-//     console.log(snippetObj);
-//   }
-// }
+  render() {
+    return (
+      <tr>
+        <td>{this.props.snippet.id}</td>
+        <td>{this.props.snippet.title}</td>
+        <td>{this.props.snippet.created.toDateString()}</td>
+        <td>{this.props.snippet.library}</td>
+        <td>{this.props.snippet.description}</td>
+        <td>{this.props.snippet.code}</td>
+        <td>{this.props.snippet.notes}</td>
+        <td><button onClick={this.handleClick.bind(this)}>View</button></td>
+      </tr>
+    )
+  }
+
+  handleClick(event) {
+    event.preventDefault();
+    const snippetObj = {
+      id: this.props.snippet.id,
+      title: this.props.snippet.title,
+      created: this.props.snippet.created,
+      library: this.props.snippet.library,
+      description: this.props.snippet.description,
+      code: this.props.snippet.code,
+      notes: this.props.snippet.notes
+    };
+    console.log(snippetObj);
+  }
+}
 
 
 // function SnippetTable(props) {
@@ -95,7 +82,42 @@ const SnippetRow = (props) => (
 //   )
 // }
 
+// const SnippetRow = (props) => (
+//   <tr>
+//     <td>{props.snippet.id}</td>
+//     <td>{props.snippet.title}</td>
+//     <td>{props.snippet.created.toDateString()}</td>
+//     <td>{props.snippet.library}</td>
+//     <td>{props.snippet.description}</td>
+//     <td>{props.snippet.code}</td>
+//     <td>{props.snippet.notes}</td>
+//     <td><button data-id={props.snippet.id}>View</button></td>
+//   </tr>
+// )
+
 class SnippetTable extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      rowValue: {}
+    }
+    // this.handleClick = this.handleClick.bind(this);
+  }
+
+  // handleClick(event) {
+  //   event.preventDefault();
+  //   const snippetObj = {
+  //     id: this.props.snippet.id,
+  //     title: this.props.snippet.title,
+  //     created: this.props.snippet.created,
+  //     library: this.props.snippet.library,
+  //     description: this.props.snippet.description,
+  //     code: this.props.snippet.code,
+  //     notes: this.props.snippet.notes
+  //   };
+  //   console.log(snippetObj);
+  // }
+
   render() {
     const snippets = this.snippetRows();
     return (
@@ -117,9 +139,13 @@ class SnippetTable extends React.Component {
     )
   }
 
+
+
   snippetRows() {
     return this.props.snippets.map((snippet) => {
-      return (<SnippetRow key={snippet.id} snippet={snippet} /> );
+      return (<SnippetRow
+        key={snippet.id}
+        snippet={snippet} /> );
     });
   }
 
