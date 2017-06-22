@@ -274,6 +274,7 @@ var SnippetRecord = function (_React$Component4) {
     var _this5 = _possibleConstructorReturn(this, (SnippetRecord.__proto__ || Object.getPrototypeOf(SnippetRecord)).call(this));
 
     _this5.editSnippetData = _this5.editSnippetData.bind(_this5);
+    _this5.deleteSnippetData = _this5.deleteSnippetData.bind(_this5);
     return _this5;
   }
 
@@ -284,6 +285,14 @@ var SnippetRecord = function (_React$Component4) {
       var currentRecord = this.props.record;
       console.log('editSnippetData');
       this.props.snippetEdit(currentRecord);
+      return;
+    }
+  }, {
+    key: 'deleteSnippetData',
+    value: function deleteSnippetData(event) {
+      event.preventDefault();
+      var currentRecord = this.props.record;
+      this.props.snippetDelete(currentRecord);
       return;
     }
   }, {
@@ -334,7 +343,7 @@ var SnippetRecord = function (_React$Component4) {
           ),
           React.createElement(
             'button',
-            null,
+            { onClick: this.deleteSnippetData },
             'Delete'
           )
         )
@@ -429,6 +438,7 @@ var SnippetList = function (_React$Component6) {
     _this7.createSnippet = _this7.createSnippet.bind(_this7);
     _this7.snippetRecord = _this7.snippetRecord.bind(_this7);
     _this7.snippetEdit = _this7.snippetEdit.bind(_this7);
+    _this7.snippetDelete = _this7.snippetDelete.bind(_this7);
     return _this7;
   }
 
@@ -463,6 +473,13 @@ var SnippetList = function (_React$Component6) {
     value: function snippetEdit(snippet) {
       this.setState({ editRecord: snippet });
       console.log('received edit data - snippetEdit');
+      return snippet;
+    }
+  }, {
+    key: 'snippetDelete',
+    value: function snippetDelete(snippet) {
+      console.log('snippet deleted');
+      console.log(snippet);
       return snippet;
     }
   }, {
@@ -515,7 +532,7 @@ var SnippetList = function (_React$Component6) {
           null,
           'View Snippet'
         ),
-        React.createElement(SnippetRecord, { record: this.state.record, snippetEdit: this.snippetEdit }),
+        React.createElement(SnippetRecord, { record: this.state.record, snippetEdit: this.snippetEdit, snippetDelete: this.snippetDelete }),
         React.createElement('hr', null),
         React.createElement(
           'h3',

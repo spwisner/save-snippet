@@ -142,6 +142,7 @@ class SnippetRecord extends React.Component {
   constructor() {
     super();
     this.editSnippetData = this.editSnippetData.bind(this);
+    this.deleteSnippetData = this.deleteSnippetData.bind(this);
   }
 
   editSnippetData(event) {
@@ -149,6 +150,13 @@ class SnippetRecord extends React.Component {
     const currentRecord = this.props.record;
     console.log('editSnippetData');
     this.props.snippetEdit(currentRecord);
+    return;
+  }
+
+  deleteSnippetData(event) {
+    event.preventDefault();
+    const currentRecord = this.props.record;
+    this.props.snippetDelete(currentRecord);
     return;
   }
 
@@ -164,7 +172,7 @@ class SnippetRecord extends React.Component {
         </div>
         <div>
           <button onClick={this.editSnippetData}>Edit</button>
-          <button>Delete</button>
+          <button onClick={this.deleteSnippetData}>Delete</button>
         </div>
       </div>
     )
@@ -234,6 +242,7 @@ class SnippetList extends React.Component {
     this.createSnippet = this.createSnippet.bind(this);
     this.snippetRecord = this.snippetRecord.bind(this);
     this.snippetEdit = this.snippetEdit.bind(this);
+    this.snippetDelete = this.snippetDelete.bind(this);
   }
 
   // componentDidMount used to ensure component is ready to use before data is loaded
@@ -256,7 +265,13 @@ class SnippetList extends React.Component {
   snippetEdit(snippet) {
     this.setState({ editRecord: snippet});
     console.log('received edit data - snippetEdit');
-    return snippet
+    return snippet;
+  }
+
+  snippetDelete(snippet) {
+    console.log('snippet deleted');
+    console.log(snippet);
+    return snippet;
   }
 
   updateSnippet(snippet) {
@@ -286,7 +301,7 @@ class SnippetList extends React.Component {
         <SnippetTable snippets={this.state.snippets} snippetRecord={this.snippetRecord}/>
         <hr />
         <h3>View Snippet</h3>
-        <SnippetRecord record={this.state.record} snippetEdit={this.snippetEdit}/>
+        <SnippetRecord record={this.state.record} snippetEdit={this.snippetEdit} snippetDelete={this.snippetDelete}/>
         <hr />
         <h3>Update Snippet</h3>
         <SnippetUpdate updateSnippet={this.updateSnippet} snippet={this.state.editRecord}/>
