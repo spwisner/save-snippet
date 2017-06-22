@@ -165,7 +165,7 @@ class SnippetList extends React.Component {
     super();
     this.state = {
       snippets: [],
-      record: snippets[0]
+      record: []
     };
     this.createSnippet = this.createSnippet.bind(this);
     this.snippetRecord = this.snippetRecord.bind(this);
@@ -186,6 +186,8 @@ class SnippetList extends React.Component {
   snippetRecord(snippet) {
     console.log('snippet list');
     console.log(snippet);
+    this.setState({ record: snippet});
+    return snippet;
   }
 
   // Will clone and create to avoid modifying the state

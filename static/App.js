@@ -345,7 +345,7 @@ var SnippetList = function (_React$Component5) {
 
     _this6.state = {
       snippets: [],
-      record: snippets[0]
+      record: []
     };
     _this6.createSnippet = _this6.createSnippet.bind(_this6);
     _this6.snippetRecord = _this6.snippetRecord.bind(_this6);
@@ -377,6 +377,8 @@ var SnippetList = function (_React$Component5) {
     value: function snippetRecord(snippet) {
       console.log('snippet list');
       console.log(snippet);
+      this.setState({ record: snippet });
+      return snippet;
     }
 
     // Will clone and create to avoid modifying the state
