@@ -47,7 +47,7 @@ class SnippetRow extends React.Component {
 
   viewSnippetData(event) {
     event.preventDefault();
-    let snippet = this.props.snippet;
+    const snippet = this.props.snippet;
     this.props.snippetRecord(snippet)
   }
 }
@@ -139,6 +139,19 @@ class SnippetAdd extends React.Component {
 // Individual Snippets View Component:
 
 class SnippetRecord extends React.Component {
+  constructor() {
+    super();
+    this.editSnippetData = this.editSnippetData.bind(this);
+  }
+
+  editSnippetData(event) {
+    event.preventDefault();
+    const currentRecord = this.props.record;
+    console.log(currentRecord);
+    this.props.snippetEdit(currentRecord);
+    return currentRecord;
+  }
+
   render() {
     return(
       <div>
@@ -150,7 +163,7 @@ class SnippetRecord extends React.Component {
           <p>{this.props.record.code}</p>
         </div>
         <div>
-          <button>Edit</button>
+          <button onClick={this.editSnippetData}>Edit</button>
           <button>Delete</button>
         </div>
       </div>
@@ -163,12 +176,16 @@ class SnippetRecord extends React.Component {
 class SnippetList extends React.Component {
   constructor() {
     super();
+
     this.state = {
       snippets: [],
-      record: []
+      record: [],
+      editRecord: []
     };
+
     this.createSnippet = this.createSnippet.bind(this);
     this.snippetRecord = this.snippetRecord.bind(this);
+    this.snippetEdit = this.snippetEdit.bind(this);
   }
 
   // componentDidMount used to ensure component is ready to use before data is loaded
@@ -184,10 +201,13 @@ class SnippetList extends React.Component {
   }
 
   snippetRecord(snippet) {
-    console.log('snippet list');
-    console.log(snippet);
     this.setState({ record: snippet});
     return snippet;
+  }
+
+  snippetEdit(snippet) {
+    this.setState({ editRecord: snippet});
+    return snippet
   }
 
   // Will clone and create to avoid modifying the state
@@ -212,7 +232,7 @@ class SnippetList extends React.Component {
         <SnippetTable snippets={this.state.snippets} snippetRecord={this.snippetRecord}/>
         <hr />
         <h3>View Snippet</h3>
-        <SnippetRecord record={this.state.record}/>
+        <SnippetRecord record={this.state.record} snippetEdit={this.snippetEdit}/>
       </div>
     );
   }
