@@ -241,18 +241,62 @@ var SnippetAdd = function (_React$Component3) {
       return React.createElement(
         'div',
         null,
-        ' ',
         React.createElement(
           'form',
-          { name: 'snippetAdd', onSubmit: this.handleSubmit },
-          React.createElement('input', { type: 'text', name: 'title', placeholder: 'Subject' }),
-          React.createElement('input', { type: 'text', name: 'library', placeholder: 'Library' }),
-          React.createElement('input', { type: 'text', name: 'description', placeholder: 'Description' }),
-          React.createElement('input', { type: 'text', name: 'code', placeholder: 'Code' }),
-          React.createElement('input', { type: 'text', name: 'notes', placeholder: 'Notes' }),
+          { className: 'snippet-form', name: 'snippetAdd', onSubmit: this.handleSubmit },
+          React.createElement(
+            'div',
+            { className: 'form-group' },
+            React.createElement(
+              'label',
+              null,
+              'Title'
+            ),
+            React.createElement('input', { className: 'form-control', type: 'text', name: 'title', placeholder: 'Title' })
+          ),
+          React.createElement(
+            'div',
+            { className: 'form-group' },
+            React.createElement(
+              'label',
+              null,
+              'Library'
+            ),
+            React.createElement('input', { className: 'form-control', type: 'text', name: 'library', placeholder: 'Library' })
+          ),
+          React.createElement(
+            'div',
+            { className: 'form-group' },
+            React.createElement(
+              'label',
+              null,
+              'Description'
+            ),
+            React.createElement('input', { className: 'form-control', type: 'text', name: 'description', placeholder: 'Description' })
+          ),
+          React.createElement(
+            'div',
+            { className: 'form-group' },
+            React.createElement(
+              'label',
+              null,
+              'Code'
+            ),
+            React.createElement('input', { className: 'form-control', type: 'text', name: 'code', placeholder: 'Code' })
+          ),
+          React.createElement(
+            'div',
+            { className: 'form-group' },
+            React.createElement(
+              'label',
+              null,
+              'Notes'
+            ),
+            React.createElement('input', { className: 'form-control', type: 'text', name: 'notes', placeholder: 'Notes' })
+          ),
           React.createElement(
             'button',
-            null,
+            { className: 'btn btn-success' },
             'Add'
           )
         )

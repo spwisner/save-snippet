@@ -123,13 +123,29 @@ class SnippetAdd extends React.Component {
   render() {
     // Form name included so that inputs can be accessed
     return (
-      <div> <form name="snippetAdd" onSubmit={this.handleSubmit}>
-          <input type="text" name="title" placeholder="Subject" />
-          <input type="text" name="library" placeholder="Library" />
-          <input type="text" name="description" placeholder="Description" />
-          <input type="text" name="code" placeholder="Code" />
-          <input type="text" name="notes" placeholder="Notes" />
-          <button>Add</button>
+      <div>
+        <form className="snippet-form" name="snippetAdd" onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            <label>Title</label>
+            <input className="form-control" type="text" name="title" placeholder="Title" />
+          </div>
+          <div className="form-group">
+            <label>Library</label>
+            <input className="form-control" type="text" name="library" placeholder="Library" />
+          </div>
+          <div className="form-group">
+            <label>Description</label>
+            <input className="form-control" type="text" name="description" placeholder="Description" />
+          </div>
+          <div className="form-group">
+            <label>Code</label>
+            <input className="form-control" type="text" name="code" placeholder="Code" />
+          </div>
+          <div className="form-group">
+            <label>Notes</label>
+            <input className="form-control" type="text" name="notes" placeholder="Notes" />
+          </div>
+          <button className="btn btn-success">Add</button>
         </form>
       </div>
     )
