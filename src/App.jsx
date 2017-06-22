@@ -60,10 +60,6 @@ class SnippetTable extends React.Component {
     }
   }
 
-  snippetValues(snippet) {
-    console.log(snippet);
-  }
-
   render() {
     const snippets = this.snippetRows();
     return (
@@ -90,7 +86,6 @@ class SnippetTable extends React.Component {
       return (<SnippetRow
         key={snippet.id}
         snippet={snippet}
-        snippetValues= {this.snippetValues}
         snippetRecord={this.props.snippetRecord}
         /> );
     });
@@ -144,20 +139,15 @@ class SnippetAdd extends React.Component {
 // Individual Snippets View Component:
 
 class SnippetRecord extends React.Component {
-  constructor() {
-    super();
-    this.state = { snippet: {} };
-  }
-
   render() {
     return(
       <div>
-        <h2 className="title-underline">Title [Library]</h2>
+        <h2 className="title-underline">{this.props.record.title} [{this.props.record.library}]</h2>
         <h3>Description</h3>
-        <p>Description Details Here</p>
+        <p>{this.props.record.description}</p>
         <div className="bordered-text">
           <h3 className="title-underline">Code</h3>
-          <p>Code content Here - Revised</p>
+          <p>{this.props.record.code}</p>
         </div>
         <div>
           <button>Edit</button>
@@ -173,7 +163,10 @@ class SnippetRecord extends React.Component {
 class SnippetList extends React.Component {
   constructor() {
     super();
-    this.state = { snippets: [] };
+    this.state = {
+      snippets: [],
+      record: snippets[0]
+    };
     this.createSnippet = this.createSnippet.bind(this);
     this.snippetRecord = this.snippetRecord.bind(this);
   }
@@ -217,7 +210,7 @@ class SnippetList extends React.Component {
         <SnippetTable snippets={this.state.snippets} snippetRecord={this.snippetRecord}/>
         <hr />
         <h3>View Snippet</h3>
-        <SnippetRecord />
+        <SnippetRecord record={this.state.record}/>
       </div>
     );
   }

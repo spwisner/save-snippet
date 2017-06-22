@@ -120,11 +120,6 @@ var SnippetTable = function (_React$Component2) {
   }
 
   _createClass(SnippetTable, [{
-    key: 'snippetValues',
-    value: function snippetValues(snippet) {
-      console.log(snippet);
-    }
-  }, {
     key: 'render',
     value: function render() {
       var snippets = this.snippetRows();
@@ -195,7 +190,6 @@ var SnippetTable = function (_React$Component2) {
         return React.createElement(SnippetRow, {
           key: snippet.id,
           snippet: snippet,
-          snippetValues: _this3.snippetValues,
           snippetRecord: _this3.props.snippetRecord
         });
       });
@@ -277,10 +271,7 @@ var SnippetRecord = function (_React$Component4) {
   function SnippetRecord() {
     _classCallCheck(this, SnippetRecord);
 
-    var _this5 = _possibleConstructorReturn(this, (SnippetRecord.__proto__ || Object.getPrototypeOf(SnippetRecord)).call(this));
-
-    _this5.state = { snippet: {} };
-    return _this5;
+    return _possibleConstructorReturn(this, (SnippetRecord.__proto__ || Object.getPrototypeOf(SnippetRecord)).apply(this, arguments));
   }
 
   _createClass(SnippetRecord, [{
@@ -292,7 +283,10 @@ var SnippetRecord = function (_React$Component4) {
         React.createElement(
           'h2',
           { className: 'title-underline' },
-          'Title [Library]'
+          this.props.record.title,
+          ' [',
+          this.props.record.library,
+          ']'
         ),
         React.createElement(
           'h3',
@@ -302,7 +296,7 @@ var SnippetRecord = function (_React$Component4) {
         React.createElement(
           'p',
           null,
-          'Description Details Here'
+          this.props.record.description
         ),
         React.createElement(
           'div',
@@ -315,7 +309,7 @@ var SnippetRecord = function (_React$Component4) {
           React.createElement(
             'p',
             null,
-            'Code content Here - Revised'
+            this.props.record.code
           )
         ),
         React.createElement(
@@ -349,7 +343,10 @@ var SnippetList = function (_React$Component5) {
 
     var _this6 = _possibleConstructorReturn(this, (SnippetList.__proto__ || Object.getPrototypeOf(SnippetList)).call(this));
 
-    _this6.state = { snippets: [] };
+    _this6.state = {
+      snippets: [],
+      record: snippets[0]
+    };
     _this6.createSnippet = _this6.createSnippet.bind(_this6);
     _this6.snippetRecord = _this6.snippetRecord.bind(_this6);
     return _this6;
@@ -425,7 +422,7 @@ var SnippetList = function (_React$Component5) {
           null,
           'View Snippet'
         ),
-        React.createElement(SnippetRecord, null)
+        React.createElement(SnippetRecord, { record: this.state.record })
       );
     }
   }]);
