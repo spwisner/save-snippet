@@ -48,7 +48,7 @@ class SnippetRow extends React.Component {
   viewSnippetData(event) {
     event.preventDefault();
     let snippet = this.props.snippet;
-    this.props.snippetValues(snippet)
+    this.props.snippetRecord(snippet)
   }
 }
 
@@ -91,6 +91,7 @@ class SnippetTable extends React.Component {
         key={snippet.id}
         snippet={snippet}
         snippetValues= {this.snippetValues}
+        snippetRecord={this.props.snippetRecord}
         /> );
     });
   }
@@ -173,7 +174,8 @@ class SnippetList extends React.Component {
   constructor() {
     super();
     this.state = { snippets: [] };
-    this.createSnippet = this.createSnippet.bind(this)
+    this.createSnippet = this.createSnippet.bind(this);
+    this.snippetRecord = this.snippetRecord.bind(this);
   }
 
   // componentDidMount used to ensure component is ready to use before data is loaded
@@ -186,6 +188,11 @@ class SnippetList extends React.Component {
     setTimeout(() => {
       this.setState({ snippets: snippets });
     }, 500);
+  }
+
+  snippetRecord(snippet) {
+    console.log('snippet list');
+    console.log(snippet);
   }
 
   // Will clone and create to avoid modifying the state
@@ -207,7 +214,7 @@ class SnippetList extends React.Component {
         <SnippetAdd createSnippet={this.createSnippet}/>
         <hr />
         <h3>Saved Snippets</h3>
-        <SnippetTable snippets={this.state.snippets} />
+        <SnippetTable snippets={this.state.snippets} snippetRecord={this.snippetRecord}/>
         <hr />
         <h3>View Snippet</h3>
         <SnippetRecord />

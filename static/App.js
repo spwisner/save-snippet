@@ -98,7 +98,7 @@ var SnippetRow = function (_React$Component) {
     value: function viewSnippetData(event) {
       event.preventDefault();
       var snippet = this.props.snippet;
-      this.props.snippetValues(snippet);
+      this.props.snippetRecord(snippet);
     }
   }]);
 
@@ -195,7 +195,8 @@ var SnippetTable = function (_React$Component2) {
         return React.createElement(SnippetRow, {
           key: snippet.id,
           snippet: snippet,
-          snippetValues: _this3.snippetValues
+          snippetValues: _this3.snippetValues,
+          snippetRecord: _this3.props.snippetRecord
         });
       });
     }
@@ -350,6 +351,7 @@ var SnippetList = function (_React$Component5) {
 
     _this6.state = { snippets: [] };
     _this6.createSnippet = _this6.createSnippet.bind(_this6);
+    _this6.snippetRecord = _this6.snippetRecord.bind(_this6);
     return _this6;
   }
 
@@ -372,6 +374,12 @@ var SnippetList = function (_React$Component5) {
       setTimeout(function () {
         _this7.setState({ snippets: snippets });
       }, 500);
+    }
+  }, {
+    key: 'snippetRecord',
+    value: function snippetRecord(snippet) {
+      console.log('snippet list');
+      console.log(snippet);
     }
 
     // Will clone and create to avoid modifying the state
@@ -410,7 +418,7 @@ var SnippetList = function (_React$Component5) {
           null,
           'Saved Snippets'
         ),
-        React.createElement(SnippetTable, { snippets: this.state.snippets }),
+        React.createElement(SnippetTable, { snippets: this.state.snippets, snippetRecord: this.snippetRecord }),
         React.createElement('hr', null),
         React.createElement(
           'h3',
