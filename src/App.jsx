@@ -63,7 +63,7 @@ class SnippetTable extends React.Component {
   render() {
     const snippets = this.snippetRows();
     return (
-      <table className="bordered-table">
+      <table className="table table-striped">
         <thead>
           <tr>
             <th>Id</th>
@@ -135,15 +135,15 @@ class SnippetAdd extends React.Component {
           </div>
           <div className="form-group">
             <label>Description</label>
-            <input className="form-control" type="text" name="description" placeholder="Description" />
+            <textarea className="form-control" name="description" placeholder="Description" rows="3"></textarea>
           </div>
           <div className="form-group">
             <label>Code</label>
-            <input className="form-control" type="text" name="code" placeholder="Code" />
+            <textarea className="form-control" name="code" placeholder="Code" rows="5"></textarea>
           </div>
           <div className="form-group">
             <label>Notes</label>
-            <input className="form-control" type="text" name="notes" placeholder="Notes" />
+            <textarea className="form-control" name="notes" placeholder="Notes" rows="3"></textarea>
           </div>
           <button className="btn btn-success">Add</button>
         </form>
@@ -187,8 +187,8 @@ class SnippetRecord extends React.Component {
           <p>{this.props.record.code}</p>
         </div>
         <div>
-          <button onClick={this.editSnippetData}>Edit</button>
-          <button onClick={this.deleteSnippetData}>Delete</button>
+          <button className="btn btn-warning" onClick={this.editSnippetData}>Edit</button>
+          <button className="btn btn-danger" onClick={this.deleteSnippetData}>Delete</button>
         </div>
       </div>
     )
@@ -229,13 +229,28 @@ class SnippetUpdate extends React.Component {
   render() {
     return (
       <div>
-        <form name="snippetUpdate" onSubmit={this.handleSubmit}>
-          <input type="text" name="title" placeholder={this.props.snippet.title}/>
-          <input type="text" name="library" placeholder={this.props.snippet.library} />
-          <input type="text" name="description" placeholder={this.props.snippet.description} />
-          <input type="text" name="code" placeholder={this.props.snippet.code} />
-          <input type="text" name="notes" placeholder={this.props.snippet.notes} />
-          <button>Update</button>
+        <form className="snippet-form" name="snippetUpdate" onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            <label>Title</label>
+            <input  className="form-control" type="text" name="title" placeholder="Title" defaultValue={this.props.snippet.title}/>
+          </div>
+          <div className="form-group">
+            <label>Library</label>
+            <input className="form-control"  type="text" name="library" placeholder="Library" defaultValue={this.props.snippet.library} />
+          </div>
+          <div className="form-group">
+            <label>Description</label>
+            <textarea className="form-control" name="description" placeholder="Description" rows="3"></textarea>
+          </div>
+          <div className="form-group">
+            <label>Code</label>
+            <textarea className="form-control" name="code" placeholder="Code" rows="5"></textarea>
+          </div>
+          <div className="form-group">
+            <label>Notes</label>
+            <textarea className="form-control" name="notes" placeholder="Notes" rows="3"></textarea>
+          </div>
+          <button className="btn btn-success">Update</button>
         </form>
       </div>
     )

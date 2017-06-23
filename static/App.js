@@ -125,7 +125,7 @@ var SnippetTable = function (_React$Component2) {
       var snippets = this.snippetRows();
       return React.createElement(
         'table',
-        { className: 'bordered-table' },
+        { className: 'table table-striped' },
         React.createElement(
           'thead',
           null,
@@ -272,7 +272,7 @@ var SnippetAdd = function (_React$Component3) {
               null,
               'Description'
             ),
-            React.createElement('input', { className: 'form-control', type: 'text', name: 'description', placeholder: 'Description' })
+            React.createElement('textarea', { className: 'form-control', name: 'description', placeholder: 'Description', rows: '3' })
           ),
           React.createElement(
             'div',
@@ -282,7 +282,7 @@ var SnippetAdd = function (_React$Component3) {
               null,
               'Code'
             ),
-            React.createElement('input', { className: 'form-control', type: 'text', name: 'code', placeholder: 'Code' })
+            React.createElement('textarea', { className: 'form-control', name: 'code', placeholder: 'Code', rows: '5' })
           ),
           React.createElement(
             'div',
@@ -292,7 +292,7 @@ var SnippetAdd = function (_React$Component3) {
               null,
               'Notes'
             ),
-            React.createElement('input', { className: 'form-control', type: 'text', name: 'notes', placeholder: 'Notes' })
+            React.createElement('textarea', { className: 'form-control', name: 'notes', placeholder: 'Notes', rows: '3' })
           ),
           React.createElement(
             'button',
@@ -382,12 +382,12 @@ var SnippetRecord = function (_React$Component4) {
           null,
           React.createElement(
             'button',
-            { onClick: this.editSnippetData },
+            { className: 'btn btn-warning', onClick: this.editSnippetData },
             'Edit'
           ),
           React.createElement(
             'button',
-            { onClick: this.deleteSnippetData },
+            { className: 'btn btn-danger', onClick: this.deleteSnippetData },
             'Delete'
           )
         )
@@ -444,15 +444,60 @@ var SnippetUpdate = function (_React$Component5) {
         null,
         React.createElement(
           'form',
-          { name: 'snippetUpdate', onSubmit: this.handleSubmit },
-          React.createElement('input', { type: 'text', name: 'title', placeholder: this.props.snippet.title }),
-          React.createElement('input', { type: 'text', name: 'library', placeholder: this.props.snippet.library }),
-          React.createElement('input', { type: 'text', name: 'description', placeholder: this.props.snippet.description }),
-          React.createElement('input', { type: 'text', name: 'code', placeholder: this.props.snippet.code }),
-          React.createElement('input', { type: 'text', name: 'notes', placeholder: this.props.snippet.notes }),
+          { className: 'snippet-form', name: 'snippetUpdate', onSubmit: this.handleSubmit },
+          React.createElement(
+            'div',
+            { className: 'form-group' },
+            React.createElement(
+              'label',
+              null,
+              'Title'
+            ),
+            React.createElement('input', { className: 'form-control', type: 'text', name: 'title', placeholder: 'Title', defaultValue: this.props.snippet.title })
+          ),
+          React.createElement(
+            'div',
+            { className: 'form-group' },
+            React.createElement(
+              'label',
+              null,
+              'Library'
+            ),
+            React.createElement('input', { className: 'form-control', type: 'text', name: 'library', placeholder: 'Library', defaultValue: this.props.snippet.library })
+          ),
+          React.createElement(
+            'div',
+            { className: 'form-group' },
+            React.createElement(
+              'label',
+              null,
+              'Description'
+            ),
+            React.createElement('textarea', { className: 'form-control', name: 'description', placeholder: 'Description', rows: '3' })
+          ),
+          React.createElement(
+            'div',
+            { className: 'form-group' },
+            React.createElement(
+              'label',
+              null,
+              'Code'
+            ),
+            React.createElement('textarea', { className: 'form-control', name: 'code', placeholder: 'Code', rows: '5' })
+          ),
+          React.createElement(
+            'div',
+            { className: 'form-group' },
+            React.createElement(
+              'label',
+              null,
+              'Notes'
+            ),
+            React.createElement('textarea', { className: 'form-control', name: 'notes', placeholder: 'Notes', rows: '3' })
+          ),
           React.createElement(
             'button',
-            null,
+            { className: 'btn btn-success' },
             'Update'
           )
         )
