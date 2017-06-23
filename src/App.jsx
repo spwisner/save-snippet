@@ -49,7 +49,7 @@ class SnippetRow extends React.Component {
     event.preventDefault();
     const snippet = this.props.snippet;
     this.props.snippetRecord(snippet);
-    this.props.buttonClicked(true);
+    this.props.displayComponent("showSnippet", true);
   }
 }
 
@@ -91,7 +91,7 @@ class SnippetTable extends React.Component {
         key={snippet.id}
         snippet={snippet}
         snippetRecord={this.props.snippetRecord}
-        buttonClicked={this.props.buttonClicked}
+        displayComponent={this.props.displayComponent}
         /> );
     });
   }
@@ -285,7 +285,8 @@ class SnippetList extends React.Component {
     this.snippetRecord = this.snippetRecord.bind(this);
     this.snippetEdit = this.snippetEdit.bind(this);
     this.snippetDelete = this.snippetDelete.bind(this);
-    this.buttonClicked = this.buttonClicked.bind(this);
+    // this.buttonClicked = this.buttonClicked.bind(this);
+    this.displayComponent = this.displayComponent.bind(this);
   }
 
   // componentDidMount used to ensure component is ready to use before data is loaded
@@ -303,16 +304,6 @@ class SnippetList extends React.Component {
   snippetRecord(snippet) {
     this.setState({ record: snippet});
     return snippet;
-  }
-
-  buttonClicked(status) {
-    this.setState({ showSnippet: true });
-    if (status) {
-      console.log('button clicked');
-      return true;
-    } else {
-      return false;
-    }
   }
 
   snippetEdit(snippet) {
@@ -343,7 +334,7 @@ class SnippetList extends React.Component {
     this.setState({ snippets: newSnippets });
   }
 
-  showComponent(state) {
+  displayStatus(state) {
     const status = state;
     if (status) {
       return true;
@@ -352,16 +343,22 @@ class SnippetList extends React.Component {
     }
   }
 
+  displayComponent(stateName, conditional) {
+    const object = {};
+    object[stateName] = conditional;
+    return this.setState(object);
+  }
+
   render() {
-    const showUpdate = this.showComponent(this.state.showUpdate);
-    const showSnippet = this.showComponent(this.state.showSnippet);
-    const showSnippets = this.showComponent(this.state.showSnippets);
-    const showCreate = this.showComponent(this.state.showCreate);
+    const showUpdate = this.displayStatus(this.state.showUpdate);
+    const showSnippet = this.displayStatus(this.state.showSnippet);
+    const showSnippets = this.displayStatus(this.state.showSnippets);
+    const showCreate = this.displayStatus(this.state.showCreate);
     return (
       <div>
         <h1>Save Your Snippet</h1>
         {showCreate ?  <SnippetAdd createSnippet={this.createSnippet} showCreate={this.state.showCreate}/> : null }
-        {showSnippets ? <SnippetTable snippets={this.state.snippets} snippetRecord={this.snippetRecord} buttonClicked={this.buttonClicked}/> : null }
+        {showSnippets ? <SnippetTable snippets={this.state.snippets} snippetRecord={this.snippetRecord} displayComponent={this.displayComponent} /> : null }
         {showSnippet ?  <SnippetRecord record={this.state.record} snippetEdit={this.snippetEdit} snippetDelete={this.snippetDelete} showSnippet={this.state.showSnippet}/> : null }
         {showUpdate ?  <SnippetUpdate updateSnippet={this.updateSnippet} snippet={this.state.editRecord} showUpdate={this.state.showUpdate} /> : null }
       </div>

@@ -99,7 +99,7 @@ var SnippetRow = function (_React$Component) {
       event.preventDefault();
       var snippet = this.props.snippet;
       this.props.snippetRecord(snippet);
-      this.props.buttonClicked(true);
+      this.props.displayComponent("showSnippet", true);
     }
   }]);
 
@@ -201,7 +201,7 @@ var SnippetTable = function (_React$Component2) {
           key: snippet.id,
           snippet: snippet,
           snippetRecord: _this3.props.snippetRecord,
-          buttonClicked: _this3.props.buttonClicked
+          displayComponent: _this3.props.displayComponent
         });
       });
     }
@@ -557,7 +557,8 @@ var SnippetList = function (_React$Component6) {
     _this7.snippetRecord = _this7.snippetRecord.bind(_this7);
     _this7.snippetEdit = _this7.snippetEdit.bind(_this7);
     _this7.snippetDelete = _this7.snippetDelete.bind(_this7);
-    _this7.buttonClicked = _this7.buttonClicked.bind(_this7);
+    // this.buttonClicked = this.buttonClicked.bind(this);
+    _this7.displayComponent = _this7.displayComponent.bind(_this7);
     return _this7;
   }
 
@@ -586,17 +587,6 @@ var SnippetList = function (_React$Component6) {
     value: function snippetRecord(snippet) {
       this.setState({ record: snippet });
       return snippet;
-    }
-  }, {
-    key: 'buttonClicked',
-    value: function buttonClicked(status) {
-      this.setState({ showSnippet: true });
-      if (status) {
-        console.log('button clicked');
-        return true;
-      } else {
-        return false;
-      }
     }
   }, {
     key: 'snippetEdit',
@@ -633,8 +623,8 @@ var SnippetList = function (_React$Component6) {
       this.setState({ snippets: newSnippets });
     }
   }, {
-    key: 'showComponent',
-    value: function showComponent(state) {
+    key: 'displayStatus',
+    value: function displayStatus(state) {
       var status = state;
       if (status) {
         return true;
@@ -643,12 +633,19 @@ var SnippetList = function (_React$Component6) {
       }
     }
   }, {
+    key: 'displayComponent',
+    value: function displayComponent(stateName, conditional) {
+      var object = {};
+      object[stateName] = conditional;
+      return this.setState(object);
+    }
+  }, {
     key: 'render',
     value: function render() {
-      var showUpdate = this.showComponent(this.state.showUpdate);
-      var showSnippet = this.showComponent(this.state.showSnippet);
-      var showSnippets = this.showComponent(this.state.showSnippets);
-      var showCreate = this.showComponent(this.state.showCreate);
+      var showUpdate = this.displayStatus(this.state.showUpdate);
+      var showSnippet = this.displayStatus(this.state.showSnippet);
+      var showSnippets = this.displayStatus(this.state.showSnippets);
+      var showCreate = this.displayStatus(this.state.showCreate);
       return React.createElement(
         'div',
         null,
@@ -658,7 +655,7 @@ var SnippetList = function (_React$Component6) {
           'Save Your Snippet'
         ),
         showCreate ? React.createElement(SnippetAdd, { createSnippet: this.createSnippet, showCreate: this.state.showCreate }) : null,
-        showSnippets ? React.createElement(SnippetTable, { snippets: this.state.snippets, snippetRecord: this.snippetRecord, buttonClicked: this.buttonClicked }) : null,
+        showSnippets ? React.createElement(SnippetTable, { snippets: this.state.snippets, snippetRecord: this.snippetRecord, displayComponent: this.displayComponent }) : null,
         showSnippet ? React.createElement(SnippetRecord, { record: this.state.record, snippetEdit: this.snippetEdit, snippetDelete: this.snippetDelete, showSnippet: this.state.showSnippet }) : null,
         showUpdate ? React.createElement(SnippetUpdate, { updateSnippet: this.updateSnippet, snippet: this.state.editRecord, showUpdate: this.state.showUpdate }) : null
       );
