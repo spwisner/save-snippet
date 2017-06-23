@@ -50,6 +50,7 @@ class SnippetRow extends React.Component {
     const snippet = this.props.snippet;
     this.props.snippetRecord(snippet);
     this.props.displayComponent("showSnippet", true);
+    this.props.displayComponent("showSnippets", false);
   }
 }
 
@@ -164,6 +165,7 @@ class SnippetRecord extends React.Component {
   constructor() {
     super();
     this.editSnippetData = this.editSnippetData.bind(this);
+    this.showSnippets = this.showSnippets.bind(this);
     this.deleteSnippetData = this.deleteSnippetData.bind(this);
   }
 
@@ -171,7 +173,15 @@ class SnippetRecord extends React.Component {
     event.preventDefault();
     const currentRecord = this.props.record;
     this.props.snippetEdit(currentRecord);
+    this.props.displayComponent("showSnippet", false);
+    this.props.displayComponent("showUpdate", true);
     return;
+  }
+
+  showSnippets(event) {
+    event.preventDefault();
+    this.props.displayComponent("showSnippets", true);
+    this.props.displayComponent("showSnippet", false);
   }
 
   deleteSnippetData(event) {
@@ -193,6 +203,7 @@ class SnippetRecord extends React.Component {
           <p>{this.props.record.code}</p>
         </div>
         <div>
+          <button className="btn btn-primary" onClick={this.showSnippets}>Back</button>
           <button className="btn btn-warning" onClick={this.editSnippetData}>Edit</button>
           <button className="btn btn-danger" onClick={this.deleteSnippetData}>Delete</button>
         </div>
@@ -210,6 +221,7 @@ class SnippetUpdate extends React.Component {
       showEditForm: false
     }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.cancelUpdate = this.cancelUpdate.bind(this);
   }
 
   handleSubmit(event) {
@@ -230,6 +242,12 @@ class SnippetUpdate extends React.Component {
     form.description.value = "";
     form.code.value = "";
     form.notes.value = "";
+  }
+
+  cancelUpdate(event) {
+    event.preventDefault();
+    this.props.displayComponent("showSnippet", true);
+    this.props.displayComponent("showUpdate", false);
   }
 
   render() {
@@ -258,6 +276,7 @@ class SnippetUpdate extends React.Component {
             <textarea className="form-control" name="notes" placeholder="Notes" rows="3"></textarea>
           </div>
           <button className="btn btn-success">Update</button>
+          <button className="btn btn-danger" onClick={this.cancelUpdate}>Cancel</button>
         </form>
       </div>
     )
@@ -357,10 +376,10 @@ class SnippetList extends React.Component {
     return (
       <div>
         <h1>Save Your Snippet</h1>
-        {showCreate ?  <SnippetAdd createSnippet={this.createSnippet} showCreate={this.state.showCreate}/> : null }
+        {showCreate ?  <SnippetAdd createSnippet={this.createSnippet} showCreate={this.state.showCreate} displayComponent={this.displayComponent} /> : null }
         {showSnippets ? <SnippetTable snippets={this.state.snippets} snippetRecord={this.snippetRecord} displayComponent={this.displayComponent} /> : null }
-        {showSnippet ?  <SnippetRecord record={this.state.record} snippetEdit={this.snippetEdit} snippetDelete={this.snippetDelete} showSnippet={this.state.showSnippet}/> : null }
-        {showUpdate ?  <SnippetUpdate updateSnippet={this.updateSnippet} snippet={this.state.editRecord} showUpdate={this.state.showUpdate} /> : null }
+        {showSnippet ?  <SnippetRecord record={this.state.record} snippetEdit={this.snippetEdit} snippetDelete={this.snippetDelete} showSnippet={this.state.showSnippet} displayComponent={this.displayComponent} /> : null }
+        {showUpdate ?  <SnippetUpdate updateSnippet={this.updateSnippet} snippet={this.state.editRecord} showUpdate={this.state.showUpdate} displayComponent={this.displayComponent} /> : null }
       </div>
     );
   }

@@ -100,6 +100,7 @@ var SnippetRow = function (_React$Component) {
       var snippet = this.props.snippet;
       this.props.snippetRecord(snippet);
       this.props.displayComponent("showSnippet", true);
+      this.props.displayComponent("showSnippets", false);
     }
   }]);
 
@@ -334,6 +335,7 @@ var SnippetRecord = function (_React$Component4) {
     var _this5 = _possibleConstructorReturn(this, (SnippetRecord.__proto__ || Object.getPrototypeOf(SnippetRecord)).call(this));
 
     _this5.editSnippetData = _this5.editSnippetData.bind(_this5);
+    _this5.showSnippets = _this5.showSnippets.bind(_this5);
     _this5.deleteSnippetData = _this5.deleteSnippetData.bind(_this5);
     return _this5;
   }
@@ -344,7 +346,16 @@ var SnippetRecord = function (_React$Component4) {
       event.preventDefault();
       var currentRecord = this.props.record;
       this.props.snippetEdit(currentRecord);
+      this.props.displayComponent("showSnippet", false);
+      this.props.displayComponent("showUpdate", true);
       return;
+    }
+  }, {
+    key: 'showSnippets',
+    value: function showSnippets(event) {
+      event.preventDefault();
+      this.props.displayComponent("showSnippets", true);
+      this.props.displayComponent("showSnippet", false);
     }
   }, {
     key: 'deleteSnippetData',
@@ -402,6 +413,11 @@ var SnippetRecord = function (_React$Component4) {
           null,
           React.createElement(
             'button',
+            { className: 'btn btn-primary', onClick: this.showSnippets },
+            'Back'
+          ),
+          React.createElement(
+            'button',
             { className: 'btn btn-warning', onClick: this.editSnippetData },
             'Edit'
           ),
@@ -432,6 +448,7 @@ var SnippetUpdate = function (_React$Component5) {
       showEditForm: false
     };
     _this6.handleSubmit = _this6.handleSubmit.bind(_this6);
+    _this6.cancelUpdate = _this6.cancelUpdate.bind(_this6);
     return _this6;
   }
 
@@ -455,6 +472,13 @@ var SnippetUpdate = function (_React$Component5) {
       form.description.value = "";
       form.code.value = "";
       form.notes.value = "";
+    }
+  }, {
+    key: 'cancelUpdate',
+    value: function cancelUpdate(event) {
+      event.preventDefault();
+      this.props.displayComponent("showSnippet", true);
+      this.props.displayComponent("showUpdate", false);
     }
   }, {
     key: 'render',
@@ -524,6 +548,11 @@ var SnippetUpdate = function (_React$Component5) {
             'button',
             { className: 'btn btn-success' },
             'Update'
+          ),
+          React.createElement(
+            'button',
+            { className: 'btn btn-danger', onClick: this.cancelUpdate },
+            'Cancel'
           )
         )
       );
@@ -654,10 +683,10 @@ var SnippetList = function (_React$Component6) {
           null,
           'Save Your Snippet'
         ),
-        showCreate ? React.createElement(SnippetAdd, { createSnippet: this.createSnippet, showCreate: this.state.showCreate }) : null,
+        showCreate ? React.createElement(SnippetAdd, { createSnippet: this.createSnippet, showCreate: this.state.showCreate, displayComponent: this.displayComponent }) : null,
         showSnippets ? React.createElement(SnippetTable, { snippets: this.state.snippets, snippetRecord: this.snippetRecord, displayComponent: this.displayComponent }) : null,
-        showSnippet ? React.createElement(SnippetRecord, { record: this.state.record, snippetEdit: this.snippetEdit, snippetDelete: this.snippetDelete, showSnippet: this.state.showSnippet }) : null,
-        showUpdate ? React.createElement(SnippetUpdate, { updateSnippet: this.updateSnippet, snippet: this.state.editRecord, showUpdate: this.state.showUpdate }) : null
+        showSnippet ? React.createElement(SnippetRecord, { record: this.state.record, snippetEdit: this.snippetEdit, snippetDelete: this.snippetDelete, showSnippet: this.state.showSnippet, displayComponent: this.displayComponent }) : null,
+        showUpdate ? React.createElement(SnippetUpdate, { updateSnippet: this.updateSnippet, snippet: this.state.editRecord, showUpdate: this.state.showUpdate, displayComponent: this.displayComponent }) : null
       );
     }
   }]);
