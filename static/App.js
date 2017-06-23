@@ -99,6 +99,7 @@ var SnippetRow = function (_React$Component) {
       event.preventDefault();
       var snippet = this.props.snippet;
       this.props.snippetRecord(snippet);
+      this.props.buttonClicked(true);
     }
   }]);
 
@@ -199,7 +200,8 @@ var SnippetTable = function (_React$Component2) {
         return React.createElement(SnippetRow, {
           key: snippet.id,
           snippet: snippet,
-          snippetRecord: _this3.props.snippetRecord
+          snippetRecord: _this3.props.snippetRecord,
+          buttonClicked: _this3.props.buttonClicked
         });
       });
     }
@@ -355,7 +357,6 @@ var SnippetRecord = function (_React$Component4) {
   }, {
     key: 'render',
     value: function render() {
-
       return React.createElement(
         'div',
         null,
@@ -556,6 +557,7 @@ var SnippetList = function (_React$Component6) {
     _this7.snippetRecord = _this7.snippetRecord.bind(_this7);
     _this7.snippetEdit = _this7.snippetEdit.bind(_this7);
     _this7.snippetDelete = _this7.snippetDelete.bind(_this7);
+    _this7.buttonClicked = _this7.buttonClicked.bind(_this7);
     return _this7;
   }
 
@@ -584,6 +586,17 @@ var SnippetList = function (_React$Component6) {
     value: function snippetRecord(snippet) {
       this.setState({ record: snippet });
       return snippet;
+    }
+  }, {
+    key: 'buttonClicked',
+    value: function buttonClicked(status) {
+      this.setState({ showSnippet: true });
+      if (status) {
+        console.log('button clicked');
+        return true;
+      } else {
+        return false;
+      }
     }
   }, {
     key: 'snippetEdit',
@@ -645,7 +658,7 @@ var SnippetList = function (_React$Component6) {
           'Save Your Snippet'
         ),
         showCreate ? React.createElement(SnippetAdd, { createSnippet: this.createSnippet, showCreate: this.state.showCreate }) : null,
-        showSnippets ? React.createElement(SnippetTable, { snippets: this.state.snippets, snippetRecord: this.snippetRecord, showSnippets: this.state.showSnippets }) : null,
+        showSnippets ? React.createElement(SnippetTable, { snippets: this.state.snippets, snippetRecord: this.snippetRecord, buttonClicked: this.buttonClicked }) : null,
         showSnippet ? React.createElement(SnippetRecord, { record: this.state.record, snippetEdit: this.snippetEdit, snippetDelete: this.snippetDelete, showSnippet: this.state.showSnippet }) : null,
         showUpdate ? React.createElement(SnippetUpdate, { updateSnippet: this.updateSnippet, snippet: this.state.editRecord, showUpdate: this.state.showUpdate }) : null
       );

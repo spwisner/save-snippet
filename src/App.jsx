@@ -48,7 +48,8 @@ class SnippetRow extends React.Component {
   viewSnippetData(event) {
     event.preventDefault();
     const snippet = this.props.snippet;
-    this.props.snippetRecord(snippet)
+    this.props.snippetRecord(snippet);
+    this.props.buttonClicked(true);
   }
 }
 
@@ -90,6 +91,7 @@ class SnippetTable extends React.Component {
         key={snippet.id}
         snippet={snippet}
         snippetRecord={this.props.snippetRecord}
+        buttonClicked={this.props.buttonClicked}
         /> );
     });
   }
@@ -180,7 +182,6 @@ class SnippetRecord extends React.Component {
   }
 
   render() {
-
     return(
       <div>
         <h3>View Snippet</h3>
@@ -284,6 +285,7 @@ class SnippetList extends React.Component {
     this.snippetRecord = this.snippetRecord.bind(this);
     this.snippetEdit = this.snippetEdit.bind(this);
     this.snippetDelete = this.snippetDelete.bind(this);
+    this.buttonClicked = this.buttonClicked.bind(this);
   }
 
   // componentDidMount used to ensure component is ready to use before data is loaded
@@ -301,6 +303,16 @@ class SnippetList extends React.Component {
   snippetRecord(snippet) {
     this.setState({ record: snippet});
     return snippet;
+  }
+
+  buttonClicked(status) {
+    this.setState({ showSnippet: true });
+    if (status) {
+      console.log('button clicked');
+      return true;
+    } else {
+      return false;
+    }
   }
 
   snippetEdit(snippet) {
@@ -349,7 +361,7 @@ class SnippetList extends React.Component {
       <div>
         <h1>Save Your Snippet</h1>
         {showCreate ?  <SnippetAdd createSnippet={this.createSnippet} showCreate={this.state.showCreate}/> : null }
-        {showSnippets ? <SnippetTable snippets={this.state.snippets} snippetRecord={this.snippetRecord} showSnippets={this.state.showSnippets}/> : null }
+        {showSnippets ? <SnippetTable snippets={this.state.snippets} snippetRecord={this.snippetRecord} buttonClicked={this.buttonClicked}/> : null }
         {showSnippet ?  <SnippetRecord record={this.state.record} snippetEdit={this.snippetEdit} snippetDelete={this.snippetDelete} showSnippet={this.state.showSnippet}/> : null }
         {showUpdate ?  <SnippetUpdate updateSnippet={this.updateSnippet} snippet={this.state.editRecord} showUpdate={this.state.showUpdate} /> : null }
       </div>
