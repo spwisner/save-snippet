@@ -164,7 +164,6 @@ class SnippetRecord extends React.Component {
   editSnippetData(event) {
     event.preventDefault();
     const currentRecord = this.props.record;
-    console.log('editSnippetData');
     this.props.snippetEdit(currentRecord);
     return;
   }
@@ -177,6 +176,7 @@ class SnippetRecord extends React.Component {
   }
 
   render() {
+
     return(
       <div>
         <h2 className="title-underline">{this.props.record.title} [{this.props.record.library}]</h2>
@@ -229,6 +229,7 @@ class SnippetUpdate extends React.Component {
   render() {
     return (
       <div>
+        <h3>Update Snippet</h3>
         <form className="snippet-form" name="snippetUpdate" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label>Title</label>
@@ -265,6 +266,10 @@ class SnippetList extends React.Component {
     super();
 
     this.state = {
+      showSnippets: false,
+      showSnippet: false,
+      showUpdate: false,
+      showCreate: false,
       snippets: [],
       record: [],
       editRecord: []
@@ -321,21 +326,32 @@ class SnippetList extends React.Component {
     this.setState({ snippets: newSnippets });
   }
 
+  showComponent(state) {
+    const status = state;
+    if (status) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   render() {
+    const showUpdate = this.showComponent(this.state.showUpdate);
     return (
       <div>
         <h1>Save Your Snippet</h1>
         <h3>Create a Snippet</h3>
-        <SnippetAdd createSnippet={this.createSnippet}/>
+        <SnippetAdd createSnippet={this.createSnippet} showCreate={this.state.showCreate}/>
         <hr />
         <h3>Saved Snippets</h3>
-        <SnippetTable snippets={this.state.snippets} snippetRecord={this.snippetRecord}/>
+        <SnippetTable snippets={this.state.snippets} snippetRecord={this.snippetRecord} showSnippets={this.state.showSnippets}/>
         <hr />
         <h3>View Snippet</h3>
-        <SnippetRecord record={this.state.record} snippetEdit={this.snippetEdit} snippetDelete={this.snippetDelete}/>
+        <SnippetRecord record={this.state.record} snippetEdit={this.snippetEdit} snippetDelete={this.snippetDelete} showSnippet={this.state.showSnippet}/>
         <hr />
-        <h3>Update Snippet</h3>
-        <SnippetUpdate updateSnippet={this.updateSnippet} snippet={this.state.editRecord}/>
+        <div>
+          {showUpdate ?  <SnippetUpdate updateSnippet={this.updateSnippet} snippet={this.state.editRecord} showUpdate={this.state.showUpdate} /> : null }
+        </div>
       </div>
     );
   }
