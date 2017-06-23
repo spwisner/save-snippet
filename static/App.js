@@ -124,60 +124,69 @@ var SnippetTable = function (_React$Component2) {
     value: function render() {
       var snippets = this.snippetRows();
       return React.createElement(
-        'table',
-        { className: 'table table-striped' },
+        'div',
+        null,
         React.createElement(
-          'thead',
+          'h3',
           null,
-          React.createElement(
-            'tr',
-            null,
-            React.createElement(
-              'th',
-              null,
-              'Id'
-            ),
-            React.createElement(
-              'th',
-              null,
-              'Title'
-            ),
-            React.createElement(
-              'th',
-              null,
-              'Created'
-            ),
-            React.createElement(
-              'th',
-              null,
-              'Library'
-            ),
-            React.createElement(
-              'th',
-              null,
-              'Description'
-            ),
-            React.createElement(
-              'th',
-              null,
-              'Code'
-            ),
-            React.createElement(
-              'th',
-              null,
-              'Notes'
-            ),
-            React.createElement(
-              'th',
-              null,
-              'View'
-            )
-          )
+          'Saved Snippets'
         ),
         React.createElement(
-          'tbody',
-          null,
-          snippets
+          'table',
+          { className: 'table table-striped' },
+          React.createElement(
+            'thead',
+            null,
+            React.createElement(
+              'tr',
+              null,
+              React.createElement(
+                'th',
+                null,
+                'Id'
+              ),
+              React.createElement(
+                'th',
+                null,
+                'Title'
+              ),
+              React.createElement(
+                'th',
+                null,
+                'Created'
+              ),
+              React.createElement(
+                'th',
+                null,
+                'Library'
+              ),
+              React.createElement(
+                'th',
+                null,
+                'Description'
+              ),
+              React.createElement(
+                'th',
+                null,
+                'Code'
+              ),
+              React.createElement(
+                'th',
+                null,
+                'Notes'
+              ),
+              React.createElement(
+                'th',
+                null,
+                'View'
+              )
+            )
+          ),
+          React.createElement(
+            'tbody',
+            null,
+            snippets
+          )
         )
       );
     }
@@ -241,6 +250,11 @@ var SnippetAdd = function (_React$Component3) {
       return React.createElement(
         'div',
         null,
+        React.createElement(
+          'h3',
+          null,
+          'Create a Snippet'
+        ),
         React.createElement(
           'form',
           { className: 'snippet-form', name: 'snippetAdd', onSubmit: this.handleSubmit },
@@ -345,6 +359,11 @@ var SnippetRecord = function (_React$Component4) {
       return React.createElement(
         'div',
         null,
+        React.createElement(
+          'h3',
+          null,
+          'View Snippet'
+        ),
         React.createElement(
           'h2',
           { className: 'title-underline' },
@@ -524,7 +543,7 @@ var SnippetList = function (_React$Component6) {
     var _this7 = _possibleConstructorReturn(this, (SnippetList.__proto__ || Object.getPrototypeOf(SnippetList)).call(this));
 
     _this7.state = {
-      showSnippets: false,
+      showSnippets: true,
       showSnippet: false,
       showUpdate: false,
       showCreate: false,
@@ -614,6 +633,9 @@ var SnippetList = function (_React$Component6) {
     key: 'render',
     value: function render() {
       var showUpdate = this.showComponent(this.state.showUpdate);
+      var showSnippet = this.showComponent(this.state.showSnippet);
+      var showSnippets = this.showComponent(this.state.showSnippets);
+      var showCreate = this.showComponent(this.state.showCreate);
       return React.createElement(
         'div',
         null,
@@ -622,32 +644,10 @@ var SnippetList = function (_React$Component6) {
           null,
           'Save Your Snippet'
         ),
-        React.createElement(
-          'h3',
-          null,
-          'Create a Snippet'
-        ),
-        React.createElement(SnippetAdd, { createSnippet: this.createSnippet, showCreate: this.state.showCreate }),
-        React.createElement('hr', null),
-        React.createElement(
-          'h3',
-          null,
-          'Saved Snippets'
-        ),
-        React.createElement(SnippetTable, { snippets: this.state.snippets, snippetRecord: this.snippetRecord, showSnippets: this.state.showSnippets }),
-        React.createElement('hr', null),
-        React.createElement(
-          'h3',
-          null,
-          'View Snippet'
-        ),
-        React.createElement(SnippetRecord, { record: this.state.record, snippetEdit: this.snippetEdit, snippetDelete: this.snippetDelete, showSnippet: this.state.showSnippet }),
-        React.createElement('hr', null),
-        React.createElement(
-          'div',
-          null,
-          showUpdate ? React.createElement(SnippetUpdate, { updateSnippet: this.updateSnippet, snippet: this.state.editRecord, showUpdate: this.state.showUpdate }) : null
-        )
+        showCreate ? React.createElement(SnippetAdd, { createSnippet: this.createSnippet, showCreate: this.state.showCreate }) : null,
+        showSnippets ? React.createElement(SnippetTable, { snippets: this.state.snippets, snippetRecord: this.snippetRecord, showSnippets: this.state.showSnippets }) : null,
+        showSnippet ? React.createElement(SnippetRecord, { record: this.state.record, snippetEdit: this.snippetEdit, snippetDelete: this.snippetDelete, showSnippet: this.state.showSnippet }) : null,
+        showUpdate ? React.createElement(SnippetUpdate, { updateSnippet: this.updateSnippet, snippet: this.state.editRecord, showUpdate: this.state.showUpdate }) : null
       );
     }
   }]);

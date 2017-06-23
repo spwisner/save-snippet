@@ -63,21 +63,24 @@ class SnippetTable extends React.Component {
   render() {
     const snippets = this.snippetRows();
     return (
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Created</th>
-            <th>Library</th>
-            <th>Description</th>
-            <th>Code</th>
-            <th>Notes</th>
-            <th>View</th>
-          </tr>
-        </thead>
-        <tbody>{snippets}</tbody>
-      </table>
+      <div>
+        <h3>Saved Snippets</h3>
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Title</th>
+              <th>Created</th>
+              <th>Library</th>
+              <th>Description</th>
+              <th>Code</th>
+              <th>Notes</th>
+              <th>View</th>
+            </tr>
+          </thead>
+          <tbody>{snippets}</tbody>
+        </table>
+      </div>
     )
   }
 
@@ -124,6 +127,7 @@ class SnippetAdd extends React.Component {
     // Form name included so that inputs can be accessed
     return (
       <div>
+        <h3>Create a Snippet</h3>
         <form className="snippet-form" name="snippetAdd" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label>Title</label>
@@ -179,6 +183,7 @@ class SnippetRecord extends React.Component {
 
     return(
       <div>
+        <h3>View Snippet</h3>
         <h2 className="title-underline">{this.props.record.title} [{this.props.record.library}]</h2>
         <h3>Description</h3>
         <p>{this.props.record.description}</p>
@@ -266,7 +271,7 @@ class SnippetList extends React.Component {
     super();
 
     this.state = {
-      showSnippets: false,
+      showSnippets: true,
       showSnippet: false,
       showUpdate: false,
       showCreate: false,
@@ -337,21 +342,16 @@ class SnippetList extends React.Component {
 
   render() {
     const showUpdate = this.showComponent(this.state.showUpdate);
+    const showSnippet = this.showComponent(this.state.showSnippet);
+    const showSnippets = this.showComponent(this.state.showSnippets);
+    const showCreate = this.showComponent(this.state.showCreate);
     return (
       <div>
         <h1>Save Your Snippet</h1>
-        <h3>Create a Snippet</h3>
-        <SnippetAdd createSnippet={this.createSnippet} showCreate={this.state.showCreate}/>
-        <hr />
-        <h3>Saved Snippets</h3>
-        <SnippetTable snippets={this.state.snippets} snippetRecord={this.snippetRecord} showSnippets={this.state.showSnippets}/>
-        <hr />
-        <h3>View Snippet</h3>
-        <SnippetRecord record={this.state.record} snippetEdit={this.snippetEdit} snippetDelete={this.snippetDelete} showSnippet={this.state.showSnippet}/>
-        <hr />
-        <div>
-          {showUpdate ?  <SnippetUpdate updateSnippet={this.updateSnippet} snippet={this.state.editRecord} showUpdate={this.state.showUpdate} /> : null }
-        </div>
+        {showCreate ?  <SnippetAdd createSnippet={this.createSnippet} showCreate={this.state.showCreate}/> : null }
+        {showSnippets ? <SnippetTable snippets={this.state.snippets} snippetRecord={this.snippetRecord} showSnippets={this.state.showSnippets}/> : null }
+        {showSnippet ?  <SnippetRecord record={this.state.record} snippetEdit={this.snippetEdit} snippetDelete={this.snippetDelete} showSnippet={this.state.showSnippet}/> : null }
+        {showUpdate ?  <SnippetUpdate updateSnippet={this.updateSnippet} snippet={this.state.editRecord} showUpdate={this.state.showUpdate} /> : null }
       </div>
     );
   }
