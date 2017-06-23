@@ -87,7 +87,7 @@ var SnippetRow = function (_React$Component) {
           null,
           React.createElement(
             'button',
-            { onClick: this.viewSnippetData.bind(this) },
+            { className: 'btn btn-default', onClick: this.viewSnippetData.bind(this) },
             'View'
           )
         )
@@ -562,17 +562,161 @@ var SnippetUpdate = function (_React$Component5) {
   return SnippetUpdate;
 }(React.Component);
 
+//////////////////// Bootstrap Sign-in
+
+
+var Navigation = function (_React$Component6) {
+  _inherits(Navigation, _React$Component6);
+
+  function Navigation() {
+    _classCallCheck(this, Navigation);
+
+    return _possibleConstructorReturn(this, (Navigation.__proto__ || Object.getPrototypeOf(Navigation)).apply(this, arguments));
+  }
+
+  _createClass(Navigation, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'nav',
+        { className: 'navbar navbar-default' },
+        React.createElement(
+          'div',
+          { className: 'container-fluid' },
+          React.createElement(
+            'div',
+            { className: 'navbar-header' },
+            React.createElement(
+              'button',
+              { type: 'button', className: 'navbar-toggle collapsed', 'data-toggle': 'collapse', 'data-target': '#bs-example-navbar-collapse-1', 'aria-expanded': 'false' },
+              React.createElement(
+                'span',
+                { className: 'sr-only' },
+                'Toggle navigation'
+              ),
+              React.createElement('span', { className: 'icon-bar' }),
+              React.createElement('span', { className: 'icon-bar' }),
+              React.createElement('span', { className: 'icon-bar' })
+            ),
+            React.createElement(
+              'a',
+              { className: 'navbar-brand', href: '#' },
+              'Save Snippet'
+            )
+          ),
+          React.createElement(
+            'div',
+            { className: 'collapse navbar-collapse', id: 'search-navbar-collapse' },
+            React.createElement(
+              'form',
+              { className: 'navbar-form navbar-right' },
+              React.createElement(
+                'div',
+                { className: 'form-group' },
+                React.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Search' })
+              ),
+              React.createElement(
+                'button',
+                { type: 'submit', className: 'btn btn-default' },
+                'Submit'
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Navigation;
+}(React.Component);
+
+var SignUp = function (_React$Component7) {
+  _inherits(SignUp, _React$Component7);
+
+  function SignUp() {
+    _classCallCheck(this, SignUp);
+
+    return _possibleConstructorReturn(this, (SignUp.__proto__ || Object.getPrototypeOf(SignUp)).apply(this, arguments));
+  }
+
+  _createClass(SignUp, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        { className: 'wrapper' },
+        React.createElement(
+          'form',
+          { className: 'form-signin snippet-form' },
+          React.createElement(
+            'h2',
+            { className: 'form-signin-heading' },
+            'Sign-Up'
+          ),
+          React.createElement('input', { type: 'text', className: 'form-control', name: 'username', placeholder: 'Email Address', required: '', autofocus: '' }),
+          React.createElement('input', { type: 'password', className: 'form-control', name: 'password', placeholder: 'Password', required: '' }),
+          React.createElement(
+            'button',
+            { className: 'btn btn-sm btn-primary btn-block login-button', type: 'submit' },
+            'Login'
+          )
+        )
+      );
+    }
+  }]);
+
+  return SignUp;
+}(React.Component);
+
+var SignIn = function (_React$Component8) {
+  _inherits(SignIn, _React$Component8);
+
+  function SignIn() {
+    _classCallCheck(this, SignIn);
+
+    return _possibleConstructorReturn(this, (SignIn.__proto__ || Object.getPrototypeOf(SignIn)).apply(this, arguments));
+  }
+
+  _createClass(SignIn, [{
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        { className: 'wrapper' },
+        React.createElement(
+          'form',
+          { className: 'form-signin snippet-form' },
+          React.createElement(
+            'h2',
+            { className: 'form-signin-heading' },
+            'Sign-In'
+          ),
+          React.createElement('input', { type: 'text', className: 'form-control', name: 'username', placeholder: 'Email Address', required: '', autofocus: '' }),
+          React.createElement('input', { type: 'password', className: 'form-control', name: 'password', placeholder: 'Password', required: '' }),
+          React.createElement(
+            'button',
+            { className: 'btn btn-sm btn-primary btn-block login-button ', type: 'submit' },
+            'Login'
+          )
+        )
+      );
+    }
+  }]);
+
+  return SignIn;
+}(React.Component);
+
 ///////////////// SnippetList
 
-var SnippetList = function (_React$Component6) {
-  _inherits(SnippetList, _React$Component6);
+var SnippetList = function (_React$Component9) {
+  _inherits(SnippetList, _React$Component9);
 
   function SnippetList() {
     _classCallCheck(this, SnippetList);
 
-    var _this7 = _possibleConstructorReturn(this, (SnippetList.__proto__ || Object.getPrototypeOf(SnippetList)).call(this));
+    var _this10 = _possibleConstructorReturn(this, (SnippetList.__proto__ || Object.getPrototypeOf(SnippetList)).call(this));
 
-    _this7.state = {
+    _this10.state = {
       showSnippets: true,
       showSnippet: false,
       showUpdate: false,
@@ -582,13 +726,13 @@ var SnippetList = function (_React$Component6) {
       editRecord: []
     };
 
-    _this7.createSnippet = _this7.createSnippet.bind(_this7);
-    _this7.snippetRecord = _this7.snippetRecord.bind(_this7);
-    _this7.snippetEdit = _this7.snippetEdit.bind(_this7);
-    _this7.snippetDelete = _this7.snippetDelete.bind(_this7);
+    _this10.createSnippet = _this10.createSnippet.bind(_this10);
+    _this10.snippetRecord = _this10.snippetRecord.bind(_this10);
+    _this10.snippetEdit = _this10.snippetEdit.bind(_this10);
+    _this10.snippetDelete = _this10.snippetDelete.bind(_this10);
     // this.buttonClicked = this.buttonClicked.bind(this);
-    _this7.displayComponent = _this7.displayComponent.bind(_this7);
-    return _this7;
+    _this10.displayComponent = _this10.displayComponent.bind(_this10);
+    return _this10;
   }
 
   // componentDidMount used to ensure component is ready to use before data is loaded
@@ -605,10 +749,10 @@ var SnippetList = function (_React$Component6) {
   }, {
     key: 'loadData',
     value: function loadData() {
-      var _this8 = this;
+      var _this11 = this;
 
       setTimeout(function () {
-        _this8.setState({ snippets: snippets });
+        _this11.setState({ snippets: snippets });
       }, 500);
     }
   }, {
@@ -678,11 +822,9 @@ var SnippetList = function (_React$Component6) {
       return React.createElement(
         'div',
         null,
-        React.createElement(
-          'h1',
-          null,
-          'Save Your Snippet'
-        ),
+        React.createElement(Navigation, null),
+        React.createElement(SignUp, null),
+        React.createElement(SignIn, null),
         showCreate ? React.createElement(SnippetAdd, { createSnippet: this.createSnippet, showCreate: this.state.showCreate, displayComponent: this.displayComponent }) : null,
         showSnippets ? React.createElement(SnippetTable, { snippets: this.state.snippets, snippetRecord: this.snippetRecord, displayComponent: this.displayComponent }) : null,
         showSnippet ? React.createElement(SnippetRecord, { record: this.state.record, snippetEdit: this.snippetEdit, snippetDelete: this.snippetDelete, showSnippet: this.state.showSnippet, displayComponent: this.displayComponent }) : null,

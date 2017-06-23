@@ -40,7 +40,7 @@ class SnippetRow extends React.Component {
         <td>{this.props.snippet.description}</td>
         <td>{this.props.snippet.code}</td>
         <td>{this.props.snippet.notes}</td>
-        <td><button onClick={this.viewSnippetData.bind(this)}>View</button></td>
+        <td><button className="btn btn-default" onClick={this.viewSnippetData.bind(this)}>View</button></td>
       </tr>
     )
   }
@@ -283,6 +283,66 @@ class SnippetUpdate extends React.Component {
   }
 }
 
+//////////////////// Bootstrap Sign-in
+class Navigation extends React.Component {
+  render() {
+    return (
+      <nav className="navbar navbar-default">
+        <div className="container-fluid">
+          <div className="navbar-header">
+            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span className="sr-only">Toggle navigation</span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+            </button>
+            <a className="navbar-brand" href="#">Save Snippet</a>
+          </div>
+          <div className="collapse navbar-collapse" id="search-navbar-collapse">
+            <form className="navbar-form navbar-right">
+              <div className="form-group">
+                <input type="text" className="form-control" placeholder="Search" />
+              </div>
+              <button type="submit" className="btn btn-default">Submit</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    )
+  }
+}
+
+class SignUp extends React.Component {
+  render() {
+    return (
+      <div className="wrapper">
+        <form className="form-signin snippet-form">
+          <h2 className="form-signin-heading">Sign-Up</h2>
+          <input type="text" className="form-control" name="username" placeholder="Email Address" required="" autofocus="" />
+          <input type="password" className="form-control" name="password" placeholder="Password" required="" />
+          <button className="btn btn-sm btn-primary btn-block login-button" type="submit">Login</button>
+        </form>
+      </div>
+    )
+  }
+}
+
+class SignIn extends React.Component {
+  render() {
+    return (
+      <div className="wrapper">
+        <form className="form-signin snippet-form">
+          <h2 className="form-signin-heading">Sign-In</h2>
+          <input type="text" className="form-control" name="username" placeholder="Email Address" required="" autofocus="" />
+          <input type="password" className="form-control" name="password" placeholder="Password" required="" />
+          <button className="btn btn-sm btn-primary btn-block login-button " type="submit">Login</button>
+        </form>
+      </div>
+    )
+  }
+}
+
+
 
 ///////////////// SnippetList
 
@@ -375,7 +435,9 @@ class SnippetList extends React.Component {
     const showCreate = this.displayStatus(this.state.showCreate);
     return (
       <div>
-        <h1>Save Your Snippet</h1>
+        <Navigation />
+        <SignUp />
+        <SignIn />
         {showCreate ?  <SnippetAdd createSnippet={this.createSnippet} showCreate={this.state.showCreate} displayComponent={this.displayComponent} /> : null }
         {showSnippets ? <SnippetTable snippets={this.state.snippets} snippetRecord={this.snippetRecord} displayComponent={this.displayComponent} /> : null }
         {showSnippet ?  <SnippetRecord record={this.state.record} snippetEdit={this.snippetEdit} snippetDelete={this.snippetDelete} showSnippet={this.state.showSnippet} displayComponent={this.displayComponent} /> : null }

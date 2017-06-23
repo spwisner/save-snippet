@@ -12,3 +12,7 @@
 .snippet-form {
   max-width: 500px;
 }
+
+.login-button {
+  max-width: 100px;
+}
