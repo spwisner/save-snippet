@@ -653,8 +653,8 @@ var SignUp = function (_React$Component7) {
             { className: 'form-signin-heading' },
             'Sign-Up'
           ),
-          React.createElement('input', { type: 'text', className: 'form-control', name: 'username', placeholder: 'Email Address', required: '', autofocus: '' }),
-          React.createElement('input', { type: 'password', className: 'form-control', name: 'password', placeholder: 'Password', required: '' }),
+          React.createElement('input', { type: 'text', className: 'form-control', name: 'credentials[email]', placeholder: 'Email Address', required: '', autofocus: '' }),
+          React.createElement('input', { type: 'password', className: 'form-control', name: 'credentials[password]', placeholder: 'Password', required: '' }),
           React.createElement(
             'button',
             { className: 'btn btn-sm btn-primary btn-block login-button', type: 'submit' },
@@ -691,8 +691,8 @@ var SignIn = function (_React$Component8) {
             { className: 'form-signin-heading' },
             'Sign-In'
           ),
-          React.createElement('input', { type: 'text', className: 'form-control', name: 'username', placeholder: 'Email Address', required: '', autofocus: '' }),
-          React.createElement('input', { type: 'password', className: 'form-control', name: 'password', placeholder: 'Password', required: '' }),
+          React.createElement('input', { type: 'text', className: 'form-control', name: 'credentials[email]', placeholder: 'Email Address', required: '', autofocus: '' }),
+          React.createElement('input', { type: 'password', className: 'form-control', name: 'credentials[password]', placeholder: 'Password', required: '' }),
           React.createElement(
             'button',
             { className: 'btn btn-sm btn-primary btn-block login-button ', type: 'submit' },
