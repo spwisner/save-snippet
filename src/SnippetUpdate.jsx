@@ -1,5 +1,7 @@
 'use strict';
 
+import React from 'react';
+
 /////////////Edit Snippet
 
 export default class SnippetUpdate extends React.Component {

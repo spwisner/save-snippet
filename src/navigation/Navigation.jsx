@@ -1,5 +1,7 @@
 'use strict';
 
+import React from 'react';
+
 //////////////////// Bootstrap Sign-in
 export default class Navigation extends React.Component {
   render() {

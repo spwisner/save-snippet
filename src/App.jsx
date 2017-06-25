@@ -8,6 +8,8 @@ import SignIn from './credentials/SignIn.jsx';
 import SignUp from './credentials/SignUp.jsx';
 import SnippetRecord from './SnippetRecord.jsx';
 import SnippetUpdate from './SnippetUpdate.jsx';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 
 // Testing Snippet Data

@@ -1,5 +1,7 @@
 'use strict';
 
+import React from 'react';
+
 // Individual Snippets View Component:
 
 export default class SnippetRecord extends React.Component {

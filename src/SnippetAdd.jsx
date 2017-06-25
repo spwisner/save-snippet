@@ -1,5 +1,7 @@
 'use strict';
 
+import React from 'react';
+
 export default class SnippetAdd extends React.Component {
   constructor() {
     super();
