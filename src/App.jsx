@@ -2,6 +2,13 @@
 
 const contentNode = document.getElementById('contents');
 import SnippetAdd from './SnippetAdd.jsx';
+import SnippetList from './SnippetList.jsx';
+import Navigation from './navigation/Navigation.jsx';
+import SignIn from './credentials/SignIn.jsx';
+import SignUp from './credentials/SignUp.jsx';
+import SnippetRecord from './SnippetRecord.jsx';
+import SnippetUpdate from './SnippetUpdate.jsx';
+
 
 // Testing Snippet Data
 const snippets = [
@@ -25,268 +32,9 @@ const snippets = [
   },
 ];
 
-class SnippetRow extends React.Component {
-  constructor() {
-    super();
-    this.viewSnippetData = this.viewSnippetData.bind(this);
-  }
+///////////////// SnippetApp
 
-  render() {
-    return (
-      <tr>
-        <td>{this.props.snippet.id}</td>
-        <td>{this.props.snippet.title}</td>
-        <td>{this.props.snippet.created.toDateString()}</td>
-        <td>{this.props.snippet.library}</td>
-        <td>{this.props.snippet.description}</td>
-        <td>{this.props.snippet.code}</td>
-        <td>{this.props.snippet.notes}</td>
-        <td><button className="btn btn-default" onClick={this.viewSnippetData.bind(this)}>View</button></td>
-      </tr>
-    )
-  }
-
-  viewSnippetData(event) {
-    event.preventDefault();
-    const snippet = this.props.snippet;
-    this.props.snippetRecord(snippet);
-    this.props.displayComponent("showSnippet", true);
-    this.props.displayComponent("showSnippets", false);
-  }
-}
-
-class SnippetTable extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      rowValue: {}
-    }
-  }
-
-  render() {
-    const snippets = this.snippetRows();
-    return (
-      <div>
-        <h3>Saved Snippets</h3>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Title</th>
-              <th>Created</th>
-              <th>Library</th>
-              <th>Description</th>
-              <th>Code</th>
-              <th>Notes</th>
-              <th>View</th>
-            </tr>
-          </thead>
-          <tbody>{snippets}</tbody>
-        </table>
-      </div>
-    )
-  }
-
-  snippetRows() {
-    return this.props.snippets.map((snippet) => {
-      return (<SnippetRow
-        key={snippet.id}
-        snippet={snippet}
-        snippetRecord={this.props.snippetRecord}
-        displayComponent={this.props.displayComponent}
-        /> );
-    });
-  }
-}
-
-// Individual Snippets View Component:
-
-class SnippetRecord extends React.Component {
-  constructor() {
-    super();
-    this.editSnippetData = this.editSnippetData.bind(this);
-    this.showSnippets = this.showSnippets.bind(this);
-    this.deleteSnippetData = this.deleteSnippetData.bind(this);
-  }
-
-  editSnippetData(event) {
-    event.preventDefault();
-    const currentRecord = this.props.record;
-    this.props.snippetEdit(currentRecord);
-    this.props.displayComponent("showSnippet", false);
-    this.props.displayComponent("showUpdate", true);
-    return;
-  }
-
-  showSnippets(event) {
-    event.preventDefault();
-    this.props.displayComponent("showSnippets", true);
-    this.props.displayComponent("showSnippet", false);
-  }
-
-  deleteSnippetData(event) {
-    event.preventDefault();
-    const currentRecord = this.props.record;
-    this.props.snippetDelete(currentRecord);
-    return;
-  }
-
-  render() {
-    return(
-      <div>
-        <h3>View Snippet</h3>
-        <h2 className="title-underline">{this.props.record.title} [{this.props.record.library}]</h2>
-        <h3>Description</h3>
-        <p>{this.props.record.description}</p>
-        <div className="bordered-text">
-          <h3 className="title-underline">Code</h3>
-          <p>{this.props.record.code}</p>
-        </div>
-        <div>
-          <button className="btn btn-primary" onClick={this.showSnippets}>Back</button>
-          <button className="btn btn-warning" onClick={this.editSnippetData}>Edit</button>
-          <button className="btn btn-danger" onClick={this.deleteSnippetData}>Delete</button>
-        </div>
-      </div>
-    )
-  }
-}
-
-/////////////Edit Snippet
-
-class SnippetUpdate extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      showEditForm: false
-    }
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.cancelUpdate = this.cancelUpdate.bind(this);
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    var form = document.forms.snippetUpdate;
-
-    this.props.updateSnippet({
-      title: form.title.value,
-      library: form.library.value,
-      description: form.description.value,
-      code: form.code.value,
-      notes: form.notes.value,
-      created: new Date(),
-    });
-
-    form.title.value = "";
-    form.library.value = "";
-    form.description.value = "";
-    form.code.value = "";
-    form.notes.value = "";
-  }
-
-  cancelUpdate(event) {
-    event.preventDefault();
-    this.props.displayComponent("showSnippet", true);
-    this.props.displayComponent("showUpdate", false);
-  }
-
-  render() {
-    return (
-      <div>
-        <h3>Update Snippet</h3>
-        <form className="snippet-form" name="snippetUpdate" onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label>Title</label>
-            <input  className="form-control" type="text" name="title" placeholder="Title" defaultValue={this.props.snippet.title}/>
-          </div>
-          <div className="form-group">
-            <label>Library</label>
-            <input className="form-control"  type="text" name="library" placeholder="Library" defaultValue={this.props.snippet.library} />
-          </div>
-          <div className="form-group">
-            <label>Description</label>
-            <textarea className="form-control" name="description" placeholder="Description" rows="3"></textarea>
-          </div>
-          <div className="form-group">
-            <label>Code</label>
-            <textarea className="form-control" name="code" placeholder="Code" rows="5"></textarea>
-          </div>
-          <div className="form-group">
-            <label>Notes</label>
-            <textarea className="form-control" name="notes" placeholder="Notes" rows="3"></textarea>
-          </div>
-          <button className="btn btn-success">Update</button>
-          <button className="btn btn-danger" onClick={this.cancelUpdate}>Cancel</button>
-        </form>
-      </div>
-    )
-  }
-}
-
-//////////////////// Bootstrap Sign-in
-class Navigation extends React.Component {
-  render() {
-    return (
-      <nav className="navbar navbar-default">
-        <div className="container-fluid">
-          <div className="navbar-header">
-            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
-            <a className="navbar-brand" href="#">Save Snippet</a>
-          </div>
-          <div className="collapse navbar-collapse" id="search-navbar-collapse">
-            <form className="navbar-form navbar-right">
-              <div className="form-group">
-                <input type="text" className="form-control" placeholder="Search" />
-              </div>
-              <button type="submit" className="btn btn-default">Submit</button>
-            </form>
-          </div>
-        </div>
-      </nav>
-    )
-  }
-}
-
-class SignUp extends React.Component {
-  render() {
-    return (
-      <div className="wrapper">
-        <form className="form-signin snippet-form">
-          <h2 className="form-signin-heading">Sign-Up</h2>
-          <input type="text" className="form-control" name="credentials[email]" placeholder="Email Address" required="" />
-          <input type="password" className="form-control" name="credentials[password]" placeholder="Password" required="" />
-          <button className="btn btn-sm btn-primary btn-block login-button" type="submit">Login</button>
-        </form>
-      </div>
-    )
-  }
-}
-
-class SignIn extends React.Component {
-  render() {
-    return (
-      <div className="wrapper">
-        <form className="form-signin snippet-form">
-          <h2 className="form-signin-heading">Sign-In</h2>
-          <input type="text" className="form-control" name="credentials[email]" placeholder="Email Address" required="" />
-          <input type="password" className="form-control" name="credentials[password]" placeholder="Password" required="" />
-          <button className="btn btn-sm btn-primary btn-block login-button " type="submit">Login</button>
-        </form>
-      </div>
-    )
-  }
-}
-
-
-
-///////////////// SnippetList
-
-class SnippetList extends React.Component {
+class SnippetApp extends React.Component {
   constructor() {
     super();
 
@@ -294,7 +42,7 @@ class SnippetList extends React.Component {
       showSnippets: true,
       showSnippet: false,
       showUpdate: false,
-      showCreate: false,
+      showCreate: true,
       snippets: [],
       record: [],
       editRecord: []
@@ -378,8 +126,8 @@ class SnippetList extends React.Component {
         <Navigation />
         <SignUp />
         <SignIn />
-        {showCreate ?  <SnippetAdd createSnippet={this.createSnippet} showCreate={this.state.showCreate} displayComponent={this.displayComponent} /> : null }
-        {showSnippets ? <SnippetTable snippets={this.state.snippets} snippetRecord={this.snippetRecord} displayComponent={this.displayComponent} /> : null }
+        {showSnippets ? <SnippetList snippets={this.state.snippets} snippetRecord={this.snippetRecord} displayComponent={this.displayComponent} /> : null }
+                {showCreate ?  <SnippetAdd createSnippet={this.createSnippet} showCreate={this.state.showCreate} displayComponent={this.displayComponent} /> : null }
         {showSnippet ?  <SnippetRecord record={this.state.record} snippetEdit={this.snippetEdit} snippetDelete={this.snippetDelete} showSnippet={this.state.showSnippet} displayComponent={this.displayComponent} /> : null }
         {showUpdate ?  <SnippetUpdate updateSnippet={this.updateSnippet} snippet={this.state.editRecord} showUpdate={this.state.showUpdate} displayComponent={this.displayComponent} /> : null }
       </div>
@@ -387,4 +135,4 @@ class SnippetList extends React.Component {
   }
 }
 
-ReactDOM.render(<SnippetList />, contentNode);
+ReactDOM.render(<SnippetApp />, contentNode);

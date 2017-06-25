@@ -3,7 +3,7 @@
 module.exports = {
   entry: './src/App.jsx',
   output: {
-    path: __dirname + '/.static',
+    path: __dirname + '/static',
     filename: 'app.bundle.js'
   },
   module: {

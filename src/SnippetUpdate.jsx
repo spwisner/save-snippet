@@ -1,17 +1,22 @@
 'use strict';
 
-export default class SnippetAdd extends React.Component {
+/////////////Edit Snippet
+
+export default class SnippetUpdate extends React.Component {
   constructor() {
     super();
+    this.state = {
+      showEditForm: false
+    }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.cancelUpdate = this.cancelUpdate.bind(this);
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    var form = document.forms.snippetAdd;
+    var form = document.forms.snippetUpdate;
 
-    // this.props.createSnippet calls the createSnippet method in SnippetApp
-    this.props.createSnippet({
+    this.props.updateSnippet({
       title: form.title.value,
       library: form.library.value,
       description: form.description.value,
@@ -20,7 +25,6 @@ export default class SnippetAdd extends React.Component {
       created: new Date(),
     });
 
-    // Clear the form for the next input
     form.title.value = "";
     form.library.value = "";
     form.description.value = "";
@@ -28,19 +32,24 @@ export default class SnippetAdd extends React.Component {
     form.notes.value = "";
   }
 
+  cancelUpdate(event) {
+    event.preventDefault();
+    this.props.displayComponent("showSnippet", true);
+    this.props.displayComponent("showUpdate", false);
+  }
+
   render() {
-    // Form name included so that inputs can be accessed
     return (
       <div>
-        <h3>Create a Snippet</h3>
-        <form className="snippet-form" name="snippetAdd" onSubmit={this.handleSubmit}>
+        <h3>Update Snippet</h3>
+        <form className="snippet-form" name="snippetUpdate" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label>Title</label>
-            <input className="form-control" type="text" name="title" placeholder="Title" />
+            <input  className="form-control" type="text" name="title" placeholder="Title" defaultValue={this.props.snippet.title}/>
           </div>
           <div className="form-group">
             <label>Library</label>
-            <input className="form-control" type="text" name="library" placeholder="Library" />
+            <input className="form-control"  type="text" name="library" placeholder="Library" defaultValue={this.props.snippet.library} />
           </div>
           <div className="form-group">
             <label>Description</label>
@@ -54,7 +63,8 @@ export default class SnippetAdd extends React.Component {
             <label>Notes</label>
             <textarea className="form-control" name="notes" placeholder="Notes" rows="3"></textarea>
           </div>
-          <button className="btn btn-success">Add</button>
+          <button className="btn btn-success">Update</button>
+          <button className="btn btn-danger" onClick={this.cancelUpdate}>Cancel</button>
         </form>
       </div>
     )
