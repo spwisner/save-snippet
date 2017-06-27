@@ -25,7 +25,8 @@ export default class SnippetRecord extends React.Component {
     event.preventDefault();
     this.props.displayComponent("showSnippets", true);
     this.props.displayComponent("showSnippet", false);
-    this.props.displayComponent("showCreate", true);
+    this.props.displayComponent("showCreate", false);
+    this.props.displayComponent("showUpdate", false);
   }
 
   deleteSnippetData(event) {
