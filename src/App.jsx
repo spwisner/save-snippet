@@ -44,7 +44,7 @@ class SnippetApp extends React.Component {
       showSnippets: true,
       showSnippet: false,
       showUpdate: false,
-      showCreate: true,
+      showCreate: false,
       snippets: [],
       record: [],
       editRecord: []
@@ -54,7 +54,6 @@ class SnippetApp extends React.Component {
     this.snippetRecord = this.snippetRecord.bind(this);
     this.snippetEdit = this.snippetEdit.bind(this);
     this.snippetDelete = this.snippetDelete.bind(this);
-    // this.buttonClicked = this.buttonClicked.bind(this);
     this.displayComponent = this.displayComponent.bind(this);
   }
 
@@ -125,11 +124,9 @@ class SnippetApp extends React.Component {
     const showCreate = this.displayStatus(this.state.showCreate);
     return (
       <div>
-        <Navigation />
-        <SignUp />
-        <SignIn />
+        <Navigation displayComponent={this.displayComponent} />
         {showSnippets ? <SnippetList snippets={this.state.snippets} snippetRecord={this.snippetRecord} displayComponent={this.displayComponent} /> : null }
-                {showCreate ?  <SnippetAdd createSnippet={this.createSnippet} showCreate={this.state.showCreate} displayComponent={this.displayComponent} /> : null }
+        {showCreate ?  <SnippetAdd createSnippet={this.createSnippet} showCreate={this.state.showCreate} displayComponent={this.displayComponent} /> : null }
         {showSnippet ?  <SnippetRecord record={this.state.record} snippetEdit={this.snippetEdit} snippetDelete={this.snippetDelete} showSnippet={this.state.showSnippet} displayComponent={this.displayComponent} /> : null }
         {showUpdate ?  <SnippetUpdate updateSnippet={this.updateSnippet} snippet={this.state.editRecord} showUpdate={this.state.showUpdate} displayComponent={this.displayComponent} /> : null }
       </div>
