@@ -16,3 +16,8 @@
 .login-button {
   max-width: 100px;
 }
+
+/* Needed to keep code spacing */
+.maintain-spacing {
+  white-space: pre;
+}
