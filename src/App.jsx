@@ -75,26 +75,21 @@ class SnippetApp extends React.Component {
 
   snippetEdit(snippet) {
     this.setState({ editRecord: snippet});
-    console.log('received edit data - snippetEdit');
     return snippet;
   }
 
   snippetDelete(deletedSnippet ) {
     let revisedSnippets = this.state.snippets.slice();
-    console.log(deletedSnippet);
 
     for (let i = 0; i < revisedSnippets.length; i++) {
       if (revisedSnippets[i].id === deletedSnippet.id) {
         let index = revisedSnippets.indexOf(revisedSnippets[i]);
-        console.log(index);
 
         if (index > -1) {
           revisedSnippets.splice(index, 1);
         }
       }
     }
-
-    console.log(revisedSnippets);
 
     return this.setState({
       snippets: revisedSnippets,
@@ -105,15 +100,12 @@ class SnippetApp extends React.Component {
 
   updateSnippet(updatedSnippet) {
     let revisedSnippets = this.state.snippets.slice();
-    console.log(updatedSnippet);
 
     for (let i = 0; i < revisedSnippets.length; i++) {
       if (revisedSnippets[i].id === updatedSnippet.id) {
         revisedSnippets[i] = updatedSnippet;
       }
     }
-
-    console.log(revisedSnippets);
 
     return this.setState({
       snippets: revisedSnippets,

@@ -489,7 +489,7 @@ var SnippetRecord = function (_React$Component) {
           ),
           _react2.default.createElement(
             'p',
-            null,
+            { className: 'maintain-spacing' },
             this.props.record.code
           )
         ),
@@ -547,8 +547,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-/////////////Edit Snippet
-
+/////////////Update Snippet
 var SnippetUpdate = function (_React$Component) {
   _inherits(SnippetUpdate, _React$Component);
 
@@ -633,7 +632,7 @@ var SnippetUpdate = function (_React$Component) {
               null,
               'Description'
             ),
-            _react2.default.createElement('textarea', { className: 'form-control', name: 'description', placeholder: 'Description', rows: '3' })
+            _react2.default.createElement('textarea', { className: 'form-control', name: 'description', placeholder: 'Description', rows: '3', defaultValue: this.props.snippet.description })
           ),
           _react2.default.createElement(
             'div',
@@ -643,7 +642,7 @@ var SnippetUpdate = function (_React$Component) {
               null,
               'Code'
             ),
-            _react2.default.createElement('textarea', { className: 'form-control', name: 'code', placeholder: 'Code', rows: '5' })
+            _react2.default.createElement('textarea', { className: 'form-control', name: 'code', placeholder: 'Code', rows: '5', defaultValue: this.props.snippet.code })
           ),
           _react2.default.createElement(
             'div',
@@ -653,7 +652,7 @@ var SnippetUpdate = function (_React$Component) {
               null,
               'Notes'
             ),
-            _react2.default.createElement('textarea', { className: 'form-control', name: 'notes', placeholder: 'Notes', rows: '3' })
+            _react2.default.createElement('textarea', { className: 'form-control', name: 'notes', placeholder: 'Notes', rows: '3', defaultValue: this.props.snippet.notes })
           ),
           _react2.default.createElement(
             'button',
@@ -1031,27 +1030,22 @@ var SnippetApp = function (_React$Component) {
     key: 'snippetEdit',
     value: function snippetEdit(snippet) {
       this.setState({ editRecord: snippet });
-      console.log('received edit data - snippetEdit');
       return snippet;
     }
   }, {
     key: 'snippetDelete',
     value: function snippetDelete(deletedSnippet) {
       var revisedSnippets = this.state.snippets.slice();
-      console.log(deletedSnippet);
 
       for (var i = 0; i < revisedSnippets.length; i++) {
         if (revisedSnippets[i].id === deletedSnippet.id) {
           var index = revisedSnippets.indexOf(revisedSnippets[i]);
-          console.log(index);
 
           if (index > -1) {
             revisedSnippets.splice(index, 1);
           }
         }
       }
-
-      console.log(revisedSnippets);
 
       return this.setState({
         snippets: revisedSnippets,
@@ -1063,15 +1057,12 @@ var SnippetApp = function (_React$Component) {
     key: 'updateSnippet',
     value: function updateSnippet(updatedSnippet) {
       var revisedSnippets = this.state.snippets.slice();
-      console.log(updatedSnippet);
 
       for (var i = 0; i < revisedSnippets.length; i++) {
         if (revisedSnippets[i].id === updatedSnippet.id) {
           revisedSnippets[i] = updatedSnippet;
         }
       }
-
-      console.log(revisedSnippets);
 
       return this.setState({
         snippets: revisedSnippets,
