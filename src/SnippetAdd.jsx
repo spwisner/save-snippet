@@ -5,6 +5,7 @@ import React from 'react';
 export default class SnippetAdd extends React.Component {
   constructor() {
     super();
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
   }
@@ -64,8 +65,8 @@ export default class SnippetAdd extends React.Component {
             <textarea className="form-control" name="notes" placeholder="Notes" rows="3"></textarea>
           </div>
           <div>
+            <button className="btn btn-success">Create</button>
             <button className="btn btn-danger" onClick={this.handleCancel}>Cancel</button>
-            <button className="btn btn-success">Add</button>
           </div>
         </form>
       </div>
