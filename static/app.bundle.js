@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 106:
+/***/ 88:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12,7 +12,165 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(12);
+var _react = __webpack_require__(15);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SnippetAdd = function (_React$Component) {
+  _inherits(SnippetAdd, _React$Component);
+
+  function SnippetAdd() {
+    _classCallCheck(this, SnippetAdd);
+
+    var _this = _possibleConstructorReturn(this, (SnippetAdd.__proto__ || Object.getPrototypeOf(SnippetAdd)).call(this));
+
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.handleCancel = _this.handleCancel.bind(_this);
+    return _this;
+  }
+
+  _createClass(SnippetAdd, [{
+    key: 'handleCancel',
+    value: function handleCancel(event) {
+      event.preventDefault();
+      this.props.displayComponent("showCreate", false);
+      this.props.displayComponent("showSnippets", true);
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(event) {
+      event.preventDefault();
+      var form = document.forms.snippetAdd;
+
+      // this.props.createSnippet calls the createSnippet method in SnippetApp
+      this.props.createSnippet({
+        title: form.title.value,
+        library: form.library.value,
+        description: form.description.value,
+        code: form.code.value,
+        notes: form.notes.value,
+        created: new Date()
+      });
+
+      // Clear the form for the next input
+      form.title.value = "";
+      form.library.value = "";
+      form.description.value = "";
+      form.code.value = "";
+      form.notes.value = "";
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      // Form name included so that inputs can be accessed
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h3',
+          null,
+          'Create a Snippet'
+        ),
+        _react2.default.createElement(
+          'form',
+          { className: 'snippet-form', name: 'snippetAdd', onSubmit: this.handleSubmit },
+          _react2.default.createElement(
+            'div',
+            { className: 'form-group' },
+            _react2.default.createElement(
+              'label',
+              null,
+              'Title'
+            ),
+            _react2.default.createElement('input', { className: 'form-control', type: 'text', name: 'title', placeholder: 'Title' })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'form-group' },
+            _react2.default.createElement(
+              'label',
+              null,
+              'Library'
+            ),
+            _react2.default.createElement('input', { className: 'form-control', type: 'text', name: 'library', placeholder: 'Library' })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'form-group' },
+            _react2.default.createElement(
+              'label',
+              null,
+              'Description'
+            ),
+            _react2.default.createElement('textarea', { className: 'form-control', name: 'description', placeholder: 'Description', rows: '3' })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'form-group' },
+            _react2.default.createElement(
+              'label',
+              null,
+              'Code'
+            ),
+            _react2.default.createElement('textarea', { className: 'form-control', name: 'code', placeholder: 'Code', rows: '5' })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'form-group' },
+            _react2.default.createElement(
+              'label',
+              null,
+              'Notes'
+            ),
+            _react2.default.createElement('textarea', { className: 'form-control', name: 'notes', placeholder: 'Notes', rows: '3' })
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+              'button',
+              { className: 'btn btn-success' },
+              'Create'
+            ),
+            _react2.default.createElement(
+              'button',
+              { className: 'btn btn-danger', onClick: this.handleCancel },
+              'Cancel'
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return SnippetAdd;
+}(_react2.default.Component);
+
+exports.default = SnippetAdd;
+
+/***/ }),
+
+/***/ 89:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(15);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -35,10 +193,19 @@ var SnippetList = function (_React$Component) {
     _this.state = {
       rowValue: {}
     };
+
+    _this.createOnClick = _this.createOnClick.bind(_this);
     return _this;
   }
 
   _createClass(SnippetList, [{
+    key: 'createOnClick',
+    value: function createOnClick(event) {
+      event.preventDefault();
+      this.props.displayComponent("showCreate", true);
+      this.props.displayComponent("showSnippets", false);
+    }
+  }, {
     key: 'render',
     value: function render() {
       var snippets = this.snippetRows();
@@ -47,7 +214,7 @@ var SnippetList = function (_React$Component) {
         null,
         _react2.default.createElement(
           'h3',
-          null,
+          { className: 'text-underline' },
           'Saved Snippets'
         ),
         _react2.default.createElement(
@@ -106,6 +273,11 @@ var SnippetList = function (_React$Component) {
             null,
             snippets
           )
+        ),
+        _react2.default.createElement(
+          'button',
+          { type: 'button', className: 'btn btn-success btn-md', onClick: this.createOnClick },
+          'Create'
         )
       );
     }
@@ -211,7 +383,7 @@ var SnippetRow = function (_React$Component2) {
 
 /***/ }),
 
-/***/ 107:
+/***/ 90:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -223,233 +395,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(12);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-//////////////////// Bootstrap Sign-in
-var Navigation = function (_React$Component) {
-  _inherits(Navigation, _React$Component);
-
-  function Navigation() {
-    _classCallCheck(this, Navigation);
-
-    return _possibleConstructorReturn(this, (Navigation.__proto__ || Object.getPrototypeOf(Navigation)).apply(this, arguments));
-  }
-
-  _createClass(Navigation, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'nav',
-        { className: 'navbar navbar-default' },
-        _react2.default.createElement(
-          'div',
-          { className: 'container-fluid' },
-          _react2.default.createElement(
-            'div',
-            { className: 'navbar-header' },
-            _react2.default.createElement(
-              'button',
-              { type: 'button', className: 'navbar-toggle collapsed', 'data-toggle': 'collapse', 'data-target': '#bs-example-navbar-collapse-1', 'aria-expanded': 'false' },
-              _react2.default.createElement(
-                'span',
-                { className: 'sr-only' },
-                'Toggle navigation'
-              ),
-              _react2.default.createElement('span', { className: 'icon-bar' }),
-              _react2.default.createElement('span', { className: 'icon-bar' }),
-              _react2.default.createElement('span', { className: 'icon-bar' })
-            ),
-            _react2.default.createElement(
-              'a',
-              { className: 'navbar-brand', href: '#' },
-              'Save Snippet'
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'collapse navbar-collapse', id: 'search-navbar-collapse' },
-            _react2.default.createElement(
-              'form',
-              { className: 'navbar-form navbar-right' },
-              _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Search' })
-              ),
-              _react2.default.createElement(
-                'button',
-                { type: 'submit', className: 'btn btn-default' },
-                'Submit'
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return Navigation;
-}(_react2.default.Component);
-
-exports.default = Navigation;
-
-/***/ }),
-
-/***/ 108:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(12);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var SignIn = function (_React$Component) {
-  _inherits(SignIn, _React$Component);
-
-  function SignIn() {
-    _classCallCheck(this, SignIn);
-
-    return _possibleConstructorReturn(this, (SignIn.__proto__ || Object.getPrototypeOf(SignIn)).apply(this, arguments));
-  }
-
-  _createClass(SignIn, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'wrapper' },
-        _react2.default.createElement(
-          'form',
-          { className: 'form-signin snippet-form' },
-          _react2.default.createElement(
-            'h2',
-            { className: 'form-signin-heading' },
-            'Sign-In'
-          ),
-          _react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'credentials[email]', placeholder: 'Email Address', required: '' }),
-          _react2.default.createElement('input', { type: 'password', className: 'form-control', name: 'credentials[password]', placeholder: 'Password', required: '' }),
-          _react2.default.createElement(
-            'button',
-            { className: 'btn btn-sm btn-primary btn-block login-button ', type: 'submit' },
-            'Login'
-          )
-        )
-      );
-    }
-  }]);
-
-  return SignIn;
-}(_react2.default.Component);
-
-exports.default = SignIn;
-
-/***/ }),
-
-/***/ 109:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(12);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var SignUp = function (_React$Component) {
-  _inherits(SignUp, _React$Component);
-
-  function SignUp() {
-    _classCallCheck(this, SignUp);
-
-    return _possibleConstructorReturn(this, (SignUp.__proto__ || Object.getPrototypeOf(SignUp)).apply(this, arguments));
-  }
-
-  _createClass(SignUp, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'wrapper' },
-        _react2.default.createElement(
-          'form',
-          { className: 'form-signin snippet-form' },
-          _react2.default.createElement(
-            'h2',
-            { className: 'form-signin-heading' },
-            'Sign-Up'
-          ),
-          _react2.default.createElement('input', { type: 'text', className: 'form-control', name: 'credentials[email]', placeholder: 'Email Address', required: '' }),
-          _react2.default.createElement('input', { type: 'password', className: 'form-control', name: 'credentials[password]', placeholder: 'Password', required: '' }),
-          _react2.default.createElement(
-            'button',
-            { className: 'btn btn-sm btn-primary btn-block login-button', type: 'submit' },
-            'Login'
-          )
-        )
-      );
-    }
-  }]);
-
-  return SignUp;
-}(_react2.default.Component);
-
-exports.default = SignUp;
-
-/***/ }),
-
-/***/ 110:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(12);
+var _react = __webpack_require__(15);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -493,7 +439,8 @@ var SnippetRecord = function (_React$Component) {
       event.preventDefault();
       this.props.displayComponent("showSnippets", true);
       this.props.displayComponent("showSnippet", false);
-      this.props.displayComponent("showCreate", true);
+      this.props.displayComponent("showCreate", false);
+      this.props.displayComponent("showUpdate", false);
     }
   }, {
     key: 'deleteSnippetData',
@@ -516,7 +463,7 @@ var SnippetRecord = function (_React$Component) {
         ),
         _react2.default.createElement(
           'h2',
-          { className: 'title-underline' },
+          { className: 'text-underline' },
           this.props.record.title,
           ' [',
           this.props.record.library,
@@ -537,7 +484,7 @@ var SnippetRecord = function (_React$Component) {
           { className: 'bordered-text' },
           _react2.default.createElement(
             'h3',
-            { className: 'title-underline' },
+            { className: 'text-underline' },
             'Code'
           ),
           _react2.default.createElement(
@@ -552,7 +499,7 @@ var SnippetRecord = function (_React$Component) {
           _react2.default.createElement(
             'button',
             { className: 'btn btn-primary', onClick: this.showSnippets },
-            'Back'
+            'Home'
           ),
           _react2.default.createElement(
             'button',
@@ -576,7 +523,7 @@ exports.default = SnippetRecord;
 
 /***/ }),
 
-/***/ 111:
+/***/ 91:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -588,7 +535,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(12);
+var _react = __webpack_require__(15);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -610,9 +557,6 @@ var SnippetUpdate = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (SnippetUpdate.__proto__ || Object.getPrototypeOf(SnippetUpdate)).call(this));
 
-    _this.state = {
-      showEditForm: false
-    };
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     _this.cancelUpdate = _this.cancelUpdate.bind(_this);
     return _this;
@@ -625,6 +569,7 @@ var SnippetUpdate = function (_React$Component) {
       var form = document.forms.snippetUpdate;
 
       this.props.updateSnippet({
+        id: this.props.snippet.id,
         title: form.title.value,
         library: form.library.value,
         description: form.description.value,
@@ -732,7 +677,232 @@ exports.default = SnippetUpdate;
 
 /***/ }),
 
-/***/ 88:
+/***/ 92:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// 'use strict';
+//
+// import React from 'react';
+// import 'whatwg-fetch';
+//
+// export default class SignIn extends React.Component {
+//   constructor() {
+//     super();
+//     this.handleSubmit = this.handleSubmit.bind(this);
+//   }
+//
+//   signIn(data) {
+//     fetch('/api/sign-in', {
+//       method: "POST",
+//       body: JSON.stringify(data),
+//       headers: {
+//         "Content-Type": "application/json"
+//       },
+//     }).then(function(response) {
+//       response.status
+//       response.statusText
+//       response.headers
+//       response.url
+//       return response.text()
+//     }, function(error) {
+//       error.message
+//     })
+//   }
+//
+//   handleSubmit(event) {
+//     event.preventDefault();
+//     const form = document.forms.signIn;
+//     const email = form.email.value;
+//     const password = form.password.value;
+//
+//     this.signIn({
+//       credentials: {
+//         email: email,
+//         password: password
+//       }
+//     });
+//   }
+//
+//   render() {
+//     return (
+//       <div className="wrapper">
+//         <form className="form-signin snippet-form" name="signIn" onSubmit={this.handleSubmit}>
+//           <h2 className="form-signin-heading">Sign-In</h2>
+//           <input type="text" className="form-control" name="email" placeholder="Email Address" />
+//           <input type="password" className="form-control" name="password" placeholder="Password"  />
+//           <button className="btn btn-sm btn-primary btn-block login-button " type="submit">Login</button>
+//         </form>
+//       </div>
+//     )
+//   }
+// }
+
+
+/***/ }),
+
+/***/ 93:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+// 'use strict';
+//
+// import React from 'react';
+//
+// export default class SignUp extends React.Component {
+//   render() {
+//     return (
+//       <div className="wrapper">
+//         <form className="form-signin snippet-form">
+//           <h2 className="form-signin-heading">Sign-Up</h2>
+//           <input type="text" className="form-control" name="credentials[email]" placeholder="Email Address" required="" />
+//           <input type="password" className="form-control" name="credentials[password]" placeholder="Password" required="" />
+//           <button className="btn btn-sm btn-primary btn-block login-button" type="submit">Login</button>
+//         </form>
+//       </div>
+//     )
+//   }
+// }
+
+
+/***/ }),
+
+/***/ 94:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(15);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+//////////////////// Bootstrap Navigation
+var Navigation = function (_React$Component) {
+  _inherits(Navigation, _React$Component);
+
+  function Navigation() {
+    _classCallCheck(this, Navigation);
+
+    var _this = _possibleConstructorReturn(this, (Navigation.__proto__ || Object.getPrototypeOf(Navigation)).call(this));
+
+    _this.activeClass = _this.activeClass.bind(_this);
+    _this.snippetsOnClick = _this.snippetsOnClick.bind(_this);
+    _this.createOnClick = _this.createOnClick.bind(_this);
+    return _this;
+  }
+
+  _createClass(Navigation, [{
+    key: 'activeClass',
+    value: function activeClass(currentState) {
+      if (currentState) {
+        return "active";
+      } else {
+        return "";
+      }
+    }
+  }, {
+    key: 'snippetsOnClick',
+    value: function snippetsOnClick(event) {
+      event.preventDefault();
+      this.props.displayComponent("showSnippets", true);
+      this.props.displayComponent("showUpdate", false);
+      this.props.displayComponent("showSnippet", false);
+      this.props.displayComponent("showCreate", false);
+      return;
+    }
+  }, {
+    key: 'createOnClick',
+    value: function createOnClick(event) {
+      event.preventDefault();
+      this.props.displayComponent("showSnippets", false);
+      this.props.displayComponent("showUpdate", false);
+      this.props.displayComponent("showSnippet", false);
+      this.props.displayComponent("showCreate", true);
+      return;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'nav',
+        { className: 'navbar navbar-inverse' },
+        _react2.default.createElement(
+          'div',
+          { className: 'container-fluid' },
+          _react2.default.createElement(
+            'div',
+            { className: 'navbar-header' },
+            _react2.default.createElement(
+              'span',
+              { className: 'navbar-brand', href: '#', onClick: this.snippetsOnClick },
+              'Save Snippet'
+            )
+          ),
+          _react2.default.createElement(
+            'ul',
+            { className: 'nav navbar-nav' },
+            _react2.default.createElement(
+              'li',
+              { className: this.activeClass(this.props.snippetsState), onClick: this.snippetsOnClick },
+              _react2.default.createElement(
+                'a',
+                { href: '#' },
+                'Home'
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              { className: this.activeClass(this.props.createState), onClick: this.createOnClick },
+              _react2.default.createElement(
+                'a',
+                { href: '#' },
+                'Create'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'form',
+            { className: 'navbar-form navbar-right navbar-form' },
+            _react2.default.createElement(
+              'div',
+              { className: 'form-group' },
+              _react2.default.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Search' })
+            ),
+            _react2.default.createElement(
+              'button',
+              { className: 'btn btn-default', type: 'submit' },
+              _react2.default.createElement('i', { className: 'glyphicon glyphicon-search' })
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Navigation;
+}(_react2.default.Component);
+
+exports.default = Navigation;
+;
+
+/***/ }),
+
+/***/ 95:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -740,39 +910,39 @@ exports.default = SnippetUpdate;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _SnippetAdd = __webpack_require__(89);
+var _SnippetAdd = __webpack_require__(88);
 
 var _SnippetAdd2 = _interopRequireDefault(_SnippetAdd);
 
-var _SnippetList = __webpack_require__(106);
+var _SnippetList = __webpack_require__(89);
 
 var _SnippetList2 = _interopRequireDefault(_SnippetList);
 
-var _Navigation = __webpack_require__(107);
+var _Navigation = __webpack_require__(94);
 
 var _Navigation2 = _interopRequireDefault(_Navigation);
 
-var _SignIn = __webpack_require__(108);
+var _SignIn = __webpack_require__(92);
 
 var _SignIn2 = _interopRequireDefault(_SignIn);
 
-var _SignUp = __webpack_require__(109);
+var _SignUp = __webpack_require__(93);
 
 var _SignUp2 = _interopRequireDefault(_SignUp);
 
-var _SnippetRecord = __webpack_require__(110);
+var _SnippetRecord = __webpack_require__(90);
 
 var _SnippetRecord2 = _interopRequireDefault(_SnippetRecord);
 
-var _SnippetUpdate = __webpack_require__(111);
+var _SnippetUpdate = __webpack_require__(91);
 
 var _SnippetUpdate2 = _interopRequireDefault(_SnippetUpdate);
 
-var _react = __webpack_require__(12);
+var _react = __webpack_require__(15);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(60);
+var _reactDom = __webpack_require__(35);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -820,7 +990,7 @@ var SnippetApp = function (_React$Component) {
       showSnippets: true,
       showSnippet: false,
       showUpdate: false,
-      showCreate: true,
+      showCreate: false,
       snippets: [],
       record: [],
       editRecord: []
@@ -830,8 +1000,8 @@ var SnippetApp = function (_React$Component) {
     _this.snippetRecord = _this.snippetRecord.bind(_this);
     _this.snippetEdit = _this.snippetEdit.bind(_this);
     _this.snippetDelete = _this.snippetDelete.bind(_this);
-    // this.buttonClicked = this.buttonClicked.bind(this);
     _this.displayComponent = _this.displayComponent.bind(_this);
+    _this.updateSnippet = _this.updateSnippet.bind(_this);
     return _this;
   }
 
@@ -849,11 +1019,7 @@ var SnippetApp = function (_React$Component) {
   }, {
     key: 'loadData',
     value: function loadData() {
-      var _this2 = this;
-
-      setTimeout(function () {
-        _this2.setState({ snippets: snippets });
-      }, 500);
+      this.setState({ snippets: snippets });
     }
   }, {
     key: 'snippetRecord',
@@ -877,9 +1043,23 @@ var SnippetApp = function (_React$Component) {
     }
   }, {
     key: 'updateSnippet',
-    value: function updateSnippet(snippet) {
-      console.log('sending update to server');
-      console.log(snippet);
+    value: function updateSnippet(updatedSnippet) {
+      var revisedSnippets = this.state.snippets.slice();
+      console.log(updatedSnippet);
+
+      for (var i = 0; i < revisedSnippets.length; i++) {
+        if (revisedSnippets[i].id === updatedSnippet.id) {
+          revisedSnippets[i] = updatedSnippet;
+        }
+      }
+
+      console.log(revisedSnippets);
+
+      return this.setState({
+        snippets: revisedSnippets,
+        showUpdate: false,
+        showSnippets: true
+      });
     }
 
     // Will clone and create to avoid modifying the state
@@ -893,7 +1073,11 @@ var SnippetApp = function (_React$Component) {
       newSnippet.id = this.state.snippets.length + 1;
       newSnippets.push(newSnippet);
       // Change of state
-      this.setState({ snippets: newSnippets });
+      this.setState({
+        snippets: newSnippets,
+        showCreate: false,
+        showSnippets: true
+      });
     }
   }, {
     key: 'displayStatus',
@@ -922,9 +1106,7 @@ var SnippetApp = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_Navigation2.default, null),
-        _react2.default.createElement(_SignUp2.default, null),
-        _react2.default.createElement(_SignIn2.default, null),
+        _react2.default.createElement(_Navigation2.default, { displayComponent: this.displayComponent, snippetsState: this.state.showSnippets, createState: this.state.showCreate }),
         showSnippets ? _react2.default.createElement(_SnippetList2.default, { snippets: this.state.snippets, snippetRecord: this.snippetRecord, displayComponent: this.displayComponent }) : null,
         showCreate ? _react2.default.createElement(_SnippetAdd2.default, { createSnippet: this.createSnippet, showCreate: this.state.showCreate, displayComponent: this.displayComponent }) : null,
         showSnippet ? _react2.default.createElement(_SnippetRecord2.default, { record: this.state.record, snippetEdit: this.snippetEdit, snippetDelete: this.snippetDelete, showSnippet: this.state.showSnippet, displayComponent: this.displayComponent }) : null,
@@ -938,147 +1120,6 @@ var SnippetApp = function (_React$Component) {
 
 _reactDom2.default.render(_react2.default.createElement(SnippetApp, null), contentNode);
 
-/***/ }),
-
-/***/ 89:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(12);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var SnippetAdd = function (_React$Component) {
-  _inherits(SnippetAdd, _React$Component);
-
-  function SnippetAdd() {
-    _classCallCheck(this, SnippetAdd);
-
-    var _this = _possibleConstructorReturn(this, (SnippetAdd.__proto__ || Object.getPrototypeOf(SnippetAdd)).call(this));
-
-    _this.handleSubmit = _this.handleSubmit.bind(_this);
-    return _this;
-  }
-
-  _createClass(SnippetAdd, [{
-    key: 'handleSubmit',
-    value: function handleSubmit(event) {
-      event.preventDefault();
-      var form = document.forms.snippetAdd;
-
-      // this.props.createSnippet calls the createSnippet method in SnippetApp
-      this.props.createSnippet({
-        title: form.title.value,
-        library: form.library.value,
-        description: form.description.value,
-        code: form.code.value,
-        notes: form.notes.value,
-        created: new Date()
-      });
-
-      // Clear the form for the next input
-      form.title.value = "";
-      form.library.value = "";
-      form.description.value = "";
-      form.code.value = "";
-      form.notes.value = "";
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      // Form name included so that inputs can be accessed
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'h3',
-          null,
-          'Create a Snippet'
-        ),
-        _react2.default.createElement(
-          'form',
-          { className: 'snippet-form', name: 'snippetAdd', onSubmit: this.handleSubmit },
-          _react2.default.createElement(
-            'div',
-            { className: 'form-group' },
-            _react2.default.createElement(
-              'label',
-              null,
-              'Title'
-            ),
-            _react2.default.createElement('input', { className: 'form-control', type: 'text', name: 'title', placeholder: 'Title' })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'form-group' },
-            _react2.default.createElement(
-              'label',
-              null,
-              'Library'
-            ),
-            _react2.default.createElement('input', { className: 'form-control', type: 'text', name: 'library', placeholder: 'Library' })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'form-group' },
-            _react2.default.createElement(
-              'label',
-              null,
-              'Description'
-            ),
-            _react2.default.createElement('textarea', { className: 'form-control', name: 'description', placeholder: 'Description', rows: '3' })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'form-group' },
-            _react2.default.createElement(
-              'label',
-              null,
-              'Code'
-            ),
-            _react2.default.createElement('textarea', { className: 'form-control', name: 'code', placeholder: 'Code', rows: '5' })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'form-group' },
-            _react2.default.createElement(
-              'label',
-              null,
-              'Notes'
-            ),
-            _react2.default.createElement('textarea', { className: 'form-control', name: 'notes', placeholder: 'Notes', rows: '3' })
-          ),
-          _react2.default.createElement(
-            'button',
-            { className: 'btn btn-success' },
-            'Add'
-          )
-        )
-      );
-    }
-  }]);
-
-  return SnippetAdd;
-}(_react2.default.Component);
-
-exports.default = SnippetAdd;
-
 /***/ })
 
-},[88]);
+},[95]);
