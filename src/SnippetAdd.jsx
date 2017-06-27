@@ -6,6 +6,13 @@ export default class SnippetAdd extends React.Component {
   constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+  }
+
+  handleCancel(event) {
+    event.preventDefault();
+    this.props.displayComponent("showCreate", false);
+    this.props.displayComponent("showSnippets", true);
   }
 
   handleSubmit(event) {
@@ -56,7 +63,10 @@ export default class SnippetAdd extends React.Component {
             <label>Notes</label>
             <textarea className="form-control" name="notes" placeholder="Notes" rows="3"></textarea>
           </div>
-          <button className="btn btn-success">Add</button>
+          <div>
+            <button className="btn btn-danger" onClick={this.handleCancel}>Cancel</button>
+            <button className="btn btn-success">Add</button>
+          </div>
         </form>
       </div>
     )
