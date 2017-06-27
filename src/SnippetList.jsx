@@ -8,13 +8,21 @@ export default class SnippetList extends React.Component {
     this.state = {
       rowValue: {}
     }
+
+    this.createOnClick = this.createOnClick.bind(this);
+  }
+
+  createOnClick(event) {
+    event.preventDefault();
+    this.props.displayComponent("showCreate", true);
+    this.props.displayComponent("showSnippets", false);
   }
 
   render() {
     const snippets = this.snippetRows();
     return (
       <div>
-        <h3>Saved Snippets</h3>
+        <h3 className="text-underline">Saved Snippets</h3>
         <table className="table table-striped">
           <thead>
             <tr>
@@ -30,6 +38,9 @@ export default class SnippetList extends React.Component {
           </thead>
           <tbody>{snippets}</tbody>
         </table>
+        <button type="button" className="btn btn-success btn-md" onClick={this.createOnClick}>
+          Create
+        </button>
       </div>
     )
   }
