@@ -42,7 +42,7 @@ export default class SnippetUpdate extends React.Component {
   render() {
     return (
       <div>
-        <h3>Update Snippet</h3>
+        <h3 className="text-underline">Update Snippet</h3>
         <form className="snippet-form" name="snippetUpdate" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label>Title</label>

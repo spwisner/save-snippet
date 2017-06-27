@@ -76,7 +76,7 @@ var SnippetAdd = function (_React$Component) {
         null,
         _react2.default.createElement(
           'h3',
-          null,
+          { className: 'text-underline' },
           'Create a Snippet'
         ),
         _react2.default.createElement(
@@ -458,12 +458,12 @@ var SnippetRecord = function (_React$Component) {
         null,
         _react2.default.createElement(
           'h3',
-          null,
+          { className: 'text-underline' },
           'View Snippet'
         ),
         _react2.default.createElement(
-          'h2',
-          { className: 'text-underline' },
+          'h3',
+          null,
           this.props.record.title,
           ' [',
           this.props.record.library,
@@ -599,7 +599,7 @@ var SnippetUpdate = function (_React$Component) {
         null,
         _react2.default.createElement(
           'h3',
-          null,
+          { className: 'text-underline' },
           'Update Snippet'
         ),
         _react2.default.createElement(

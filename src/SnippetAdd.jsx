@@ -42,7 +42,7 @@ export default class SnippetAdd extends React.Component {
     // Form name included so that inputs can be accessed
     return (
       <div>
-        <h3>Create a Snippet</h3>
+        <h3 className="text-underline">Create a Snippet</h3>
         <form className="snippet-form" name="snippetAdd" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label>Title</label>

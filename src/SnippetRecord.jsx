@@ -39,8 +39,8 @@ export default class SnippetRecord extends React.Component {
   render() {
     return(
       <div>
-        <h3>View Snippet</h3>
-        <h2 className="text-underline">{this.props.record.title} [{this.props.record.library}]</h2>
+        <h3 className="text-underline">View Snippet</h3>
+        <h3>{this.props.record.title} [{this.props.record.library}]</h3>
         <h3>Description</h3>
         <p>{this.props.record.description}</p>
         <div className="bordered-text">
