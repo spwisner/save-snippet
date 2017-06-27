@@ -45,7 +45,7 @@ export default class SnippetRecord extends React.Component {
         <p>{this.props.record.description}</p>
         <div className="bordered-text">
           <h3 className="text-underline">Code</h3>
-          <p>{this.props.record.code}</p>
+          <p className="maintain-spacing">{this.props.record.code}</p>
         </div>
         <div>
           <button className="btn btn-primary" onClick={this.showSnippets}>Home</button>
