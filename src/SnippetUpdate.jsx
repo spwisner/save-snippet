@@ -2,8 +2,7 @@
 
 import React from 'react';
 
-/////////////Edit Snippet
-
+/////////////Update Snippet
 export default class SnippetUpdate extends React.Component {
   constructor() {
     super();
@@ -54,15 +53,15 @@ export default class SnippetUpdate extends React.Component {
           </div>
           <div className="form-group">
             <label>Description</label>
-            <textarea className="form-control" name="description" placeholder="Description" rows="3"></textarea>
+            <textarea className="form-control" name="description" placeholder="Description" rows="3" defaultValue={this.props.snippet.description}></textarea>
           </div>
           <div className="form-group">
             <label>Code</label>
-            <textarea className="form-control" name="code" placeholder="Code" rows="5"></textarea>
+            <textarea className="form-control" name="code" placeholder="Code" rows="5" defaultValue={this.props.snippet.code}></textarea>
           </div>
           <div className="form-group">
             <label>Notes</label>
-            <textarea className="form-control" name="notes" placeholder="Notes" rows="3"></textarea>
+            <textarea className="form-control" name="notes" placeholder="Notes" rows="3" defaultValue={this.props.snippet.notes}></textarea>
           </div>
           <button className="btn btn-success">Update</button>
           <button className="btn btn-danger" onClick={this.cancelUpdate}>Cancel</button>
