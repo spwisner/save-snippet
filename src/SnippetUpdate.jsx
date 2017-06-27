@@ -7,9 +7,7 @@ import React from 'react';
 export default class SnippetUpdate extends React.Component {
   constructor() {
     super();
-    this.state = {
-      showEditForm: false
-    }
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.cancelUpdate = this.cancelUpdate.bind(this);
   }
@@ -19,6 +17,7 @@ export default class SnippetUpdate extends React.Component {
     var form = document.forms.snippetUpdate;
 
     this.props.updateSnippet({
+      id: this.props.snippet.id,
       title: form.title.value,
       library: form.library.value,
       description: form.description.value,
