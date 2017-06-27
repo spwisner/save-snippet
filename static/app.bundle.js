@@ -1036,10 +1036,28 @@ var SnippetApp = function (_React$Component) {
     }
   }, {
     key: 'snippetDelete',
-    value: function snippetDelete(snippet) {
-      console.log('snippet deleted');
-      console.log(snippet);
-      return snippet;
+    value: function snippetDelete(deletedSnippet) {
+      var revisedSnippets = this.state.snippets.slice();
+      console.log(deletedSnippet);
+
+      for (var i = 0; i < revisedSnippets.length; i++) {
+        if (revisedSnippets[i].id === deletedSnippet.id) {
+          var index = revisedSnippets.indexOf(revisedSnippets[i]);
+          console.log(index);
+
+          if (index > -1) {
+            revisedSnippets.splice(index, 1);
+          }
+        }
+      }
+
+      console.log(revisedSnippets);
+
+      return this.setState({
+        snippets: revisedSnippets,
+        showSnippet: false,
+        showSnippets: true
+      });
     }
   }, {
     key: 'updateSnippet',
