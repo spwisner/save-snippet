@@ -6,8 +6,18 @@ import React from 'react';
 export default class Navigation extends React.Component {
   constructor() {
     super();
+
+    this.activeClass = this.activeClass.bind(this);
     this.snippetsOnClick = this.snippetsOnClick.bind(this);
     this.createOnClick = this.createOnClick.bind(this);
+  }
+
+  activeClass(currentState) {
+    if (currentState) {
+      return "active";
+    } else {
+      return "";
+    }
   }
 
   snippetsOnClick(event) {
@@ -15,7 +25,7 @@ export default class Navigation extends React.Component {
     this.props.displayComponent("showSnippets", true);
     this.props.displayComponent("showUpdate", false);
     this.props.displayComponent("showSnippet", false);
-    this.props.displayComponent("createSnippet", false);
+    this.props.displayComponent("showCreate", false);
     return;
   }
 
@@ -33,11 +43,11 @@ export default class Navigation extends React.Component {
       <nav className="navbar navbar-inverse">
         <div className="container-fluid">
           <div className="navbar-header">
-            <a className="navbar-brand" href="#">Save Snippet</a>
+            <span className="navbar-brand" href="#" onClick={this.snippetsOnClick}>Save Snippet</span>
           </div>
           <ul className="nav navbar-nav">
-            <li className="active" onClick={this.snippetsOnClick}><a href="#">Home</a></li>
-            <li onClick={this.createOnClick}><a href="#">Create</a></li>
+            <li className={this.activeClass(this.props.snippetsState)} onClick={this.snippetsOnClick}><a href="#">Home</a></li>
+            <li className={this.activeClass(this.props.createState)} onClick={this.createOnClick}><a href="#">Create</a></li>
           </ul>
           <form className="navbar-form navbar-right navbar-form">
             <div className="form-group">
