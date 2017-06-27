@@ -55,6 +55,7 @@ class SnippetApp extends React.Component {
     this.snippetEdit = this.snippetEdit.bind(this);
     this.snippetDelete = this.snippetDelete.bind(this);
     this.displayComponent = this.displayComponent.bind(this);
+    this.updateSnippet = this.updateSnippet.bind(this);
   }
 
   // componentDidMount used to ensure component is ready to use before data is loaded
@@ -64,9 +65,7 @@ class SnippetApp extends React.Component {
 
   // Setting the state
   loadData() {
-    setTimeout(() => {
-      this.setState({ snippets: snippets });
-    }, 500);
+    this.setState({ snippets: snippets });
   }
 
   snippetRecord(snippet) {
@@ -86,9 +85,24 @@ class SnippetApp extends React.Component {
     return snippet;
   }
 
-  updateSnippet(snippet) {
-    console.log('sending update to server');
-    console.log(snippet);
+  updateSnippet(updatedSnippet) {
+    let revisedSnippets = this.state.snippets.slice();
+    console.log(updatedSnippet);
+
+    for (let i = 0; i < revisedSnippets.length; i++) {
+      if (revisedSnippets[i].id === updatedSnippet.id) {
+        revisedSnippets[i] = updatedSnippet;
+      }
+    }
+
+    console.log(revisedSnippets);
+
+    return this.setState({
+      snippets: revisedSnippets,
+      showUpdate: false,
+      showSnippets: true,
+    });
+
   }
 
   // Will clone and create to avoid modifying the state
@@ -99,7 +113,11 @@ class SnippetApp extends React.Component {
     newSnippet.id = this.state.snippets.length + 1;
     newSnippets.push(newSnippet);
     // Change of state
-    this.setState({ snippets: newSnippets });
+    this.setState({
+      snippets: newSnippets,
+      showCreate: false,
+      showSnippets: true
+    });
   }
 
   displayStatus(state) {
@@ -124,7 +142,7 @@ class SnippetApp extends React.Component {
     const showCreate = this.displayStatus(this.state.showCreate);
     return (
       <div>
-        <Navigation displayComponent={this.displayComponent} />
+        <Navigation displayComponent={this.displayComponent} snippetsState={this.state.showSnippets} createState={this.state.showCreate} />
         {showSnippets ? <SnippetList snippets={this.state.snippets} snippetRecord={this.snippetRecord} displayComponent={this.displayComponent} /> : null }
         {showCreate ?  <SnippetAdd createSnippet={this.createSnippet} showCreate={this.state.showCreate} displayComponent={this.displayComponent} /> : null }
         {showSnippet ?  <SnippetRecord record={this.state.record} snippetEdit={this.snippetEdit} snippetDelete={this.snippetDelete} showSnippet={this.state.showSnippet} displayComponent={this.displayComponent} /> : null }
