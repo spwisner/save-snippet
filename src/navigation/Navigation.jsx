@@ -2,31 +2,53 @@
 
 import React from 'react';
 
-//////////////////// Bootstrap Sign-in
+//////////////////// Bootstrap Navigation
 export default class Navigation extends React.Component {
+  constructor() {
+    super();
+    this.snippetsOnClick = this.snippetsOnClick.bind(this);
+    this.createOnClick = this.createOnClick.bind(this);
+  }
+
+  snippetsOnClick(event) {
+    event.preventDefault();
+    this.props.displayComponent("showSnippets", true);
+    this.props.displayComponent("showUpdate", false);
+    this.props.displayComponent("showSnippet", false);
+    this.props.displayComponent("createSnippet", false);
+    return;
+  }
+
+  createOnClick(event) {
+    event.preventDefault();
+    this.props.displayComponent("showSnippets", false);
+    this.props.displayComponent("showUpdate", false);
+    this.props.displayComponent("showSnippet", false);
+    this.props.displayComponent("showCreate", true);
+    return;
+  }
+
   render() {
     return (
-      <nav className="navbar navbar-default">
+      <nav className="navbar navbar-inverse">
         <div className="container-fluid">
           <div className="navbar-header">
-            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
             <a className="navbar-brand" href="#">Save Snippet</a>
           </div>
-          <div className="collapse navbar-collapse" id="search-navbar-collapse">
-            <form className="navbar-form navbar-right">
-              <div className="form-group">
-                <input type="text" className="form-control" placeholder="Search" />
+          <ul className="nav navbar-nav">
+            <li className="active" onClick={this.snippetsOnClick}><a href="#">Home</a></li>
+            <li onClick={this.createOnClick}><a href="#">Create</a></li>
+          </ul>
+          <form className="navbar-form navbar-right navbar-form">
+            <div className="form-group">
+              <input type="text" className="form-control" placeholder="Search" />
               </div>
-              <button type="submit" className="btn btn-default">Submit</button>
-            </form>
-          </div>
+              <button className="btn btn-default" type="submit">
+                <i className="glyphicon glyphicon-search"></i>
+              </button>
+          </form>
         </div>
       </nav>
     )
   }
-}
+};
