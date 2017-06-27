@@ -5,19 +5,17 @@ const webpack = require('webpack');
 module.exports = {
   entry: {
     app: './src/App.jsx',
-    vendor: [
-      'react', 'react-dom', 'react-router', 'react-bootstrap', 'react-router-bootstrap',
-      'isomorphic-fetch', 'react-select'
-    ],
+    vendor: ['react', 'react-dom'],
   },
   output: {
     path: __dirname + '/static',
-    filename: 'app.bundle.js',
+    filename: 'app.bundle.js'
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      minChunks: Infinity
+      filename: 'vendor.bundle.js',
+      minChucks: Infinity,
     }),
   ],
   module: {
@@ -26,18 +24,9 @@ module.exports = {
         test: /\.jsx$/,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'es2015'],
-        },
+          presets: ['react', 'es2015']
+        }
       },
-    ],
-  },
-  devServer: {
-    port: 4741,
-    contentBase: 'static',
-    proxy: {
-      '**': {
-        target: 'http://localhost:3000',
-      },
-    },
-  },
+    ]
+  }
 };
