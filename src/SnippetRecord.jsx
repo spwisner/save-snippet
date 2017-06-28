@@ -7,9 +7,63 @@ import React from 'react';
 export default class SnippetRecord extends React.Component {
   constructor() {
     super();
+
+    this.state = {
+      code: "active",
+      description: "",
+      notes: ""
+    };
+
     this.editSnippetData = this.editSnippetData.bind(this);
     this.showSnippets = this.showSnippets.bind(this);
     this.deleteSnippetData = this.deleteSnippetData.bind(this);
+    this.viewCode = this.viewCode.bind(this);
+    this.viewDescription = this.viewDescription.bind(this);
+    this.viewNotes = this.viewNotes.bind(this);
+  }
+
+  viewCode(event) {
+    event.preventDefault();
+    this.setState({
+      code: "active",
+      description: "",
+      notes: ""
+    });
+  }
+
+  viewDescription(event) {
+    event.preventDefault();
+    this.setState({
+      code: "",
+      description: "active",
+      notes: ""
+    });
+  }
+
+  viewNotes(event) {
+    event.preventDefault();
+    this.setState({
+      code: "",
+      description: "",
+      notes: "active"
+    });
+  }
+
+  tabContent() {
+    const codeState = this.state.code;
+    const descriptionState = this.state.description;
+    const notesState = this.state.notes;
+    const active = "active";
+
+    if (codeState === active) {
+      return this.props.record.code;
+    } else if (descriptionState === active) {
+      return this.props.record.description;
+    } else if (notesState === active) {
+      return this.props.record.notes;
+    } else {
+      console.log('error');
+    }
   }
 
   editSnippetData(event) {
@@ -37,20 +91,37 @@ export default class SnippetRecord extends React.Component {
   }
 
   render() {
+    const tabContent = this.tabContent();
     return(
-      <div>
-        <h3 className="text-underline">View Snippet</h3>
-        <h3>{this.props.record.title} [{this.props.record.library}]</h3>
-        <h3>Description</h3>
-        <p>{this.props.record.description}</p>
-        <div className="bordered-text">
-          <h3 className="text-underline">Code</h3>
-          <p className="maintain-spacing">{this.props.record.code}</p>
+      <div className="container">
+        <div className="row record-head">
+            <div className="col-xs-7 col-xs-offset-1">
+              <p className="no-margin"> <span className="glyphicon glyphicon-file"></span> {this.props.record.title}</p>
+            </div>
+            <div className="col-xs-3">
+              <p className="no-margin text-right"> {this.props.record.library}</p>
+            </div>
         </div>
         <div>
-          <button className="btn btn-primary" onClick={this.showSnippets}>Home</button>
-          <button className="btn btn-warning" onClick={this.editSnippetData}>Edit</button>
-          <button className="btn btn-danger" onClick={this.deleteSnippetData}>Delete</button>
+          <ul className="nav nav-tabs">
+            <li className={this.state.code}>
+              <a href="#" onClick={this.viewCode}>Code</a>
+            </li>
+            <li className={this.state.description}>
+              <a href="#" onClick={this.viewDescription}>Description</a>
+            </li>
+            <li className={this.state.notes} >
+              <a href="#" onClick={this.viewNotes}>Notes</a>
+            </li>
+          </ul>
+        </div>
+        <div className="tab-content">
+          {tabContent}
+        </div>
+        <div className="record-btn-container">
+          <button className="btn btn-primary record-btn" onClick={this.showSnippets}>Home</button>
+          <button className="btn btn-warning record-btn" onClick={this.editSnippetData}>Edit</button>
+          <button className="btn btn-danger record-btn" onClick={this.deleteSnippetData}>Delete</button>
         </div>
       </div>
     )

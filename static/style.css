@@ -1,4 +1,14 @@
 /*Headers*/
+
+/*
+Color Scheme
+* Red #4C212A
+* BLUE #01172F
+* GREEN #00635D
+LIGHT BLUE #08A4BD
+PURPLE/BLUE #446DF6
+*/
+
 .text-underline {
   text-decoration: underline;
 }
@@ -7,6 +17,34 @@
   border: 1px solid black;
   padding: 5px;
   width:50%;
+}
+
+/* Top Header for Record */
+.record-head {
+  color: white;
+  background-color: #4C212A;
+  font-size: 20px;
+  padding: 8px;
+  margin: 0;
+  border-radius: 4px;
+}
+
+/* Used in SnippetRecord to remove abnormal spacing for title */
+.no-margin {
+  margin: 0;
+}
+
+/* Record Styling Tab Content */
+.tab-content {
+  margin-top: 15px;
+}
+
+.record-btn-container {
+  margin-top: 15px;
+}
+
+.record-btn {
+  margin-right: 3px;
 }
 
 .snippet-form {

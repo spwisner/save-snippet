@@ -417,13 +417,70 @@ var SnippetRecord = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (SnippetRecord.__proto__ || Object.getPrototypeOf(SnippetRecord)).call(this));
 
+    _this.state = {
+      code: "active",
+      description: "",
+      notes: ""
+    };
+
     _this.editSnippetData = _this.editSnippetData.bind(_this);
     _this.showSnippets = _this.showSnippets.bind(_this);
     _this.deleteSnippetData = _this.deleteSnippetData.bind(_this);
+    _this.viewCode = _this.viewCode.bind(_this);
+    _this.viewDescription = _this.viewDescription.bind(_this);
+    _this.viewNotes = _this.viewNotes.bind(_this);
     return _this;
   }
 
   _createClass(SnippetRecord, [{
+    key: 'viewCode',
+    value: function viewCode(event) {
+      event.preventDefault();
+      this.setState({
+        code: "active",
+        description: "",
+        notes: ""
+      });
+    }
+  }, {
+    key: 'viewDescription',
+    value: function viewDescription(event) {
+      event.preventDefault();
+      this.setState({
+        code: "",
+        description: "active",
+        notes: ""
+      });
+    }
+  }, {
+    key: 'viewNotes',
+    value: function viewNotes(event) {
+      event.preventDefault();
+      this.setState({
+        code: "",
+        description: "",
+        notes: "active"
+      });
+    }
+  }, {
+    key: 'tabContent',
+    value: function tabContent() {
+      var codeState = this.state.code;
+      var descriptionState = this.state.description;
+      var notesState = this.state.notes;
+      var active = "active";
+
+      if (codeState === active) {
+        return this.props.record.code;
+      } else if (descriptionState === active) {
+        return this.props.record.description;
+      } else if (notesState === active) {
+        return this.props.record.notes;
+      } else {
+        console.log('error');
+      }
+    }
+  }, {
     key: 'editSnippetData',
     value: function editSnippetData(event) {
       event.preventDefault();
@@ -453,62 +510,92 @@ var SnippetRecord = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var tabContent = this.tabContent();
       return _react2.default.createElement(
         'div',
-        null,
-        _react2.default.createElement(
-          'h3',
-          { className: 'text-underline' },
-          'View Snippet'
-        ),
-        _react2.default.createElement(
-          'h3',
-          null,
-          this.props.record.title,
-          ' [',
-          this.props.record.library,
-          ']'
-        ),
-        _react2.default.createElement(
-          'h3',
-          null,
-          'Description'
-        ),
-        _react2.default.createElement(
-          'p',
-          null,
-          this.props.record.description
-        ),
+        { className: 'container' },
         _react2.default.createElement(
           'div',
-          { className: 'bordered-text' },
+          { className: 'row record-head' },
           _react2.default.createElement(
-            'h3',
-            { className: 'text-underline' },
-            'Code'
+            'div',
+            { className: 'col-xs-7 col-xs-offset-1' },
+            _react2.default.createElement(
+              'p',
+              { className: 'no-margin' },
+              ' ',
+              _react2.default.createElement('span', { className: 'glyphicon glyphicon-file' }),
+              ' ',
+              this.props.record.title
+            )
           ),
           _react2.default.createElement(
-            'p',
-            { className: 'maintain-spacing' },
-            this.props.record.code
+            'div',
+            { className: 'col-xs-3' },
+            _react2.default.createElement(
+              'p',
+              { className: 'no-margin text-right' },
+              ' ',
+              this.props.record.library
+            )
           )
         ),
         _react2.default.createElement(
           'div',
           null,
           _react2.default.createElement(
+            'ul',
+            { className: 'nav nav-tabs' },
+            _react2.default.createElement(
+              'li',
+              { className: this.state.code },
+              _react2.default.createElement(
+                'a',
+                { href: '#', onClick: this.viewCode },
+                'Code'
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              { className: this.state.description },
+              _react2.default.createElement(
+                'a',
+                { href: '#', onClick: this.viewDescription },
+                'Description'
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              { className: this.state.notes },
+              _react2.default.createElement(
+                'a',
+                { href: '#', onClick: this.viewNotes },
+                'Notes'
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'tab-content' },
+          tabContent
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'record-btn-container' },
+          _react2.default.createElement(
             'button',
-            { className: 'btn btn-primary', onClick: this.showSnippets },
+            { className: 'btn btn-primary record-btn', onClick: this.showSnippets },
             'Home'
           ),
           _react2.default.createElement(
             'button',
-            { className: 'btn btn-warning', onClick: this.editSnippetData },
+            { className: 'btn btn-warning record-btn', onClick: this.editSnippetData },
             'Edit'
           ),
           _react2.default.createElement(
             'button',
-            { className: 'btn btn-danger', onClick: this.deleteSnippetData },
+            { className: 'btn btn-danger record-btn', onClick: this.deleteSnippetData },
             'Delete'
           )
         )
@@ -838,54 +925,58 @@ var Navigation = function (_React$Component) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'nav',
-        { className: 'navbar navbar-inverse' },
+        'div',
+        null,
         _react2.default.createElement(
-          'div',
-          { className: 'container-fluid' },
+          'nav',
+          { className: 'navbar navbar-inverse' },
           _react2.default.createElement(
             'div',
-            { className: 'navbar-header' },
-            _react2.default.createElement(
-              'span',
-              { className: 'navbar-brand', href: '#', onClick: this.snippetsOnClick },
-              'Save Snippet'
-            )
-          ),
-          _react2.default.createElement(
-            'ul',
-            { className: 'nav navbar-nav' },
-            _react2.default.createElement(
-              'li',
-              { className: this.activeClass(this.props.snippetsState), onClick: this.snippetsOnClick },
-              _react2.default.createElement(
-                'a',
-                { href: '#' },
-                'Home'
-              )
-            ),
-            _react2.default.createElement(
-              'li',
-              { className: this.activeClass(this.props.createState), onClick: this.createOnClick },
-              _react2.default.createElement(
-                'a',
-                { href: '#' },
-                'Create'
-              )
-            )
-          ),
-          _react2.default.createElement(
-            'form',
-            { className: 'navbar-form navbar-right navbar-form' },
+            { className: 'container-fluid' },
             _react2.default.createElement(
               'div',
-              { className: 'form-group' },
-              _react2.default.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Search' })
+              { className: 'navbar-header' },
+              _react2.default.createElement(
+                'span',
+                { className: 'navbar-brand', href: '#', onClick: this.snippetsOnClick },
+                'Save Snippet'
+              )
             ),
             _react2.default.createElement(
-              'button',
-              { className: 'btn btn-default', type: 'submit' },
-              _react2.default.createElement('i', { className: 'glyphicon glyphicon-search' })
+              'ul',
+              { className: 'nav navbar-nav' },
+              _react2.default.createElement(
+                'li',
+                { className: this.activeClass(this.props.snippetsState), onClick: this.snippetsOnClick },
+                _react2.default.createElement(
+                  'a',
+                  { href: '#' },
+                  'Home'
+                )
+              ),
+              _react2.default.createElement(
+                'li',
+                { className: this.activeClass(this.props.createState), onClick: this.createOnClick },
+                _react2.default.createElement(
+                  'a',
+                  { href: '#' },
+                  'Create'
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'form',
+              { className: 'navbar-form navbar-right navbar-form' },
+              _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Search' })
+              ),
+              _react2.default.createElement(
+                'button',
+                { className: 'btn btn-default', type: 'submit' },
+                _react2.default.createElement('i', { className: 'glyphicon glyphicon-search' })
+              )
             )
           )
         )
