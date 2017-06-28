@@ -30,9 +30,6 @@ export default class SnippetList extends React.Component {
               <th>Title</th>
               <th>Created</th>
               <th>Library</th>
-              <th>Description</th>
-              <th>Code</th>
-              <th>Notes</th>
               <th>View</th>
             </tr>
           </thead>
@@ -70,9 +67,6 @@ class SnippetRow extends React.Component {
         <td>{this.props.snippet.title}</td>
         <td>{this.props.snippet.created.toDateString()}</td>
         <td>{this.props.snippet.library}</td>
-        <td>{this.props.snippet.description}</td>
-        <td>{this.props.snippet.code}</td>
-        <td>{this.props.snippet.notes}</td>
         <td><button className="btn btn-default" onClick={this.viewSnippetData.bind(this)}>View</button></td>
       </tr>
     )

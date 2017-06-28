@@ -134,7 +134,7 @@ var SnippetAdd = function (_React$Component) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'mt-btn-container' },
+            { className: 'margin-btn-container' },
             _react2.default.createElement(
               'button',
               { className: 'btn btn-success margin-right-btn' },
@@ -249,21 +249,6 @@ var SnippetList = function (_React$Component) {
               _react2.default.createElement(
                 'th',
                 null,
-                'Description'
-              ),
-              _react2.default.createElement(
-                'th',
-                null,
-                'Code'
-              ),
-              _react2.default.createElement(
-                'th',
-                null,
-                'Notes'
-              ),
-              _react2.default.createElement(
-                'th',
-                null,
                 'View'
               )
             )
@@ -339,21 +324,6 @@ var SnippetRow = function (_React$Component2) {
           'td',
           null,
           this.props.snippet.library
-        ),
-        _react2.default.createElement(
-          'td',
-          null,
-          this.props.snippet.description
-        ),
-        _react2.default.createElement(
-          'td',
-          null,
-          this.props.snippet.code
-        ),
-        _react2.default.createElement(
-          'td',
-          null,
-          this.props.snippet.notes
         ),
         _react2.default.createElement(
           'td',
@@ -747,7 +717,7 @@ var SnippetUpdate = function (_React$Component) {
           ),
           _react2.default.createElement(
             'div',
-            { 'class': 'mt-btn-container' },
+            { className: 'margin-btn-container' },
             _react2.default.createElement(
               'button',
               { className: 'btn btn-success margin-right-btn' },
@@ -974,16 +944,16 @@ var Navigation = function (_React$Component) {
             ),
             _react2.default.createElement(
               'form',
-              { className: 'navbar-form navbar-right navbar-form' },
+              { className: 'navbar-form navbar-right', role: 'search' },
               _react2.default.createElement(
                 'div',
                 { className: 'form-group' },
-                _react2.default.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Search' })
+                _react2.default.createElement('input', { type: 'text', className: 'form-control search-input', placeholder: 'Search' })
               ),
               _react2.default.createElement(
                 'button',
-                { className: 'btn btn-default', type: 'submit' },
-                _react2.default.createElement('i', { className: 'glyphicon glyphicon-search' })
+                { type: 'submit', className: 'btn btn-default' },
+                'Submit'
               )
             )
           )
