@@ -64,8 +64,8 @@ export default class SnippetAdd extends React.Component {
             <label>Notes</label>
             <textarea className="form-control" name="notes" placeholder="Notes" rows="3"></textarea>
           </div>
-          <div>
-            <button className="btn btn-success">Create</button>
+          <div className="mt-btn-container">
+            <button className="btn btn-success margin-right-btn">Create</button>
             <button className="btn btn-danger" onClick={this.handleCancel}>Cancel</button>
           </div>
         </form>
