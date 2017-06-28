@@ -134,10 +134,10 @@ var SnippetAdd = function (_React$Component) {
           ),
           _react2.default.createElement(
             'div',
-            null,
+            { className: 'mt-btn-container' },
             _react2.default.createElement(
               'button',
-              { className: 'btn btn-success' },
+              { className: 'btn btn-success margin-right-btn' },
               'Create'
             ),
             _react2.default.createElement(
@@ -519,22 +519,22 @@ var SnippetRecord = function (_React$Component) {
           { className: 'row record-head' },
           _react2.default.createElement(
             'div',
-            { className: 'col-xs-7 col-xs-offset-1' },
+            { className: 'col-xs-6' },
             _react2.default.createElement(
               'p',
               { className: 'no-margin' },
-              ' ',
               _react2.default.createElement('span', { className: 'glyphicon glyphicon-file' }),
-              ' ',
               this.props.record.title
             )
           ),
           _react2.default.createElement(
             'div',
-            { className: 'col-xs-3' },
+            { className: 'col-xs-6' },
             _react2.default.createElement(
               'p',
               { className: 'no-margin text-right' },
+              ' ',
+              _react2.default.createElement('span', { className: 'glyphicon glyphicon-tag' }),
               ' ',
               this.props.record.library
             )
@@ -542,13 +542,13 @@ var SnippetRecord = function (_React$Component) {
         ),
         _react2.default.createElement(
           'div',
-          null,
+          { className: 'tab-options' },
           _react2.default.createElement(
             'ul',
             { className: 'nav nav-tabs' },
             _react2.default.createElement(
               'li',
-              { className: this.state.code },
+              { role: 'presentation', className: this.state.code },
               _react2.default.createElement(
                 'a',
                 { href: '#', onClick: this.viewCode },
@@ -557,7 +557,7 @@ var SnippetRecord = function (_React$Component) {
             ),
             _react2.default.createElement(
               'li',
-              { className: this.state.description },
+              { role: 'presentation', className: this.state.description },
               _react2.default.createElement(
                 'a',
                 { href: '#', onClick: this.viewDescription },
@@ -566,7 +566,7 @@ var SnippetRecord = function (_React$Component) {
             ),
             _react2.default.createElement(
               'li',
-              { className: this.state.notes },
+              { role: 'presentation', className: this.state.notes },
               _react2.default.createElement(
                 'a',
                 { href: '#', onClick: this.viewNotes },
@@ -577,25 +577,29 @@ var SnippetRecord = function (_React$Component) {
         ),
         _react2.default.createElement(
           'div',
-          { className: 'tab-content' },
-          tabContent
+          { className: 'tab-content maintain-spacing' },
+          _react2.default.createElement(
+            'p',
+            null,
+            tabContent
+          )
         ),
         _react2.default.createElement(
           'div',
-          { className: 'record-btn-container' },
+          { className: 'mt-btn-container' },
           _react2.default.createElement(
             'button',
-            { className: 'btn btn-primary record-btn', onClick: this.showSnippets },
+            { className: 'btn btn-primary margin-right-btn', onClick: this.showSnippets },
             'Home'
           ),
           _react2.default.createElement(
             'button',
-            { className: 'btn btn-warning record-btn', onClick: this.editSnippetData },
+            { className: 'btn btn-warning margin-right-btn', onClick: this.editSnippetData },
             'Edit'
           ),
           _react2.default.createElement(
             'button',
-            { className: 'btn btn-danger record-btn', onClick: this.deleteSnippetData },
+            { className: 'btn btn-danger margin-right-btn', onClick: this.deleteSnippetData },
             'Delete'
           )
         )
@@ -742,14 +746,18 @@ var SnippetUpdate = function (_React$Component) {
             _react2.default.createElement('textarea', { className: 'form-control', name: 'notes', placeholder: 'Notes', rows: '3', defaultValue: this.props.snippet.notes })
           ),
           _react2.default.createElement(
-            'button',
-            { className: 'btn btn-success' },
-            'Update'
-          ),
-          _react2.default.createElement(
-            'button',
-            { className: 'btn btn-danger', onClick: this.cancelUpdate },
-            'Cancel'
+            'div',
+            { 'class': 'mt-btn-container' },
+            _react2.default.createElement(
+              'button',
+              { className: 'btn btn-success margin-right-btn' },
+              'Update'
+            ),
+            _react2.default.createElement(
+              'button',
+              { className: 'btn btn-danger', onClick: this.cancelUpdate },
+              'Cancel'
+            )
           )
         )
       );
