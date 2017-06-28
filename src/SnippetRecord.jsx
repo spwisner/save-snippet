@@ -11,7 +11,8 @@ export default class SnippetRecord extends React.Component {
     this.state = {
       code: "active",
       description: "",
-      notes: ""
+      notes: "",
+      spacing: "tab-content maintain-spacing"
     };
 
     this.editSnippetData = this.editSnippetData.bind(this);
@@ -27,7 +28,8 @@ export default class SnippetRecord extends React.Component {
     this.setState({
       code: "active",
       description: "",
-      notes: ""
+      notes: "",
+      spacing: "tab-content maintain-spacing"
     });
   }
 
@@ -36,7 +38,8 @@ export default class SnippetRecord extends React.Component {
     this.setState({
       code: "",
       description: "active",
-      notes: ""
+      notes: "",
+      spacing: "tab-content"
     });
   }
 
@@ -45,7 +48,8 @@ export default class SnippetRecord extends React.Component {
     this.setState({
       code: "",
       description: "",
-      notes: "active"
+      notes: "active",
+      spacing: "tab-content"
     });
   }
 
@@ -122,7 +126,7 @@ export default class SnippetRecord extends React.Component {
             </li>
           </ul>
         </div>
-        <div className="tab-content maintain-spacing">
+        <div className={this.state.spacing}>
           <p>{tabContent}</p>
         </div>
         <div className="mt-btn-container">

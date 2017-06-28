@@ -398,7 +398,8 @@ var SnippetRecord = function (_React$Component) {
     _this.state = {
       code: "active",
       description: "",
-      notes: ""
+      notes: "",
+      spacing: "tab-content maintain-spacing"
     };
 
     _this.editSnippetData = _this.editSnippetData.bind(_this);
@@ -417,7 +418,8 @@ var SnippetRecord = function (_React$Component) {
       this.setState({
         code: "active",
         description: "",
-        notes: ""
+        notes: "",
+        spacing: "tab-content maintain-spacing"
       });
     }
   }, {
@@ -427,7 +429,8 @@ var SnippetRecord = function (_React$Component) {
       this.setState({
         code: "",
         description: "active",
-        notes: ""
+        notes: "",
+        spacing: "tab-content"
       });
     }
   }, {
@@ -437,7 +440,8 @@ var SnippetRecord = function (_React$Component) {
       this.setState({
         code: "",
         description: "",
-        notes: "active"
+        notes: "active",
+        spacing: "tab-content"
       });
     }
   }, {
@@ -559,7 +563,7 @@ var SnippetRecord = function (_React$Component) {
         ),
         _react2.default.createElement(
           'div',
-          { className: 'tab-content maintain-spacing' },
+          { className: this.state.spacing },
           _react2.default.createElement(
             'p',
             null,
