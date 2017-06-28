@@ -95,33 +95,36 @@ export default class SnippetRecord extends React.Component {
     return(
       <div className="container">
         <div className="row record-head">
-            <div className="col-xs-7 col-xs-offset-1">
-              <p className="no-margin"> <span className="glyphicon glyphicon-file"></span> {this.props.record.title}</p>
+            <div className="col-xs-6">
+              <p className="no-margin">
+                <span className="glyphicon glyphicon-file"></span>
+                {this.props.record.title}
+              </p>
             </div>
-            <div className="col-xs-3">
-              <p className="no-margin text-right"> {this.props.record.library}</p>
+            <div className="col-xs-6">
+              <p className="no-margin text-right"> <span className="glyphicon glyphicon-tag"></span> {this.props.record.library}</p>
             </div>
         </div>
-        <div>
+        <div className="tab-options">
           <ul className="nav nav-tabs">
-            <li className={this.state.code}>
+            <li role="presentation" className={this.state.code}>
               <a href="#" onClick={this.viewCode}>Code</a>
             </li>
-            <li className={this.state.description}>
+            <li role="presentation" className={this.state.description}>
               <a href="#" onClick={this.viewDescription}>Description</a>
             </li>
-            <li className={this.state.notes} >
+            <li role="presentation"className={this.state.notes} >
               <a href="#" onClick={this.viewNotes}>Notes</a>
             </li>
           </ul>
         </div>
-        <div className="tab-content">
-          {tabContent}
+        <div className="tab-content maintain-spacing">
+          <p>{tabContent}</p>
         </div>
-        <div className="record-btn-container">
-          <button className="btn btn-primary record-btn" onClick={this.showSnippets}>Home</button>
-          <button className="btn btn-warning record-btn" onClick={this.editSnippetData}>Edit</button>
-          <button className="btn btn-danger record-btn" onClick={this.deleteSnippetData}>Delete</button>
+        <div className="mt-btn-container">
+          <button className="btn btn-primary margin-right-btn" onClick={this.showSnippets}>Home</button>
+          <button className="btn btn-warning margin-right-btn" onClick={this.editSnippetData}>Edit</button>
+          <button className="btn btn-danger margin-right-btn" onClick={this.deleteSnippetData}>Delete</button>
         </div>
       </div>
     )
