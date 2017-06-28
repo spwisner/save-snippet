@@ -12,13 +12,18 @@ export default class SnippetAdd extends React.Component {
 
   handleCancel(event) {
     event.preventDefault();
-    this.props.displayComponent("showCreate", false);
     this.props.displayComponent("showSnippets", true);
+    this.props.displayComponent("showSnippet", false);
+    this.props.displayComponent("showUpdate", false);
+    this.props.displayComponent("showCreate", false);
+    this.props.displayComponent("showSearchResults", false);
   }
 
   handleSubmit(event) {
     event.preventDefault();
     var form = document.forms.snippetAdd;
+
+    console.log(form.code.value);
 
     // this.props.createSnippet calls the createSnippet method in SnippetApp
     this.props.createSnippet({

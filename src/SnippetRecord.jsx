@@ -56,6 +56,7 @@ export default class SnippetRecord extends React.Component {
     const active = "active";
 
     if (codeState === active) {
+      console.log(this.props.record.code)
       return this.props.record.code;
     } else if (descriptionState === active) {
       return this.props.record.description;
@@ -70,8 +71,11 @@ export default class SnippetRecord extends React.Component {
     event.preventDefault();
     const currentRecord = this.props.record;
     this.props.snippetEdit(currentRecord);
+    this.props.displayComponent("showSnippets", false);
     this.props.displayComponent("showSnippet", false);
     this.props.displayComponent("showUpdate", true);
+    this.props.displayComponent("showCreate", false);
+    this.props.displayComponent("showSearchResults", false);
     return;
   }
 
@@ -79,8 +83,9 @@ export default class SnippetRecord extends React.Component {
     event.preventDefault();
     this.props.displayComponent("showSnippets", true);
     this.props.displayComponent("showSnippet", false);
-    this.props.displayComponent("showCreate", false);
     this.props.displayComponent("showUpdate", false);
+    this.props.displayComponent("showCreate", false);
+    this.props.displayComponent("showSearchResults", false);
   }
 
   deleteSnippetData(event) {
