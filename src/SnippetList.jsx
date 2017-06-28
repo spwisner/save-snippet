@@ -14,12 +14,16 @@ export default class SnippetList extends React.Component {
 
   createOnClick(event) {
     event.preventDefault();
-    this.props.displayComponent("showCreate", true);
     this.props.displayComponent("showSnippets", false);
+    this.props.displayComponent("showSnippet", false);
+    this.props.displayComponent("showUpdate", false);
+    this.props.displayComponent("showCreate", true);
+    this.props.displayComponent("showSearchResults", false);
   }
 
   render() {
     const snippets = this.snippetRows();
+    console.log(this.props.snippets)
     return (
       <div>
         <h3 className="text-underline">Saved Snippets</h3>
@@ -60,6 +64,17 @@ class SnippetRow extends React.Component {
     this.viewSnippetData = this.viewSnippetData.bind(this);
   }
 
+  viewSnippetData(event) {
+    event.preventDefault();
+    const snippet = this.props.snippet;
+    this.props.snippetRecord(snippet);
+    this.props.displayComponent("showSnippets", false);
+    this.props.displayComponent("showSnippet", true);
+    this.props.displayComponent("showUpdate", false);
+    this.props.displayComponent("showCreate", false);
+    this.props.displayComponent("showSearchResults", false);
+  }
+
   render() {
     return (
       <tr>
@@ -70,14 +85,5 @@ class SnippetRow extends React.Component {
         <td><button className="btn btn-default" onClick={this.viewSnippetData.bind(this)}>View</button></td>
       </tr>
     )
-  }
-
-  viewSnippetData(event) {
-    event.preventDefault();
-    const snippet = this.props.snippet;
-    this.props.snippetRecord(snippet);
-    this.props.displayComponent("showSnippet", true);
-    this.props.displayComponent("showSnippets", false);
-    this.props.displayComponent("showCreate", false);
   }
 }
