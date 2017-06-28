@@ -39,6 +39,12 @@ PURPLE/BLUE #446DF6
   margin: 0;
 }
 
+/* Search Input in Navigation Component */
+.search-input {
+  margin-right: 3px;
+  max-width: 175px;
+}
+
 /* Record Styling Tab Content */
 .tab-content {
   margin-top: 15px;
