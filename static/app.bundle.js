@@ -41,14 +41,19 @@ var SnippetAdd = function (_React$Component) {
     key: 'handleCancel',
     value: function handleCancel(event) {
       event.preventDefault();
-      this.props.displayComponent("showCreate", false);
       this.props.displayComponent("showSnippets", true);
+      this.props.displayComponent("showSnippet", false);
+      this.props.displayComponent("showUpdate", false);
+      this.props.displayComponent("showCreate", false);
+      this.props.displayComponent("showSearchResults", false);
     }
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(event) {
       event.preventDefault();
       var form = document.forms.snippetAdd;
+
+      console.log(form.code.value);
 
       // this.props.createSnippet calls the createSnippet method in SnippetApp
       this.props.createSnippet({
@@ -202,13 +207,17 @@ var SnippetList = function (_React$Component) {
     key: 'createOnClick',
     value: function createOnClick(event) {
       event.preventDefault();
-      this.props.displayComponent("showCreate", true);
       this.props.displayComponent("showSnippets", false);
+      this.props.displayComponent("showSnippet", false);
+      this.props.displayComponent("showUpdate", false);
+      this.props.displayComponent("showCreate", true);
+      this.props.displayComponent("showSearchResults", false);
     }
   }, {
     key: 'render',
     value: function render() {
       var snippets = this.snippetRows();
+      console.log(this.props.snippets);
       return _react2.default.createElement(
         'div',
         null,
@@ -300,6 +309,18 @@ var SnippetRow = function (_React$Component2) {
   }
 
   _createClass(SnippetRow, [{
+    key: 'viewSnippetData',
+    value: function viewSnippetData(event) {
+      event.preventDefault();
+      var snippet = this.props.snippet;
+      this.props.snippetRecord(snippet);
+      this.props.displayComponent("showSnippets", false);
+      this.props.displayComponent("showSnippet", true);
+      this.props.displayComponent("showUpdate", false);
+      this.props.displayComponent("showCreate", false);
+      this.props.displayComponent("showSearchResults", false);
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -335,16 +356,6 @@ var SnippetRow = function (_React$Component2) {
           )
         )
       );
-    }
-  }, {
-    key: 'viewSnippetData',
-    value: function viewSnippetData(event) {
-      event.preventDefault();
-      var snippet = this.props.snippet;
-      this.props.snippetRecord(snippet);
-      this.props.displayComponent("showSnippet", true);
-      this.props.displayComponent("showSnippets", false);
-      this.props.displayComponent("showCreate", false);
     }
   }]);
 
@@ -441,6 +452,7 @@ var SnippetRecord = function (_React$Component) {
       var active = "active";
 
       if (codeState === active) {
+        console.log(this.props.record.code);
         return this.props.record.code;
       } else if (descriptionState === active) {
         return this.props.record.description;
@@ -456,8 +468,11 @@ var SnippetRecord = function (_React$Component) {
       event.preventDefault();
       var currentRecord = this.props.record;
       this.props.snippetEdit(currentRecord);
+      this.props.displayComponent("showSnippets", false);
       this.props.displayComponent("showSnippet", false);
       this.props.displayComponent("showUpdate", true);
+      this.props.displayComponent("showCreate", false);
+      this.props.displayComponent("showSearchResults", false);
       return;
     }
   }, {
@@ -466,8 +481,9 @@ var SnippetRecord = function (_React$Component) {
       event.preventDefault();
       this.props.displayComponent("showSnippets", true);
       this.props.displayComponent("showSnippet", false);
-      this.props.displayComponent("showCreate", false);
       this.props.displayComponent("showUpdate", false);
+      this.props.displayComponent("showCreate", false);
+      this.props.displayComponent("showSearchResults", false);
     }
   }, {
     key: 'deleteSnippetData',
@@ -648,8 +664,11 @@ var SnippetUpdate = function (_React$Component) {
     key: 'cancelUpdate',
     value: function cancelUpdate(event) {
       event.preventDefault();
+      this.props.displayComponent("showSnippets", false);
       this.props.displayComponent("showSnippet", true);
       this.props.displayComponent("showUpdate", false);
+      this.props.displayComponent("showCreate", false);
+      this.props.displayComponent("showSearchResults", false);
     }
   }, {
     key: 'render',
@@ -961,7 +980,7 @@ var Navigation = function (_React$Component) {
               _react2.default.createElement(
                 'div',
                 { className: 'form-group' },
-                _react2.default.createElement('input', { type: 'text', name: 'searchInput', className: 'form-control search-input', placeholder: 'Search' })
+                _react2.default.createElement('input', { type: 'text', name: 'searchInput', className: 'form-control search-input', placeholder: 'Search By Title' })
               ),
               _react2.default.createElement(
                 'button',
@@ -1055,7 +1074,19 @@ var snippets = [{
   description: 'Used when parent does not supply value to parent',
   code: 'SnippetRow.defaultProps = {snippet_title: "-- no title --",};',
   notes: 'Needs to be outside of component as a function'
+}, {
+  id: 3,
+  title: "blank",
+  created: new Date('2016-06-03'),
+  library: "JavaScript",
+  description: "AFAIK, script elements don't have progress events. Your best bet is to use an XHR to get the script's body, then count on the browser cache for a second fetch. The problem is that your script then needs to be parsed by the browser, and there doesn't seem to be events for that.",
+  code: '',
+  notes: "The solution is pure JS, so you can adapt it to whatever framework you're using. It assumes that actual download will be about 70% of the total time, and allocates 20 % to the browser parsing. I use a non-minified versionof the awesome three.js 3D library as a biggish source file. because it is in another sandbox, progress callculation is inaccurate, but if you serve your own script that shouldn't be a problem.'"
 }];
+
+var codeThree = ['//this is a rough size estimate for my example file', 'let TOTAL_ESTIMATE = 1016 * 1024;', '// I use a hr as a ', 'let bar = document.getElementById("progressbar");', 'let button = document.getElementById("dlbtn");', 'var js; // to hold the created dom element', 'var fileName; // to hold my cacheBusted script adress', ' ', 'function onProgress(e) {', '     var percentComplete = e.loaded / TOTAL_ESTIMATE;', '     if (e.lengthComputable) {', '         percentComplete = e.loaded / e.total;', '     }', '     p = Math.round(percentComplete * 100);', '     console.log("progress", p + "%,", e.loaded, "bytes loaded")', '     bar.style = "width: " + (5 + .6 * p) + "%"; // I just assume dl will be around 60-70% of total time', '} '].join("\n");
+
+snippets[2].code = codeThree;
 
 ///////////////// SnippetApp
 
@@ -1072,6 +1103,7 @@ var SnippetApp = function (_React$Component) {
       showSnippet: false,
       showUpdate: false,
       showCreate: false,
+      showSearchResults: false,
       snippets: [],
       record: [],
       editRecord: [],
@@ -1133,8 +1165,11 @@ var SnippetApp = function (_React$Component) {
 
       return this.setState({
         snippets: revisedSnippets,
+        showSnippets: true,
         showSnippet: false,
-        showSnippets: true
+        showUpdate: false,
+        showCreate: false,
+        showSearchResults: false
       });
     }
   }, {
@@ -1150,8 +1185,11 @@ var SnippetApp = function (_React$Component) {
 
       return this.setState({
         snippets: revisedSnippets,
+        showSnippets: true,
+        showSnippet: false,
         showUpdate: false,
-        showSnippets: true
+        showCreate: false,
+        showSearchResults: false
       });
     }
 
@@ -1168,8 +1206,11 @@ var SnippetApp = function (_React$Component) {
       // Change of state
       this.setState({
         snippets: newSnippets,
+        showSnippets: true,
+        showSnippet: false,
+        showUpdate: false,
         showCreate: false,
-        showSnippets: true
+        showSearchResults: false
       });
     }
   }, {
@@ -1204,9 +1245,17 @@ var SnippetApp = function (_React$Component) {
 
       console.log(resultsArray);
 
+      // Moves search results to state
       this.displayComponent("searchResults", resultsArray);
-    }
 
+      this.setState({
+        showSnippets: false,
+        showSnippet: false,
+        showUpdate: false,
+        showCreate: false,
+        showSearchResults: true
+      });
+    }
     /////End Search Bar
 
   }, {
@@ -1223,6 +1272,7 @@ var SnippetApp = function (_React$Component) {
       var showSnippet = this.displayStatus(this.state.showSnippet);
       var showSnippets = this.displayStatus(this.state.showSnippets);
       var showCreate = this.displayStatus(this.state.showCreate);
+      var showSearchResults = this.displayStatus(this.state.showSearchResults);
       return _react2.default.createElement(
         'div',
         null,
@@ -1230,7 +1280,8 @@ var SnippetApp = function (_React$Component) {
         showSnippets ? _react2.default.createElement(_SnippetList2.default, { snippets: this.state.snippets, snippetRecord: this.snippetRecord, displayComponent: this.displayComponent }) : null,
         showCreate ? _react2.default.createElement(_SnippetAdd2.default, { createSnippet: this.createSnippet, showCreate: this.state.showCreate, displayComponent: this.displayComponent }) : null,
         showSnippet ? _react2.default.createElement(_SnippetRecord2.default, { record: this.state.record, snippetEdit: this.snippetEdit, snippetDelete: this.snippetDelete, showSnippet: this.state.showSnippet, displayComponent: this.displayComponent }) : null,
-        showUpdate ? _react2.default.createElement(_SnippetUpdate2.default, { updateSnippet: this.updateSnippet, snippet: this.state.editRecord, showUpdate: this.state.showUpdate, displayComponent: this.displayComponent }) : null
+        showUpdate ? _react2.default.createElement(_SnippetUpdate2.default, { updateSnippet: this.updateSnippet, snippet: this.state.editRecord, showUpdate: this.state.showUpdate, displayComponent: this.displayComponent }) : null,
+        showSearchResults ? _react2.default.createElement(_SnippetList2.default, { snippets: this.state.searchResults, snippetRecord: this.snippetRecord, displayComponent: this.displayComponent }) : null
       );
     }
   }]);

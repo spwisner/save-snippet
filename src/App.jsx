@@ -32,7 +32,38 @@ const snippets = [
     code: 'SnippetRow.defaultProps = {snippet_title: "-- no title --",};',
     notes: 'Needs to be outside of component as a function',
   },
+  {
+    id: 3,
+    title: "blank",
+    created: new Date('2016-06-03'),
+    library: "JavaScript",
+    description: "AFAIK, script elements don't have progress events. Your best bet is to use an XHR to get the script's body, then count on the browser cache for a second fetch. The problem is that your script then needs to be parsed by the browser, and there doesn't seem to be events for that.",
+    code: '',
+    notes: "The solution is pure JS, so you can adapt it to whatever framework you're using. It assumes that actual download will be about 70% of the total time, and allocates 20 % to the browser parsing. I use a non-minified versionof the awesome three.js 3D library as a biggish source file. because it is in another sandbox, progress callculation is inaccurate, but if you serve your own script that shouldn't be a problem.'",
+  }
 ];
+
+let codeThree = [
+'//this is a rough size estimate for my example file',
+'let TOTAL_ESTIMATE = 1016 * 1024;',
+'// I use a hr as a ',
+'let bar = document.getElementById("progressbar");',
+'let button = document.getElementById("dlbtn");',
+'var js; // to hold the created dom element',
+'var fileName; // to hold my cacheBusted script adress',
+' ',
+'function onProgress(e) {',
+'     var percentComplete = e.loaded / TOTAL_ESTIMATE;',
+'     if (e.lengthComputable) {',
+'         percentComplete = e.loaded / e.total;',
+'     }',
+'     p = Math.round(percentComplete * 100);',
+'     console.log("progress", p + "%,", e.loaded, "bytes loaded")',
+'     bar.style = "width: " + (5 + .6 * p) + "%"; // I just assume dl will be around 60-70% of total time',
+'} '
+].join("\n");
+
+snippets[2].code = codeThree;
 
 ///////////////// SnippetApp
 
@@ -45,6 +76,7 @@ class SnippetApp extends React.Component {
       showSnippet: false,
       showUpdate: false,
       showCreate: false,
+      showSearchResults: false,
       snippets: [],
       record: [],
       editRecord: [],
@@ -95,8 +127,11 @@ class SnippetApp extends React.Component {
 
     return this.setState({
       snippets: revisedSnippets,
-      showSnippet: false,
       showSnippets: true,
+      showSnippet: false,
+      showUpdate: false,
+      showCreate: false,
+      showSearchResults: false,
     });
   }
 
@@ -111,8 +146,11 @@ class SnippetApp extends React.Component {
 
     return this.setState({
       snippets: revisedSnippets,
-      showUpdate: false,
       showSnippets: true,
+      showSnippet: false,
+      showUpdate: false,
+      showCreate: false,
+      showSearchResults: false,
     });
 
   }
@@ -127,8 +165,11 @@ class SnippetApp extends React.Component {
     // Change of state
     this.setState({
       snippets: newSnippets,
+      showSnippets: true,
+      showSnippet: false,
+      showUpdate: false,
       showCreate: false,
-      showSnippets: true
+      showSearchResults: false,
     });
   }
 
@@ -160,11 +201,18 @@ class SnippetApp extends React.Component {
 
     console.log(resultsArray);
 
+    // Moves search results to state
     this.displayComponent("searchResults", resultsArray);
+
+    this.setState({
+      showSnippets: false,
+      showSnippet: false,
+      showUpdate: false,
+      showCreate: false,
+      showSearchResults: true,
+    });
 }
-
-
-  /////End Search Bar
+/////End Search Bar
 
   displayComponent(stateName, conditional) {
     const object = {};
@@ -177,6 +225,7 @@ class SnippetApp extends React.Component {
     const showSnippet = this.displayStatus(this.state.showSnippet);
     const showSnippets = this.displayStatus(this.state.showSnippets);
     const showCreate = this.displayStatus(this.state.showCreate);
+    const showSearchResults = this.displayStatus(this.state.showSearchResults)
     return (
       <div>
         <Navigation findSearchResults={this.findSearchResults} displayComponent={this.displayComponent} snippetsState={this.state.showSnippets} createState={this.state.showCreate} />
@@ -184,6 +233,7 @@ class SnippetApp extends React.Component {
         {showCreate ?  <SnippetAdd createSnippet={this.createSnippet} showCreate={this.state.showCreate} displayComponent={this.displayComponent} /> : null }
         {showSnippet ?  <SnippetRecord record={this.state.record} snippetEdit={this.snippetEdit} snippetDelete={this.snippetDelete} showSnippet={this.state.showSnippet} displayComponent={this.displayComponent} /> : null }
         {showUpdate ?  <SnippetUpdate updateSnippet={this.updateSnippet} snippet={this.state.editRecord} showUpdate={this.state.showUpdate} displayComponent={this.displayComponent} /> : null }
+        {showSearchResults ? <SnippetList snippets={this.state.searchResults} snippetRecord={this.snippetRecord} displayComponent={this.displayComponent} /> : null }
       </div>
     );
   }
