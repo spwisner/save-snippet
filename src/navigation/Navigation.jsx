@@ -10,6 +10,7 @@ export default class Navigation extends React.Component {
     this.activeClass = this.activeClass.bind(this);
     this.snippetsOnClick = this.snippetsOnClick.bind(this);
     this.createOnClick = this.createOnClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   activeClass(currentState) {
@@ -38,6 +39,17 @@ export default class Navigation extends React.Component {
     return;
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    var form = document.forms.searchSnippets;
+
+    const searchText = form.searchInput.value;
+    this.props.findSearchResults(searchText);
+
+    // Clear the form for the next input
+    form.searchInput.value = "";
+  }
+
   render() {
     return (
       <div>
@@ -50,9 +62,9 @@ export default class Navigation extends React.Component {
               <li className={this.activeClass(this.props.snippetsState)} onClick={this.snippetsOnClick}><a href="#">Home</a></li>
               <li className={this.activeClass(this.props.createState)} onClick={this.createOnClick}><a href="#">Create</a></li>
             </ul>
-            <form className="navbar-form navbar-right" role="search">
+            <form className="navbar-form navbar-right" name="searchSnippets" role="search" onSubmit={this.handleSubmit}>
               <div className="form-group">
-                <input type="text" className="form-control search-input" placeholder="Search" />
+                <input type="text" name="searchInput" className="form-control search-input" placeholder="Search" />
               </div>
               <button type="submit" className="btn btn-default">Submit</button>
             </form>

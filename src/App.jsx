@@ -47,7 +47,8 @@ class SnippetApp extends React.Component {
       showCreate: false,
       snippets: [],
       record: [],
-      editRecord: []
+      editRecord: [],
+      searchResults: []
     };
 
     this.createSnippet = this.createSnippet.bind(this);
@@ -56,6 +57,7 @@ class SnippetApp extends React.Component {
     this.snippetDelete = this.snippetDelete.bind(this);
     this.displayComponent = this.displayComponent.bind(this);
     this.updateSnippet = this.updateSnippet.bind(this);
+    this.findSearchResults = this.findSearchResults.bind(this);
   }
 
   // componentDidMount used to ensure component is ready to use before data is loaded
@@ -139,6 +141,31 @@ class SnippetApp extends React.Component {
     }
   }
 
+  //////Search Bar
+
+  findSearchResults(searchText) {
+    // Declare variables
+    const snippetsArray = this.state.snippets;
+    const filter = searchText.toUpperCase();
+
+    // Empty Results Array
+    let resultsArray = [];
+
+    // Loop through all objects, and push matches into resultsArray
+    for (let i = 0; i < snippetsArray.length; i++) {
+      if (snippetsArray[i].title.toUpperCase().indexOf(filter) > -1) {
+        resultsArray.push(snippetsArray[i]);
+      }
+    }
+
+    console.log(resultsArray);
+
+    this.displayComponent("searchResults", resultsArray);
+}
+
+
+  /////End Search Bar
+
   displayComponent(stateName, conditional) {
     const object = {};
     object[stateName] = conditional;
@@ -152,7 +179,7 @@ class SnippetApp extends React.Component {
     const showCreate = this.displayStatus(this.state.showCreate);
     return (
       <div>
-        <Navigation displayComponent={this.displayComponent} snippetsState={this.state.showSnippets} createState={this.state.showCreate} />
+        <Navigation findSearchResults={this.findSearchResults} displayComponent={this.displayComponent} snippetsState={this.state.showSnippets} createState={this.state.showCreate} />
         {showSnippets ? <SnippetList snippets={this.state.snippets} snippetRecord={this.snippetRecord} displayComponent={this.displayComponent} /> : null }
         {showCreate ?  <SnippetAdd createSnippet={this.createSnippet} showCreate={this.state.showCreate} displayComponent={this.displayComponent} /> : null }
         {showSnippet ?  <SnippetRecord record={this.state.record} snippetEdit={this.snippetEdit} snippetDelete={this.snippetDelete} showSnippet={this.state.showSnippet} displayComponent={this.displayComponent} /> : null }

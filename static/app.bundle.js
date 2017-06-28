@@ -867,6 +867,7 @@ var Navigation = function (_React$Component) {
     _this.activeClass = _this.activeClass.bind(_this);
     _this.snippetsOnClick = _this.snippetsOnClick.bind(_this);
     _this.createOnClick = _this.createOnClick.bind(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
     return _this;
   }
 
@@ -898,6 +899,18 @@ var Navigation = function (_React$Component) {
       this.props.displayComponent("showSnippet", false);
       this.props.displayComponent("showCreate", true);
       return;
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(event) {
+      event.preventDefault();
+      var form = document.forms.searchSnippets;
+
+      var searchText = form.searchInput.value;
+      this.props.findSearchResults(searchText);
+
+      // Clear the form for the next input
+      form.searchInput.value = "";
     }
   }, {
     key: 'render',
@@ -944,11 +957,11 @@ var Navigation = function (_React$Component) {
             ),
             _react2.default.createElement(
               'form',
-              { className: 'navbar-form navbar-right', role: 'search' },
+              { className: 'navbar-form navbar-right', name: 'searchSnippets', role: 'search', onSubmit: this.handleSubmit },
               _react2.default.createElement(
                 'div',
                 { className: 'form-group' },
-                _react2.default.createElement('input', { type: 'text', className: 'form-control search-input', placeholder: 'Search' })
+                _react2.default.createElement('input', { type: 'text', name: 'searchInput', className: 'form-control search-input', placeholder: 'Search' })
               ),
               _react2.default.createElement(
                 'button',
@@ -1061,7 +1074,8 @@ var SnippetApp = function (_React$Component) {
       showCreate: false,
       snippets: [],
       record: [],
-      editRecord: []
+      editRecord: [],
+      searchResults: []
     };
 
     _this.createSnippet = _this.createSnippet.bind(_this);
@@ -1070,6 +1084,7 @@ var SnippetApp = function (_React$Component) {
     _this.snippetDelete = _this.snippetDelete.bind(_this);
     _this.displayComponent = _this.displayComponent.bind(_this);
     _this.updateSnippet = _this.updateSnippet.bind(_this);
+    _this.findSearchResults = _this.findSearchResults.bind(_this);
     return _this;
   }
 
@@ -1167,6 +1182,33 @@ var SnippetApp = function (_React$Component) {
         return false;
       }
     }
+
+    //////Search Bar
+
+  }, {
+    key: 'findSearchResults',
+    value: function findSearchResults(searchText) {
+      // Declare variables
+      var snippetsArray = this.state.snippets;
+      var filter = searchText.toUpperCase();
+
+      // Empty Results Array
+      var resultsArray = [];
+
+      // Loop through all objects, and push matches into resultsArray
+      for (var i = 0; i < snippetsArray.length; i++) {
+        if (snippetsArray[i].title.toUpperCase().indexOf(filter) > -1) {
+          resultsArray.push(snippetsArray[i]);
+        }
+      }
+
+      console.log(resultsArray);
+
+      this.displayComponent("searchResults", resultsArray);
+    }
+
+    /////End Search Bar
+
   }, {
     key: 'displayComponent',
     value: function displayComponent(stateName, conditional) {
@@ -1184,7 +1226,7 @@ var SnippetApp = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_Navigation2.default, { displayComponent: this.displayComponent, snippetsState: this.state.showSnippets, createState: this.state.showCreate }),
+        _react2.default.createElement(_Navigation2.default, { findSearchResults: this.findSearchResults, displayComponent: this.displayComponent, snippetsState: this.state.showSnippets, createState: this.state.showCreate }),
         showSnippets ? _react2.default.createElement(_SnippetList2.default, { snippets: this.state.snippets, snippetRecord: this.snippetRecord, displayComponent: this.displayComponent }) : null,
         showCreate ? _react2.default.createElement(_SnippetAdd2.default, { createSnippet: this.createSnippet, showCreate: this.state.showCreate, displayComponent: this.displayComponent }) : null,
         showSnippet ? _react2.default.createElement(_SnippetRecord2.default, { record: this.state.record, snippetEdit: this.snippetEdit, snippetDelete: this.snippetDelete, showSnippet: this.state.showSnippet, displayComponent: this.displayComponent }) : null,
