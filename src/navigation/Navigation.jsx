@@ -50,13 +50,11 @@ export default class Navigation extends React.Component {
               <li className={this.activeClass(this.props.snippetsState)} onClick={this.snippetsOnClick}><a href="#">Home</a></li>
               <li className={this.activeClass(this.props.createState)} onClick={this.createOnClick}><a href="#">Create</a></li>
             </ul>
-            <form className="navbar-form navbar-right navbar-form">
+            <form className="navbar-form navbar-right" role="search">
               <div className="form-group">
-                <input type="text" className="form-control" placeholder="Search" />
-                </div>
-                <button className="btn btn-default" type="submit">
-                  <i className="glyphicon glyphicon-search"></i>
-                </button>
+                <input type="text" className="form-control search-input" placeholder="Search" />
+              </div>
+              <button type="submit" className="btn btn-default">Submit</button>
             </form>
           </div>
         </nav>
