@@ -63,7 +63,7 @@ export default class SnippetUpdate extends React.Component {
             <label>Notes</label>
             <textarea className="form-control" name="notes" placeholder="Notes" rows="3" defaultValue={this.props.snippet.notes}></textarea>
           </div>
-          <div class="mt-btn-container">
+          <div className="margin-btn-container">
             <button className="btn btn-success margin-right-btn">Update</button>
             <button className="btn btn-danger" onClick={this.cancelUpdate}>Cancel</button>
           </div>

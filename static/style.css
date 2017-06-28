@@ -41,8 +41,8 @@ PURPLE/BLUE #446DF6
 
 /* Search Input in Navigation Component */
 .search-input {
-  margin-right: 3px;
-  max-width: 175px;
+  margin-right: 5px;
+  max-width: 300px;
 }
 
 /* Record Styling Tab Content */
@@ -50,8 +50,15 @@ PURPLE/BLUE #446DF6
   margin-top: 15px;
 }
 
-.mt-btn-container {
+/* Record Border */
+.record-border {
+  border: 1px solid #4C212A;
+  border-radius: 4px;
+}
+
+.margin-btn-container {
   margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .margin-right-btn {
