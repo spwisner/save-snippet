@@ -16,34 +16,100 @@ import ReactDOM from 'react-dom';
 const snippets = [
   {
     id: 1,
-    title: 'PropType',
-    created: new Date('2017-06-01'),
-    library: 'React.js',
-    description: 'Proptypes are used when properties being passed from one component to another can be validated against a specification',
-    code: 'SnippetRow.propTypes = {snippet_id: React.PropTypes.number.isRequired, snippet_title: React.PropTypes.string};',
-    notes: 'Only Checked in Developer Mode',
-  },
-  {
-    id: 2,
-    title: 'Default Property Value',
-    created: new Date('2016-06-02'),
-    library: 'React.js',
-    description: 'Used when parent does not supply value to parent',
-    code: 'SnippetRow.defaultProps = {snippet_title: "-- no title --",};',
-    notes: 'Needs to be outside of component as a function',
-  },
-  {
-    id: 3,
-    title: "blank",
+    title: "Display Progress During Download",
     created: new Date('2016-06-03'),
     library: "JavaScript",
     description: "AFAIK, script elements don't have progress events. Your best bet is to use an XHR to get the script's body, then count on the browser cache for a second fetch. The problem is that your script then needs to be parsed by the browser, and there doesn't seem to be events for that.",
     code: '',
     notes: "The solution is pure JS, so you can adapt it to whatever framework you're using. It assumes that actual download will be about 70% of the total time, and allocates 20 % to the browser parsing. I use a non-minified versionof the awesome three.js 3D library as a biggish source file. because it is in another sandbox, progress callculation is inaccurate, but if you serve your own script that shouldn't be a problem.'",
+  },
+  {
+    id: 2,
+    title: 'Parsing CSV Data',
+    created: new Date('2016-06-02'),
+    library: 'JavaScript',
+    description: 'You can use the CSVToArray() function',
+    code: '',
+    notes: 'This has worked for a wide variety of files. I find that it appends an extra blank row at the end. Not sure if this is the best way to but suggest adding a check that the new line has at least one value, even if explicitly blank ',
   }
 ];
 
-let codeThree = [
+// Sample Code with spacing
+let codeOne = [
+'  <script type="text/javascript">',
+'      // ref: http://stackoverflow.com/a/1293163/2343 ',
+'      // This will parse a delimited string into an array of',
+'      // arrays. The default delimiter is the comma, but this',
+'      // can be overriden in the second argument.',
+'      function CSVToArray( strData, strDelimiter ){',
+'          // Check to see if the delimiter is defined. If not,',
+'          // then default to comma.',
+'          strDelimiter = (strDelimiter || ",");',
+'',
+'          // Create a regular expression to parse the CSV values.',
+'          var objPattern = new RegExp(',
+'              (',
+'                  // Delimiters.',
+'                  Insert Delimiters Here ',
+'',
+'                  // Quoted fields. ',
+'                  Insert Quoted Field Here ',
+'',
+'                  // Standard fields.',
+'                  Insert Standard fields here',
+'              ),',
+'              "gi"',
+'              );',
+'',
+'',
+'          // Create an array to hold our data. Give the array',
+'          // a default empty first row.',
+'          var arrData = [[]];',
+'',
+'          // Create an array to hold our individual pattern',
+'          // matching groups.',
+'          var arrMatches = null;',
+'',
+'',
+'          // Keep looping over the regular expression matches',
+'          // until we can no longer find a match.',
+'          while (arrMatches = objPattern.exec( strData )){',
+'',
+'              // Get the delimiter that was found.',
+'              var strMatchedDelimiter = arrMatches[ 1 ];',
+'',
+'              // Check to see if the given delimiter has a length',
+'              // (is not the start of string) and if it matches',
+'              // field delimiter. If id does not, then we know',
+'              // that this delimiter is a row delimiter.',
+'              if (',
+'                  strMatchedDelimiter.length &&',
+'                  strMatchedDelimiter !== strDelimiter',
+'                  ){',
+'',
+'                  // Since we have reached a new row of data,',,
+'                  // add an empty row to our data array.',
+'                  arrData.push( [] );',
+'',
+'              }',
+'',
+'              var strMatchedValue;',
+'',
+'              // Now that we have our delimiter out of the way,',
+"              // let's check to see which kind of value we",
+'              // captured (quoted or unquoted).',
+'              arrData[ arrData.length - 1 ].push( strMatchedValue );',
+'          }',
+'',
+'          // Return the parsed data.',
+'          return( arrData );',
+'      }',
+'',
+'  </script>'
+].join("\n");
+snippets[0].code = codeOne;
+
+let codeTwo = [
 '//this is a rough size estimate for my example file',
 'let TOTAL_ESTIMATE = 1016 * 1024;',
 '// I use a hr as a ',
@@ -62,8 +128,7 @@ let codeThree = [
 '     bar.style = "width: " + (5 + .6 * p) + "%"; // I just assume dl will be around 60-70% of total time',
 '} '
 ].join("\n");
-
-snippets[2].code = codeThree;
+snippets[1].code = codeTwo;
 
 ///////////////// SnippetApp
 
@@ -197,9 +262,7 @@ class SnippetApp extends React.Component {
       if (snippetsArray[i].title.toUpperCase().indexOf(filter) > -1) {
         resultsArray.push(snippetsArray[i]);
       }
-    }
-
-    console.log(resultsArray);
+    };
 
     // Moves search results to state
     this.displayComponent("searchResults", resultsArray);

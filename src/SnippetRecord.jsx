@@ -56,7 +56,6 @@ export default class SnippetRecord extends React.Component {
     const active = "active";
 
     if (codeState === active) {
-      console.log(this.props.record.code)
       return this.props.record.code;
     } else if (descriptionState === active) {
       return this.props.record.description;

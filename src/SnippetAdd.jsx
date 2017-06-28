@@ -23,8 +23,6 @@ export default class SnippetAdd extends React.Component {
     event.preventDefault();
     var form = document.forms.snippetAdd;
 
-    console.log(form.code.value);
-
     // this.props.createSnippet calls the createSnippet method in SnippetApp
     this.props.createSnippet({
       title: form.title.value,

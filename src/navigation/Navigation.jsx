@@ -27,6 +27,7 @@ export default class Navigation extends React.Component {
     this.props.displayComponent("showUpdate", false);
     this.props.displayComponent("showSnippet", false);
     this.props.displayComponent("showCreate", false);
+    this.props.displayComponent("showSearchResults", false);
     return;
   }
 
@@ -36,6 +37,7 @@ export default class Navigation extends React.Component {
     this.props.displayComponent("showUpdate", false);
     this.props.displayComponent("showSnippet", false);
     this.props.displayComponent("showCreate", true);
+    this.props.displayComponent("showSearchResults", false);
     return;
   }
 

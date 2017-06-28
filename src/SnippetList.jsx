@@ -23,7 +23,6 @@ export default class SnippetList extends React.Component {
 
   render() {
     const snippets = this.snippetRows();
-    console.log(this.props.snippets)
     return (
       <div>
         <h3 className="text-underline">Saved Snippets</h3>
