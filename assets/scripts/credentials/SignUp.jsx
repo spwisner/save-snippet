@@ -2,79 +2,32 @@
 
 import React from 'react';
 
-export default class SignUp extends React.Component {
-  constructor(){
-    super();
-
-    this.state = {
-      signInClass: "credentials-button active",
-      signUpClass: "",
-      showSignIn: true,
-      showSignUp: false
-    }
-
-    this.handleClassChange = this.handleClassChange.bind(this);
-  }
-
-  handleClassChange(event) {
-    event.preventDefault();
-    if (credentialState === "signInClass") {
-      this.setState({
-        signInClass: "credentials-button active",
-        signUpClass: "",
-      });
-    } else {
-      this.setState({
-        signInClass: "",
-        signUpClass: "credentials-button active",
-      });
-    }
-  }
-
+export default class SignIn extends React.Component {
   render() {
     return (
-      <div>
-        <div className="container">
-          <div className="row">
-            <div className="col-xs-6">
-              <a className={this.state.signInClass} href="#" type="button" onClick={this.handleClassChange}>Sign-In</a>
-            </div>
-            <div className="col-xs-6">
-                <a className={this.state.signUpClass} href="#" type="button" onClick={this.handleClassChange}>Register</a>
+      <div className="container-fluid">
+        <h2>Sign-Up</h2>
+        <form className="form login-form">
+          <div className="form-group">
+            <label>Email:</label>
+            <input type="text" className="form-control" id="usr" />
+          </div>
+          <div className="form-group">
+            <label>Password:</label>
+            <input type="password" className="form-control"/>
+          </div>
+          <div className="form-group">
+            <label>Confirm Password:</label>
+            <input type="password" className="form-control"/>
+          </div>
+          <button type="button" id="btnLogin" className="btn btn-block btn-lg btn-success">Sign-Up</button>
+          <div className="register-bg">
+            <div className="register-text-container">
+              <a className="register-text" onClick={this.props.credentialSwitch}>Already a member?</a><button className="btn btn-primary" onClick={this.props.credentialSwitch}>Sign-In</button>
             </div>
           </div>
-          <div className="row">
-            <div className="col-xs-12">
-              <form className="form-signin snippet-form">
-                <h2 className="form-signin-heading">Sign-Up</h2>
-                <input type="text" className="form-control" name="credentials[email]" placeholder="Email Address" required="" />
-                <input type="password" className="form-control" name="credentials[password]" placeholder="Password" required="" />
-                <button className="btn btn-sm btn-primary btn-block login-button" type="submit">Login</button>
-              </form>
-            </div>
-          </div>
-        </div>
+        </form>
       </div>
     )
   }
 }
-
-
-// 'use strict';
-//
-// import React from 'react';
-//
-// export default class SignUp extends React.Component {
-//   render() {
-//     return (
-//       <div className="wrapper">
-//         <form className="form-signin snippet-form">
-//           <h2 className="form-signin-heading">Sign-Up</h2>
-//           <input type="text" className="form-control" name="credentials[email]" placeholder="Email Address" required="" />
-//           <input type="password" className="form-control" name="credentials[password]" placeholder="Password" required="" />
-//           <button className="btn btn-sm btn-primary btn-block login-button" type="submit">Login</button>
-//         </form>
-//       </div>
-//     )
-//   }
-// }

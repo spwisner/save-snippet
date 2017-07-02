@@ -4,6 +4,19 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 
 /*Headers*/
 
+h1 {
+  color: #00635D;
+  font-size: 22px;
+}
+
+h2 {
+  color: #4C212A;
+}
+
+h3 {
+  color: #01172F;
+}
+
 /*
 Color Scheme
 * Red #4C212A
@@ -12,6 +25,33 @@ Color Scheme
 LIGHT BLUE #08A4BD
 PURPLE/BLUE #446DF6
 */
+
+/* Login Start*/
+
+/*Setting Width of login box in nav*/
+.login-form {
+  width: 400px;
+}
+
+.register-text {
+  font-size: 16px;
+  color: #337ab7;
+  padding-right: 10px;
+  text-decoration: underline;
+}
+
+.register-bg {
+  background-color: lightgray;
+  margin: 10px 0;
+}
+
+.register-text-container {
+  padding: 5px;
+  text-align: right;
+}
+
+/* Login End*/
+
 
 .text-underline {
   text-decoration: underline;
