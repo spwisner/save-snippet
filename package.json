@@ -4,7 +4,8 @@
   "private": true,
   "description": "",
   "scripts": {
-    "start": "grunt serve"
+    "start": "grunt serve",
+    "deploy": "grunt deploy"
   },
   "author": "Steve Wisner",
   "license": "ISC",
