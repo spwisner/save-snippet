@@ -11,7 +11,6 @@ import SnippetUpdate from './SnippetUpdate.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-
 // Testing Snippet Data
 const snippets = [
   {
