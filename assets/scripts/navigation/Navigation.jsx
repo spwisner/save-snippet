@@ -60,19 +60,39 @@ export default class Navigation extends React.Component {
             <div className="navbar-header">
               <span className="navbar-brand" href="#" onClick={this.snippetsOnClick}>Save Snippet</span>
             </div>
-            <ul className="nav navbar-nav">
-              <li className={this.activeClass(this.props.snippetsState)} onClick={this.snippetsOnClick}><a href="#">Home</a></li>
-              <li className={this.activeClass(this.props.createState)} onClick={this.createOnClick}><a href="#">Create</a></li>
+            <div>
+              <ul className="nav navbar-nav">
+                <li className={this.activeClass(this.props.snippetsState)} onClick={this.snippetsOnClick}><a href="#">Home</a></li>
+                <li className={this.activeClass(this.props.createState)} onClick={this.createOnClick}><a href="#">Create</a></li>
+              </ul>
+              <form className="navbar-form navbar-left" name="searchSnippets" role="search" onSubmit={this.handleSubmit}>
+                <div className="form-group">
+                  <input type="text" name="searchInput" className="form-control search-input" placeholder="Search By Title" />
+                </div>
+                <button type="submit" className="btn btn-default">Submit</button>
+              </form>
+              <ul className="nav navbar-nav navbar-right">
+                <li className="dropdown">
+                  <a className="dropdown-toggle" data-toggle="dropdown" href="#">Login <span className="glyphicon glyphicon-log-in"></span></a>
+                <div className="dropdown-menu">
+                  <form id="formLogin" className="form container-fluid">
+                    <div className="form-group">
+                      <label>Name:</label>
+                      <input type="text" className="form-control" id="usr" />
+                    </div>
+                    <div className="form-group">
+                      <label>Password:</label>
+                      <input type="password" className="form-control" id="pwd" />
+                    </div>
+                    <button type="button" id="btnLogin" className="btn btn-block">Login</button>
+                  </form>
+                </div>
+              </li>
             </ul>
-            <form className="navbar-form navbar-right" name="searchSnippets" role="search" onSubmit={this.handleSubmit}>
-              <div className="form-group">
-                <input type="text" name="searchInput" className="form-control search-input" placeholder="Search By Title" />
-              </div>
-              <button type="submit" className="btn btn-default">Submit</button>
-            </form>
           </div>
-        </nav>
-      </div>
+        </div>
+      </nav>
+    </div>
     )
   }
 };
