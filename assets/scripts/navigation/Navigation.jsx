@@ -1,23 +1,17 @@
 'use strict';
 
 import React from 'react';
-import SignIn from '../credentials/SignIn.jsx';
-import SignUp from '../credentials/SignUp.jsx';
+import Prelogin from '../credentials/prelogin/Prelogin.jsx';
 
 //////////////////// Bootstrap Navigation
 export default class Navigation extends React.Component {
   constructor() {
     super();
 
-    this.state = {
-      signIn: true
-    }
-
     this.activeClass = this.activeClass.bind(this);
     this.snippetsOnClick = this.snippetsOnClick.bind(this);
     this.createOnClick = this.createOnClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.credentialSwitch = this.credentialSwitch.bind(this);
   }
 
   activeClass(currentState) {
@@ -26,14 +20,6 @@ export default class Navigation extends React.Component {
     } else {
       return "";
     }
-  }
-
-  credentialSwitch() {
-    const currentShowState = this.state.signIn;
-    const stateObject = {};
-    stateObject.signIn = !currentShowState;
-    console.log(stateObject);
-    this.setState(stateObject);
   }
 
   snippetsOnClick(event) {
@@ -68,7 +54,6 @@ export default class Navigation extends React.Component {
   }
 
   render() {
-    const showSignIn = this.state.signIn;
     return (
       <div>
         <nav className="navbar navbar-inverse">
@@ -87,14 +72,7 @@ export default class Navigation extends React.Component {
                 </div>
                 <button type="submit" className="btn btn-default">Submit</button>
               </form>
-              <ul className="nav navbar-nav navbar-right">
-                <li className="dropdown">
-                  <a className="dropdown-toggle" data-toggle="dropdown" href="#">Login <span className="glyphicon glyphicon-log-in"></span></a>
-                <div className="dropdown-menu">
-                  {showSignIn ? <SignIn credentialSwitch={this.credentialSwitch}/> : <SignUp credentialSwitch={this.credentialSwitch}/>}
-                </div>
-              </li>
-            </ul>
+              <Prelogin />
           </div>
         </div>
       </nav>
