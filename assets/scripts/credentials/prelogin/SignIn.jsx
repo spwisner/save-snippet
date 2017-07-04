@@ -2,6 +2,7 @@
 
 import React from 'react';
 
+const store = require('../../store');
 const config = require('../../config');
 const api = config.apiOrigins.production;
 
@@ -12,16 +13,26 @@ export default class SignIn extends React.Component {
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
   }
 
+  success() {
+    console.log('success');
+  }
+
   signInRequest(data) {
     fetch(`${api}/sign-in`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     })
-    .then(response => response.json())
+    .then(response =>
+      response.json())
+    .then((response) => {
+      store.user = response.user;
+      console.log(store.user);
+      return store.user;
+    })
     .catch(err => {
-      alert("Error in sending data to server: " + err.message);
-    });
+      alert("Error: " + err.message);
+    })
   }
 
 
