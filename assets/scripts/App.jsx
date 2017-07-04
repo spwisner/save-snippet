@@ -10,6 +10,8 @@ import SnippetRecord from './SnippetRecord.jsx';
 import SnippetUpdate from './SnippetUpdate.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
+const config = require('./config');
+const api = config.apiOrigins.production;
 
 // Testing Snippet Data
 const snippets = [
@@ -164,7 +166,21 @@ class SnippetApp extends React.Component {
   // Setting the state
   loadData() {
     this.setState({ snippets: snippets });
-  }
+    fetch(`${api}/snippets`).then(response =>
+      response.json()
+    ).then(data => {
+      console.log(data);
+      // data.records.forEach(snippet => {
+      //   snippet.created = new Date(snippet.created);
+      //   if (snippet.completionDate)
+      //   snippet.completionDate = new Date(snippet.completionDate);
+      // });
+      // this.setState({ snippets: data.records });
+    }).catch(err => {
+      console.log(err);
+    });
+}
+
 
   snippetRecord(snippet) {
     this.setState({ record: snippet});
