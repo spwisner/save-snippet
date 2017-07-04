@@ -72,7 +72,7 @@ export default class Navigation extends React.Component {
                 </div>
                 <button type="submit" className="btn btn-default">Submit</button>
               </form>
-              <Prelogin />
+              <Prelogin loginStatus={this.props.loginStatus}/>
           </div>
         </div>
       </nav>
