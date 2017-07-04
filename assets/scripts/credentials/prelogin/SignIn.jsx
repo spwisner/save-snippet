@@ -13,8 +13,12 @@ export default class SignIn extends React.Component {
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
   }
 
-  success() {
-    console.log('success');
+  signInSuccess() {
+    console.log("signInSuccess");
+  }
+
+  signInFail() {
+    console.log('signInFail');
   }
 
   signInRequest(data) {
@@ -23,15 +27,17 @@ export default class SignIn extends React.Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     })
-    .then(response =>
-      response.json())
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+    })
     .then((response) => {
       store.user = response.user;
-      console.log(store.user);
-      return store.user;
+      return this.signInSuccess();
     })
-    .catch(err => {
-      alert("Error: " + err.message);
+    .catch(() => {
+      this.signInFail();
     })
   }
 
