@@ -15,6 +15,7 @@ export default class SignIn extends React.Component {
 
   signInSuccess() {
     console.log("signInSuccess");
+    this.props.loginStatus(true);
   }
 
   signInFail() {
@@ -22,19 +23,24 @@ export default class SignIn extends React.Component {
   }
 
   signInRequest(data) {
+    let responseOk;
     fetch(`${api}/sign-in`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     })
     .then((response) => {
-      if (response.ok) {
+      responseOk = response.ok;
+      if (responseOk) {
         return response.json();
       }
+      return this.signInFail();
     })
     .then((response) => {
-      store.user = response.user;
-      return this.signInSuccess();
+      if(responseOk) {
+        store.user = response.user;
+        return this.signInSuccess();
+      }
     })
     .catch(() => {
       this.signInFail();

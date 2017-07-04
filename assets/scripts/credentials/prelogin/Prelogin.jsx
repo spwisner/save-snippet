@@ -30,7 +30,7 @@ export default class Prelogin extends React.Component {
           <li className="dropdown">
             <a className="dropdown-toggle" data-toggle="dropdown" href="#">Login <span className="glyphicon glyphicon-log-in"></span></a>
             <div className="dropdown-menu">
-              {showSignIn ? <SignIn credentialSwitch={this.credentialSwitch}/> : <SignUp credentialSwitch={this.credentialSwitch}/>}
+              {showSignIn ? <SignIn loginStatus={this.props.loginStatus} credentialSwitch={this.credentialSwitch}/> : <SignUp credentialSwitch={this.credentialSwitch}/>}
             </div>
           </li>
         </ul>
