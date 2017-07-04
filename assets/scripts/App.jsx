@@ -4,8 +4,6 @@ const contentNode = document.getElementById('contents');
 import SnippetAdd from './SnippetAdd.jsx';
 import SnippetList from './SnippetList.jsx';
 import Navigation from './navigation/Navigation.jsx';
-import SignIn from './credentials/SignIn.jsx';
-import SignUp from './credentials/SignUp.jsx';
 import SnippetRecord from './SnippetRecord.jsx';
 import SnippetUpdate from './SnippetUpdate.jsx';
 import React from 'react';
