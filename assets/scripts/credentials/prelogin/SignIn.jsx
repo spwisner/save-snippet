@@ -13,8 +13,6 @@ export default class SignIn extends React.Component {
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
   }
 
-
-
   signInSuccess() {
     console.log('signInSuccess');
     this.props.loginStatus(true);
@@ -45,12 +43,6 @@ export default class SignIn extends React.Component {
           console.log(store.user);
           this.signInSuccess();
           return;
-          // return store.user;
-          // updatedIssue.created = new Date(updatedIssue.created);
-          // if (updatedIssue.completionDate)
-          // updatedIssue.completionDate = new Date(updatedIssue.completionDate);
-          // const newIssues = this.state.issues.concat(updatedIssue);
-          // this.setState({ issues: newIssues });
         });
       } else {
         response.json().then(error => {
