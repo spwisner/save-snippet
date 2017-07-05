@@ -45,7 +45,7 @@ class SnippetApp extends React.Component {
 
   loadSnippets() {
     this.componentDidMount();
-    this.showHideComponent(["showSnippets", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
+    this.showHideComponent(["showSnippets", "showHomepage", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
   }
 
   // componentDidMount used to ensure component is ready to use before data is loaded

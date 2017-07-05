@@ -77,7 +77,7 @@ export default class SnippetRecord extends React.Component {
     event.preventDefault();
     const currentRecord = this.props.record;
     this.props.snippetEdit(currentRecord);
-    this.props.showHideComponent(["showUpdate", "showSnippet", "showCreate", "showSnippets", "showSearchResults"]);
+    this.props.showHideComponent(["showUpdate", "showHomepage", "showSnippet", "showCreate", "showSnippets", "showSearchResults"]);
     // this.props.displayComponent("showSnippets", false);
     // this.props.displayComponent("showSnippet", false);
     // this.props.displayComponent("showUpdate", true);
@@ -88,7 +88,7 @@ export default class SnippetRecord extends React.Component {
 
   showSnippets(event) {
     event.preventDefault();
-    this.props.showHideComponent(["showSnippets", "showSnippet", "showCreate", "showUpdate", "showSearchResults"]);
+    this.props.showHideComponent(["showSnippets", "showHomepage", "showSnippet", "showCreate", "showUpdate", "showSearchResults"]);
     // this.props.displayComponent("showSnippets", true);
     // this.props.displayComponent("showSnippet", false);
     // this.props.displayComponent("showUpdate", false);

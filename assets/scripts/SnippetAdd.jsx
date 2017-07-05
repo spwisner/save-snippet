@@ -16,8 +16,7 @@ export default class SnippetAdd extends React.Component {
 
   handleCancel(event) {
     event.preventDefault();
-    this.props.snippetsLoad();
-    this.props.showHideComponent(["showSnippets", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
+    this.props.showHideComponent(["showSnippets", "showHomepage", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
     // this.props.displayComponent("showSnippets", true);
     // this.props.displayComponent("showSnippet", false);
     // this.props.displayComponent("showUpdate", false);
@@ -27,7 +26,7 @@ export default class SnippetAdd extends React.Component {
 
   createSnippetSuccess() {
     this.props.snippetsLoad();
-    this.props.showHideComponent(["showSnippets", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
+    this.props.showHideComponent(["showSnippets", "showHomepage", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
     // this.props.displayComponent("showSnippet", false);
     // this.props.displayComponent("showUpdate", false);
     // this.props.displayComponent("showCreate", false);

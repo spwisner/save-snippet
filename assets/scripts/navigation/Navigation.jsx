@@ -26,7 +26,7 @@ export default class Navigation extends React.Component {
   snippetsOnClick(event) {
     event.preventDefault();
 
-    let arr = ["showSnippets", "showUpdate", "showSnippet", "showCreate", "showSearchResults"];
+    let arr = ["showSnippets", "showHomepage", "showUpdate", "showSnippet", "showCreate", "showSearchResults"];
     this.props.showHideComponent(arr);
 
     // this.props.displayComponent("showSnippets", true);
