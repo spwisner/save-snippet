@@ -18,7 +18,7 @@ export default class ChangePasswordBtn extends React.Component {
     return (
       <div>
         <ul className="nav navbar-nav navbar-right">
-          <li className="dropdown">
+          <li className={this.props.dropDownOpenClass}>
             <a className="dropdown-toggle" data-toggle="dropdown" href="#">Options
               <span className="caret"></span></a>
               <ul className="dropdown-menu">
@@ -27,7 +27,7 @@ export default class ChangePasswordBtn extends React.Component {
               </ul>
             </li>
           </ul>
-        </div>
+      </div>
     )
   }
 }

@@ -3,11 +3,22 @@
 import React from 'react';
 
 export default class ChangePasswordForm extends React.Component {
+  constructor() {
+    super();
+
+    this.handleCancel = this.handleCancel.bind(this);
+  }
+
+  handleCancel(event) {
+    event.preventDefault();
+    this.props.changeOpenState(true);
+  }
+
   render() {
     return (
       <div>
         <ul className="nav navbar-nav navbar-right">
-          <li className="dropdown">
+          <li className={this.props.dropDownOpenClass}>
             <a className="dropdown-toggle" data-toggle="dropdown" href="#">Options <span className="glyphicon glyphicon-log-in"></span></a>
             <div className="dropdown-menu">
               <div className="container-fluid">
@@ -25,12 +36,8 @@ export default class ChangePasswordForm extends React.Component {
                     <label>Confirm Password:</label>
                     <input type="password" className="form-control"/>
                   </div>
-                  <button type="button" id="btnLogin" className="btn btn-block btn-lg btn-success">Sign-Up</button>
-                  <div className="register-bg">
-                    <div className="register-text-container">
-                      <a className="register-text" onClick={this.props.credentialSwitch}>Already a member?</a><button className="btn btn-primary" onClick={this.props.credentialSwitch}>Sign-In</button>
-                    </div>
-                  </div>
+                  <button type="button" id="btnLogin" className="btn btn-sm btn-danger margin-right-btn" onClick={this.handleCancel}>Cancel</button>
+                  <button type="button" id="btnLogin" className="btn btn-sm btn-success">Submit</button>
                 </form>
               </div>
             </div>
