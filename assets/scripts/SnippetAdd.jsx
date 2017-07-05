@@ -17,34 +17,36 @@ export default class SnippetAdd extends React.Component {
   handleCancel(event) {
     event.preventDefault();
     this.props.snippetsLoad();
-    this.props.displayComponent("showSnippets", true);
-    this.props.displayComponent("showSnippet", false);
-    this.props.displayComponent("showUpdate", false);
-    this.props.displayComponent("showCreate", false);
-    this.props.displayComponent("showSearchResults", false);
+    this.props.showHideComponent(["showSnippets", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
+    // this.props.displayComponent("showSnippets", true);
+    // this.props.displayComponent("showSnippet", false);
+    // this.props.displayComponent("showUpdate", false);
+    // this.props.displayComponent("showCreate", false);
+    // this.props.displayComponent("showSearchResults", false);
   }
 
-  signInSuccess() {
+  createSnippetSuccess() {
     this.props.snippetsLoad();
-    this.props.displayComponent("showSnippet", false);
-    this.props.displayComponent("showUpdate", false);
-    this.props.displayComponent("showCreate", false);
-    this.props.displayComponent("showSearchResults", false);
-    this.props.displayComponent("showSnippets", true);
+    this.props.showHideComponent(["showSnippets", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
+    // this.props.displayComponent("showSnippet", false);
+    // this.props.displayComponent("showUpdate", false);
+    // this.props.displayComponent("showCreate", false);
+    // this.props.displayComponent("showSearchResults", false);
+    // this.props.displayComponent("showSnippets", true);
   }
 
-  signInFail() {
+  createSnippetFail() {
     console.log('fail');
   }
 
-  signInServerFail() {
+  createSnippetServerFail() {
     console.log('server fail')
   }
 
   createSnippet(data) {
-    this.signInSuccess = this.signInSuccess.bind(this);
-    this.signInFail = this.signInFail.bind(this);
-    this.signInServerFail = this.signInServerFail.bind(this);
+    this.createSnippetSuccess = this.createSnippetSuccess.bind(this);
+    this.createSnippetFail = this.createSnippetFail.bind(this);
+    this.createSnippetServerFail = this.createSnippetServerFail.bind(this);
     console.log(store.user.token);
     fetch(`${api}/snippets`, {
       method: 'POST',
@@ -60,18 +62,18 @@ export default class SnippetAdd extends React.Component {
           console.log(json);
           store.user = json.user;
           console.log(store.user);
-          this.signInSuccess();
+          this.createSnippetSuccess();
           return;
         });
       } else {
         response.json().then(error => {
           console.log("Failed to add snippet: " + error.message);
-          this.signInFail();
+          this.createSnippetFail();
         });
       }
     }).catch(err => {
       console.log("Error in sending data to server: " + err.message);
-      this.signInServerFail();
+      this.createSnippetServerFail();
     });
   }
 

@@ -14,11 +14,12 @@ export default class SnippetList extends React.Component {
 
   createOnClick(event) {
     event.preventDefault();
-    this.props.displayComponent("showSnippets", false);
-    this.props.displayComponent("showSnippet", false);
-    this.props.displayComponent("showUpdate", false);
-    this.props.displayComponent("showCreate", true);
-    this.props.displayComponent("showSearchResults", false);
+    this.props.showHideComponent(["showCreate", "showSnippet", "showUpdate", "showSnippets", "showSearchResults"]);
+    // this.props.displayComponent("showSnippets", false);
+    // this.props.displayComponent("showSnippet", false);
+    // this.props.displayComponent("showUpdate", false);
+    // this.props.displayComponent("showCreate", true);
+    // this.props.displayComponent("showSearchResults", false);
   }
 
   render() {
@@ -50,6 +51,7 @@ export default class SnippetList extends React.Component {
       return (<SnippetRow
         key={snippet.id}
         snippet={snippet}
+        showHideComponent={this.props.showHideComponent}
         snippetRecord={this.props.snippetRecord}
         displayComponent={this.props.displayComponent}
         /> );
@@ -67,11 +69,12 @@ class SnippetRow extends React.Component {
     event.preventDefault();
     const snippet = this.props.snippet;
     this.props.snippetRecord(snippet);
-    this.props.displayComponent("showSnippets", false);
-    this.props.displayComponent("showSnippet", true);
-    this.props.displayComponent("showUpdate", false);
-    this.props.displayComponent("showCreate", false);
-    this.props.displayComponent("showSearchResults", false);
+    this.props.showHideComponent(["showSnippet", "showCreate", "showUpdate", "showSnippets", "showSearchResults"]);
+    // this.props.displayComponent("showSnippets", false);
+    // this.props.displayComponent("showSnippet", true);
+    // this.props.displayComponent("showUpdate", false);
+    // this.props.displayComponent("showCreate", false);
+    // this.props.displayComponent("showSearchResults", false);
   }
 
   render() {

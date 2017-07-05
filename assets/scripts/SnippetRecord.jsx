@@ -77,21 +77,23 @@ export default class SnippetRecord extends React.Component {
     event.preventDefault();
     const currentRecord = this.props.record;
     this.props.snippetEdit(currentRecord);
-    this.props.displayComponent("showSnippets", false);
-    this.props.displayComponent("showSnippet", false);
-    this.props.displayComponent("showUpdate", true);
-    this.props.displayComponent("showCreate", false);
-    this.props.displayComponent("showSearchResults", false);
+    this.props.showHideComponent(["showUpdate", "showSnippet", "showCreate", "showSnippets", "showSearchResults"]);
+    // this.props.displayComponent("showSnippets", false);
+    // this.props.displayComponent("showSnippet", false);
+    // this.props.displayComponent("showUpdate", true);
+    // this.props.displayComponent("showCreate", false);
+    // this.props.displayComponent("showSearchResults", false);
     return;
   }
 
   showSnippets(event) {
     event.preventDefault();
-    this.props.displayComponent("showSnippets", true);
-    this.props.displayComponent("showSnippet", false);
-    this.props.displayComponent("showUpdate", false);
-    this.props.displayComponent("showCreate", false);
-    this.props.displayComponent("showSearchResults", false);
+    this.props.showHideComponent(["showSnippets", "showSnippet", "showCreate", "showUpdate", "showSearchResults"]);
+    // this.props.displayComponent("showSnippets", true);
+    // this.props.displayComponent("showSnippet", false);
+    // this.props.displayComponent("showUpdate", false);
+    // this.props.displayComponent("showCreate", false);
+    // this.props.displayComponent("showSearchResults", false);
   }
 
   deleteSnippetData(event) {

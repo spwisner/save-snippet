@@ -34,11 +34,12 @@ export default class SnippetUpdate extends React.Component {
 
   cancelUpdate(event) {
     event.preventDefault();
-    this.props.displayComponent("showSnippets", false);
-    this.props.displayComponent("showSnippet", true);
-    this.props.displayComponent("showUpdate", false);
-    this.props.displayComponent("showCreate", false);
-    this.props.displayComponent("showSearchResults", false);
+    this.props.showHideComponent(["showSnippet", "showUpdate", "showCreate", "showSnippets", "showSearchResults"]);
+    // this.props.displayComponent("showSnippets", false);
+    // this.props.displayComponent("showSnippet", true);
+    // this.props.displayComponent("showUpdate", false);
+    // this.props.displayComponent("showCreate", false);
+    // this.props.displayComponent("showSearchResults", false);
   }
 
   render() {
