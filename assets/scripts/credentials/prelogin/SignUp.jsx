@@ -3,6 +3,55 @@
 import React from 'react';
 
 export default class SignIn extends React.Component {
+  constructor() {
+    super();
+
+  }
+
+  signUpSuccess() {
+    console.log('signUpSuccess');
+    this.props.loginStatus(true);
+  }
+
+  signUpFail() {
+    console.log('signUpFail');
+  }
+
+  signUpServerFail() {
+    console.log('server fail');
+  }
+
+  signUpRequest(data) {
+    this.signUpSuccess = this.signUpSuccess.bind(this);
+    this.signUpFail = this.signUpFail.bind(this);
+    this.signUpServerFail = this.signUpServerFail.bind(this);
+    fetch(`${api}/sign-in`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+    .then(response => {
+      if (response.ok) {
+        response.json().then((json) => {
+          console.log(json);
+          store.user = json.user;
+          console.log(store.user);
+          this.signUpSuccess();
+          return;
+        });
+      } else {
+        response.json().then(error => {
+          console.log("Failed to add issue: " + error.message);
+          this.signUpFail();
+        });
+      }
+    }).catch(err => {
+      console.log("Error in sending data to server: " + err.message);
+      this.signUpServerFail();
+    });
+  }
+
+
   render() {
     return (
       <div className="container-fluid">

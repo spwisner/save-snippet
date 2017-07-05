@@ -13,49 +13,6 @@ export default class SignIn extends React.Component {
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
   }
 
-  signInSuccess() {
-    console.log('signInSuccess');
-    this.props.loginStatus(true);
-  }
-
-  signInFail() {
-    console.log('signInFail');
-  }
-
-  signInServerFail() {
-    console.log('server fail');
-  }
-
-  signInRequest(data) {
-    this.signInSuccess = this.signInSuccess.bind(this);
-    this.signInFail = this.signInFail.bind(this);
-    this.signInServerFail = this.signInServerFail.bind(this);
-    fetch(`${api}/sign-in`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    })
-    .then(response => {
-      if (response.ok) {
-        response.json().then((json) => {
-          console.log(json);
-          store.user = json.user;
-          console.log(store.user);
-          this.signInSuccess();
-          return;
-        });
-      } else {
-        response.json().then(error => {
-          console.log("Failed to add issue: " + error.message);
-          this.signInFail();
-        });
-      }
-    }).catch(err => {
-      console.log("Error in sending data to server: " + err.message);
-      this.signInServerFail();
-    });
-  }
-
   // signInRequest(data) {
   //   fetch(`${api}/sign-in`, {
   //     method: 'POST',
@@ -90,7 +47,7 @@ export default class SignIn extends React.Component {
       }
     }
 
-    this.signInRequest(data);
+    this.props.signInRequest(data);
   }
 
   render() {
