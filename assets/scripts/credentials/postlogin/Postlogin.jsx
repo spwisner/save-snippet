@@ -11,7 +11,7 @@ export default class PostLogin extends React.Component {
 
     this.state = {
       displayCPForm: false,
-      dropDownOpenClass: "dropdown open"
+      dropDownOpenClass: "dropdown"
     };
 
     this.changeDisplayState = this.changeDisplayState.bind(this);

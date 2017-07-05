@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import SignOut from './SignOut.jsx'
 
 export default class ChangePasswordBtn extends React.Component {
   constructor() {
@@ -18,12 +19,12 @@ export default class ChangePasswordBtn extends React.Component {
     return (
       <div>
         <ul className="nav navbar-nav navbar-right">
-          <li className={this.props.dropDownOpenClass}>
+          <li className="dropdown">
             <a className="dropdown-toggle" data-toggle="dropdown" href="#">Options
               <span className="caret"></span></a>
               <ul className="dropdown-menu">
                 <li><a href="#" onClick={this.handleCPClick}>Change Password</a></li>
-                <li><a href="#">Sign Out</a></li>
+                <SignOut />
               </ul>
             </li>
           </ul>
