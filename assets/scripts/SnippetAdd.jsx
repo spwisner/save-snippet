@@ -1,6 +1,9 @@
 'use strict';
 
 import React from 'react';
+const store = require('./store');
+const config = require('./config');
+const api = config.apiOrigins.production;
 
 export default class SnippetAdd extends React.Component {
   constructor() {
@@ -8,10 +11,12 @@ export default class SnippetAdd extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    // this.createSnippet = this.createSnippet.bind(this);
   }
 
   handleCancel(event) {
     event.preventDefault();
+    this.props.snippetsLoad();
     this.props.displayComponent("showSnippets", true);
     this.props.displayComponent("showSnippet", false);
     this.props.displayComponent("showUpdate", false);
@@ -19,19 +24,75 @@ export default class SnippetAdd extends React.Component {
     this.props.displayComponent("showSearchResults", false);
   }
 
+  signInSuccess() {
+    this.props.snippetsLoad();
+    this.props.displayComponent("showSnippet", false);
+    this.props.displayComponent("showUpdate", false);
+    this.props.displayComponent("showCreate", false);
+    this.props.displayComponent("showSearchResults", false);
+    this.props.displayComponent("showSnippets", true);
+  }
+
+  signInFail() {
+    console.log('fail');
+  }
+
+  signInServerFail() {
+    console.log('server fail')
+  }
+
+  createSnippet(data) {
+    this.signInSuccess = this.signInSuccess.bind(this);
+    this.signInFail = this.signInFail.bind(this);
+    this.signInServerFail = this.signInServerFail.bind(this);
+    console.log(store.user.token);
+    fetch(`${api}/snippets`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token token=${store.user.token}`
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => {
+      if (response.ok) {
+        response.json().then((json) => {
+          console.log(json);
+          store.user = json.user;
+          console.log(store.user);
+          this.signInSuccess();
+          return;
+        });
+      } else {
+        response.json().then(error => {
+          console.log("Failed to add snippet: " + error.message);
+          this.signInFail();
+        });
+      }
+    }).catch(err => {
+      console.log("Error in sending data to server: " + err.message);
+      this.signInServerFail();
+    });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
-    var form = document.forms.snippetAdd;
+    const form = document.forms.snippetAdd;
+    let data = {
+      snippet: {
+        title: form.title.value,
+        library: form.library.value,
+        description: form.description.value,
+        code: form.code.value,
+        notes: form.notes.value,
+        created: new Date(),
+        }
+      }
 
-    // this.props.createSnippet calls the createSnippet method in SnippetApp
-    this.props.createSnippet({
-      title: form.title.value,
-      library: form.library.value,
-      description: form.description.value,
-      code: form.code.value,
-      notes: form.notes.value,
-      created: new Date(),
-    });
+      this.createSnippet(data);
+    // });
+
+
 
     // Clear the form for the next input
     form.title.value = "";
@@ -39,6 +100,8 @@ export default class SnippetAdd extends React.Component {
     form.description.value = "";
     form.code.value = "";
     form.notes.value = "";
+
+
   }
 
   render() {
