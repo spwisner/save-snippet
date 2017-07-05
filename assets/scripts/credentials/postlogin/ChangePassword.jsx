@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import SignOut from './SightOut.jsx';
+import SignOut from './SignOut.jsx';
 
 export default class ChangePassword extends React.Component {
   render() {

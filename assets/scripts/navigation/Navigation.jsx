@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Prelogin from '../credentials/prelogin/Prelogin.jsx';
+import Postlogin from '../credentials/postlogin/Postlogin.jsx';
 
 //////////////////// Bootstrap Navigation
 export default class Navigation extends React.Component {
@@ -54,6 +55,7 @@ export default class Navigation extends React.Component {
   }
 
   render() {
+    const postLoginDisplay = this.props.userSignedIn;
     return (
       <div>
         <nav className="navbar navbar-inverse">
@@ -72,7 +74,7 @@ export default class Navigation extends React.Component {
                 </div>
                 <button type="submit" className="btn btn-default">Submit</button>
               </form>
-              <Prelogin loginStatus={this.props.loginStatus}/>
+              {postLoginDisplay ? <Postlogin /> : <Prelogin loginStatus={this.props.loginStatus}/> }
           </div>
         </div>
       </nav>

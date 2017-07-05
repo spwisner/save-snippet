@@ -13,8 +13,10 @@ export default class SignIn extends React.Component {
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
   }
 
+
+
   signInSuccess() {
-    console.log("signInSuccess");
+    console.log('signInSuccess');
     this.props.loginStatus(true);
   }
 
@@ -22,30 +24,67 @@ export default class SignIn extends React.Component {
     console.log('signInFail');
   }
 
+  signInServerFail() {
+    console.log('server fail');
+  }
+
   signInRequest(data) {
-    let responseOk;
+    this.signInSuccess = this.signInSuccess.bind(this);
+    this.signInFail = this.signInFail.bind(this);
+    this.signInServerFail = this.signInServerFail.bind(this);
     fetch(`${api}/sign-in`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     })
-    .then((response) => {
-      responseOk = response.ok;
-      if (responseOk) {
-        return response.json();
+    .then(response => {
+      if (response.ok) {
+        response.json().then((json) => {
+          console.log(json);
+          store.user = json.user;
+          console.log(store.user);
+          this.signInSuccess();
+          return;
+          // return store.user;
+          // updatedIssue.created = new Date(updatedIssue.created);
+          // if (updatedIssue.completionDate)
+          // updatedIssue.completionDate = new Date(updatedIssue.completionDate);
+          // const newIssues = this.state.issues.concat(updatedIssue);
+          // this.setState({ issues: newIssues });
+        });
+      } else {
+        response.json().then(error => {
+          console.log("Failed to add issue: " + error.message);
+          this.signInFail();
+        });
       }
-      return this.signInFail();
-    })
-    .then((response) => {
-      if(responseOk) {
-        store.user = response.user;
-        return this.signInSuccess();
-      }
-    })
-    .catch(() => {
-      this.signInFail();
-    })
+    }).catch(err => {
+      console.log("Error in sending data to server: " + err.message);
+      this.signInServerFail();
+    });
   }
+
+  // signInRequest(data) {
+  //   fetch(`${api}/sign-in`, {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify(data),
+  //   })
+  //   .then(function(response) {
+  //     if (response.status !== 200) {
+  //       console.log('note 200');
+  //       this.signInFail();
+  //       return;
+  //     } else {
+  //       response.json()
+  //       .then(function(json) {
+  //         console.log(json);
+  //         store.user = json.user;
+  //         return store.user;
+  //       });
+  //     }
+  //   });
+  // }
 
 
   handleLoginSubmit(event) {

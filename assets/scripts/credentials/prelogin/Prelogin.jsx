@@ -8,22 +8,22 @@ export default class Prelogin extends React.Component {
   constructor() {
     super();
     this.state = {
-      signIn: true
+      showSignIn: true
     }
 
     this.credentialSwitch = this.credentialSwitch.bind(this);
   }
 
   credentialSwitch() {
-    const currentShowState = this.state.signIn;
+    const currentShowState = this.state.showSignIn;
     const stateObject = {};
-    stateObject.signIn = !currentShowState;
+    stateObject.showSignIn = !currentShowState;
     console.log(stateObject);
     this.setState(stateObject);
   }
 
   render() {
-    const showSignIn = this.state.signIn;
+    const showSignIn = this.state.showSignIn;
     return (
       <div>
         <ul className="nav navbar-nav navbar-right">
