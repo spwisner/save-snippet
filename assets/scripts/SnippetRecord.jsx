@@ -1,6 +1,9 @@
 'use strict';
 
 import React from 'react';
+const store = require('./store');
+const config = require('./config');
+const api = config.apiOrigins.production;
 
 // Individual Snippets View Component:
 
@@ -93,10 +96,34 @@ export default class SnippetRecord extends React.Component {
 
   deleteSnippetData(event) {
     event.preventDefault();
-    const currentRecord = this.props.record;
-    this.props.snippetDelete(currentRecord);
-    return;
+    console.log(api);
+    console.log(store.user._id)
+    console.log(store.user.token);
+    const recordID = this.props.record.id;
+    fetch(`${api}/snippets/${recordID}`,
+      { method: 'DELETE' ,
+        headers: {
+          'Authorization': `Token token=${store.user.token}`
+        },
+        mode: 'cors'
+      })
+      .then(response => {
+        if (!response.ok) {
+          let contentType = response.headers.get("content-type");
+          console.log(contentType);
+          alert('Failed to delete snippet');
+        } else {
+          console.log(response);
+        }
+    });
   }
+
+  // deleteSnippetData(event) {
+  //   event.preventDefault();
+  //   const currentRecord = this.props.record;
+  //   this.props.snippetDelete(currentRecord);
+  //   return;
+  // }
 
   render() {
     const tabContent = this.tabContent();

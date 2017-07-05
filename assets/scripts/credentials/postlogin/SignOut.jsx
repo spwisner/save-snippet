@@ -26,6 +26,7 @@ export default class SignOut extends React.Component {
         }
     });
   }
+
   render() {
     return (
         <li><a href="#" onClick={this.signOutRequest}>Sign Out</a></li>
