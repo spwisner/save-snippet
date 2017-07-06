@@ -11,32 +11,74 @@ export default class Prelogin extends React.Component {
   constructor() {
     super();
     this.state = {
-      showSignIn: true
+      showSignIn: true,
+      signInError: false,
+      signUpError: false,
     }
 
     this.credentialSwitch = this.credentialSwitch.bind(this);
     this.signInRequest = this.signInRequest.bind(this);
+    this.handleClearError = this.handleClearError.bind(this);
+    this.signUpErrorMessage = this.signUpErrorMessage.bind(this);
 
   }
 
-  credentialSwitch() {
+  handleClearError(event) {
+    event.preventDefault();
+    this.setState({
+      signInError: false,
+      signUpError: false,
+    })
+  }
+
+  credentialSwitch(event) {
+    event.preventDefault();
     const currentShowState = this.state.showSignIn;
     const stateObject = {};
     stateObject.showSignIn = !currentShowState;
     this.setState(stateObject);
+    this.setState({
+      signInError: false,
+      signUpError: false,
+    })
+    return;
   }
 
   signInSuccess() {
     console.log('signInSuccess');
+    this.setState({
+      signInError: false
+    })
     this.props.loginStatus(true);
+    return;
   }
 
   signInFail() {
     console.log('signInFail');
+    this.setState({
+      signInError: true
+    })
+    return;
   }
 
   signInServerFail() {
     console.log('server fail');
+    this.setState({
+      signInError: true
+    })
+    return;
+  }
+
+  signUpErrorMessage(bool) {
+    if (bool) {
+      this.setState({
+        signUpError: true
+      })
+    } else {
+      this.setState({
+        signUpError: false
+      })
+    }
   }
 
   signInRequest(data) {
@@ -73,9 +115,9 @@ export default class Prelogin extends React.Component {
       <div>
         <ul className="nav navbar-nav navbar-right">
           <li className="dropdown">
-            <a className="dropdown-toggle" data-toggle="dropdown" href="#">Login <span className="glyphicon glyphicon-log-in"></span></a>
+            <a className="dropdown-toggle" data-toggle="dropdown" href="#" onClick={this.handleClearError}>Login <span className="glyphicon glyphicon-log-in"></span></a>
             <div className="dropdown-menu">
-              {showSignIn ? <SignIn signInRequest={this.signInRequest} loginStatus={this.props.loginStatus} credentialSwitch={this.credentialSwitch}/> : <SignUp signInRequest={this.signInRequest} credentialSwitch={this.credentialSwitch}/>}
+              {showSignIn ? <SignIn signInRequest={this.signInRequest} signInErrorStatus={this.state.signInError} loginStatus={this.props.loginStatus} credentialSwitch={this.credentialSwitch}/> : <SignUp signUpErrorStatus={this.state.signUpError} signInRequest={this.signInRequest} credentialSwitch={this.credentialSwitch} signUpErrorMessage={this.signUpErrorMessage}/>}
             </div>
           </li>
         </ul>

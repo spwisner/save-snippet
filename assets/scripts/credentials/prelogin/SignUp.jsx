@@ -15,15 +15,18 @@ export default class SignUp extends React.Component {
 
   signUpSuccess() {
     console.log('signUpSuccess');
+    this.props.signUpErrorMessage(false);
     this.props.loginStatus(true);
   }
 
   signUpFail() {
     console.log('signUpFail');
+    this.props.signUpErrorMessage(true)
   }
 
   signUpServerFail() {
     console.log('server fail');
+    this.props.signUpErrorMessage(true);
   }
 
   signUpRequest(data) {
@@ -75,9 +78,12 @@ export default class SignUp extends React.Component {
   }
 
   render() {
+    const signUpError = this.props.signUpErrorStatus;
+    console.log(signUpError);
     return (
       <div className="container-fluid">
         <h2>Sign-Up</h2>
+        {signUpError ? <p className="error">There has been an error signing-up.  Please try again</p> : null}
         <form className="form login-form" name="signUpForm" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label>Email:</label>

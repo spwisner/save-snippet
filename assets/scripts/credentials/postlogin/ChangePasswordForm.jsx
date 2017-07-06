@@ -10,27 +10,44 @@ export default class ChangePasswordForm extends React.Component {
   constructor() {
     super();
 
+    this.state = {
+      passwordError: false
+    }
+
     this.handleCancel = this.handleCancel.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.clearPasswordErrors = this.clearPasswordErrors.bind(this);
   }
 
-  ChangePasswordSuccess() {
-    this.props.changeOpenState(true);
-    console.log('success');
+  clearPasswordErrors() {
+    return this.setState({
+      passwordError: false
+    });
   }
 
-  ChangePasswordFail() {
-    console.log('ChangePasswordFail');
+  changePasswordSuccess() {
+    this.setState({
+      passwordError: false
+    });
+    return this.props.changeOpenState(true);
   }
 
-  ChangePasswordServerFail() {
-    console.log('usf');
+  changePasswordFail() {
+    return this.setState({
+      passwordError: true
+    });
+  }
+
+  changePasswordServerFail() {
+    return this.setState({
+      passwordError: true
+    });
   }
 
   ChangePasswordSnippet(data) {
-    this.ChangePasswordSuccess = this.ChangePasswordSuccess.bind(this);
-    this.ChangePasswordFail = this.ChangePasswordFail.bind(this);
-    this.ChangePasswordServerFail = this.ChangePasswordServerFail.bind(this);
+    this.changePasswordSuccess = this.changePasswordSuccess.bind(this);
+    this.changePasswordFail = this.changePasswordFail.bind(this);
+    this.changePasswordServerFail = this.changePasswordServerFail.bind(this);
     fetch(`${api}/change-password/${store.user.id}`, {
       method: 'PATCH',
       headers: {
@@ -41,13 +58,13 @@ export default class ChangePasswordForm extends React.Component {
     })
     .then(response => {
       if (response.ok) {
-        this.ChangePasswordSuccess();
+        this.changePasswordSuccess();
       } else {
-        this.ChangePasswordFail();
+        this.changePasswordFail();
       }
     }).catch(error => {
       console.log("Error in sending data to server: " + error.message);
-      this.ChangePasswordServerFail();
+      this.changePasswordServerFail();
     });
   }
 
@@ -64,7 +81,9 @@ export default class ChangePasswordForm extends React.Component {
     };
 
     if (form.new.value !== form.confirm.value) {
-      console.log('ERROR');
+      this.setState({
+        passwordError: true
+      })
     } else {
       form.old.value = "";
       form.new.value = "";
@@ -72,22 +91,29 @@ export default class ChangePasswordForm extends React.Component {
       this.ChangePasswordSnippet(data);
     }
 
+    return;
+
   }
 
   handleCancel(event) {
     event.preventDefault();
+    this.setState({
+      passwordError: false
+    });
     this.props.changeOpenState(true);
   }
 
   render() {
+    const isPasswordError = this.state.passwordError;
     return (
       <div>
         <ul className="nav navbar-nav navbar-right">
           <li className="dropdown open">
-            <a className="dropdown-toggle" data-toggle="dropdown" href="#">Options <span className="glyphicon glyphicon-list"></span></a>
+            <a className="dropdown-toggle" data-toggle="dropdown" href="#" onClick={this.clearPasswordErrors}>Options <span className="glyphicon glyphicon-list"></span></a>
             <div className="dropdown-menu">
               <div className="container-fluid">
                 <h2>Change Password</h2>
+                {isPasswordError ? <p className="error">There has been an error changing your password. Please try again.</p> : null}
                 <form className="form login-form" name="changePassword" onSubmit={this.handleSubmit}>
                   <div className="form-group">
                     <label>Old Password</label>

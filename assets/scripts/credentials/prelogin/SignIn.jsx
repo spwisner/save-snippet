@@ -28,9 +28,12 @@ export default class SignIn extends React.Component {
   }
 
   render() {
+    const signInError = this.props.signInErrorStatus;
+    console.log(signInError);
     return (
       <div className="container-fluid">
         <h2>Sign-In</h2>
+        {signInError ? <p className="error">There has been an error signing in.  Please try again.</p> : null}
         <form className="form login-form" name="signInForm" onSubmit={this.handleLoginSubmit}>
           <div className="form-group">
             <label>Email:</label>
