@@ -9,25 +9,41 @@ export default class SnippetAdd extends React.Component {
   constructor() {
     super();
 
+    this.state = {
+      createError: false
+    }
+
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
   }
 
   handleCancel(event) {
     event.preventDefault();
+    this.setState({
+      createError: false,
+    });
     this.props.showHideComponent(["showSnippets", "showHomepage", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
   }
 
   createSnippetSuccess() {
+    this.setState({
+      createError: false,
+    });
     this.props.loadSnippets();
     this.props.showHideComponent(["showSnippets", "showHomepage", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
   }
 
   createSnippetFail() {
+    this.setState({
+      createError: true,
+    });
     console.log('fail');
   }
 
   createSnippetServerFail() {
+    this.setState({
+      createError: true,
+    });
     console.log('server fail')
   }
 
@@ -84,17 +100,19 @@ export default class SnippetAdd extends React.Component {
   }
 
   render() {
-    // Form name included so that inputs can be accessed
+    const isError = this.state.createError;
     return (
       <div>
         <h3 className="text-underline">Create a Snippet</h3>
         <form className="snippet-form" name="snippetAdd" onSubmit={this.handleSubmit}>
+          {isError ? <p className="error">There was an error creating your snippet. Please make sure all required
+          fields are complete and try again.</p> : null }
           <div className="form-group">
-            <label>Title</label>
+            <label>Title (required)</label>
             <input className="form-control" type="text" name="title" placeholder="Title" />
           </div>
           <div className="form-group">
-            <label>Library</label>
+            <label>Library (required)</label>
             <input className="form-control" type="text" name="library" placeholder="Library" />
           </div>
           <div className="form-group">
@@ -102,7 +120,7 @@ export default class SnippetAdd extends React.Component {
             <textarea className="form-control" name="description" placeholder="Description" rows="3"></textarea>
           </div>
           <div className="form-group">
-            <label>Code</label>
+            <label>Code (required)</label>
             <textarea className="form-control" name="code" placeholder="Code" rows="5"></textarea>
           </div>
           <div className="form-group">
