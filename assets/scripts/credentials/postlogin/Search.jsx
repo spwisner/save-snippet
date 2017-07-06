@@ -3,6 +3,23 @@
 import React from 'react';
 
 export default class Search extends React.Component {
+  constructor() {
+    super();
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const form = document.forms.searchSnippets;
+
+    const searchText = form.searchInput.value;
+    this.props.findSearchResults(searchText);
+
+    // Clear the form for the next input
+    form.searchInput.value = "";
+  }
+
   render() {
     return(
       <div>

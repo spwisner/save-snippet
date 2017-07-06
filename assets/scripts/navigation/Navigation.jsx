@@ -13,7 +13,7 @@ export default class Navigation extends React.Component {
     this.activeClass = this.activeClass.bind(this);
     this.snippetsOnClick = this.snippetsOnClick.bind(this);
     this.createOnClick = this.createOnClick.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   activeClass(currentState) {
@@ -48,16 +48,16 @@ export default class Navigation extends React.Component {
     return;
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    var form = document.forms.searchSnippets;
-
-    const searchText = form.searchInput.value;
-    this.props.findSearchResults(searchText);
-
-    // Clear the form for the next input
-    form.searchInput.value = "";
-  }
+  // handleSubmit(event) {
+  //   event.preventDefault();
+  //   var form = document.forms.searchSnippets;
+  //
+  //   const searchText = form.searchInput.value;
+  //   this.props.findSearchResults(searchText);
+  //
+  //   // Clear the form for the next input
+  //   form.searchInput.value = "";
+  // }
 
   render() {
     const postLoginDisplay = this.props.userSignedIn;
@@ -73,7 +73,7 @@ export default class Navigation extends React.Component {
                 <li className={this.activeClass(this.props.snippetsState)} onClick={this.snippetsOnClick}><a href="#">Home</a></li>
                 <li className={this.activeClass(this.props.createState)} onClick={this.createOnClick}><a href="#">Create</a></li>
               </ul>
-              {postLoginDisplay ? <Search /> : null}
+              {postLoginDisplay ? <Search findSearchResults={this.props.findSearchResults}/> : null}
               {postLoginDisplay ? <Postlogin loginStatus={this.props.loginStatus} /> : <Prelogin loginStatus={this.props.loginStatus}/> }
           </div>
         </div>
