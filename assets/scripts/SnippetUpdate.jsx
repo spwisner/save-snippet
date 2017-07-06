@@ -18,14 +18,17 @@ export default class SnippetUpdate extends React.Component {
   updateSuccess() {
     this.props.loadSnippets();
     this.props.showHideComponent(["showSnippets", "showHomepage", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
+    return;
   }
 
   updateFail() {
-    console.log('updateFail');
+    console.log('update failed');
+    return;
   }
 
   updateServerFail() {
-    console.log('usf');
+    console.log('update failed');
+    return;
   }
 
   updateSnippet(data) {
@@ -75,6 +78,8 @@ export default class SnippetUpdate extends React.Component {
     form.description.value = "";
     form.code.value = "";
     form.notes.value = "";
+
+    return;
   }
 
   cancelUpdate(event) {

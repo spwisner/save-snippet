@@ -23,6 +23,7 @@ export default class SnippetAdd extends React.Component {
       createError: false,
     });
     this.props.showHideComponent(["showSnippets", "showHomepage", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
+    return;
   }
 
   createSnippetSuccess() {
@@ -31,20 +32,19 @@ export default class SnippetAdd extends React.Component {
     });
     this.props.loadSnippets();
     this.props.showHideComponent(["showSnippets", "showHomepage", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
+    return;
   }
 
   createSnippetFail() {
-    this.setState({
+    return this.setState({
       createError: true,
     });
-    console.log('fail');
   }
 
   createSnippetServerFail() {
-    this.setState({
+    return this.setState({
       createError: true,
     });
-    console.log('server fail')
   }
 
   createSnippet(data) {
@@ -97,6 +97,8 @@ export default class SnippetAdd extends React.Component {
       form.description.value = "";
       form.code.value = "";
       form.notes.value = "";
+
+      return;
   }
 
   render() {

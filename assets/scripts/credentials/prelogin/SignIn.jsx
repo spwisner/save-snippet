@@ -24,7 +24,7 @@ export default class SignIn extends React.Component {
       }
     }
 
-    this.props.signInRequest(data);
+    return this.props.signInRequest(data);
   }
 
   render() {

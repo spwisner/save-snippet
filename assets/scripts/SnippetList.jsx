@@ -15,6 +15,7 @@ export default class SnippetList extends React.Component {
   createOnClick(event) {
     event.preventDefault();
     this.props.showHideComponent(["showCreate", "showHomepage", "showSnippet", "showUpdate", "showSnippets", "showSearchResults"]);
+    return;
   }
 
   snippetCount(snippets) {
@@ -80,6 +81,7 @@ class SnippetRow extends React.Component {
     const snippet = this.props.snippet;
     this.props.snippetRecord(snippet);
     this.props.showHideComponent(["showSnippet", "showHomepage", "showCreate", "showUpdate", "showSnippets", "showSearchResults"]);
+    return;
   }
 
   render() {

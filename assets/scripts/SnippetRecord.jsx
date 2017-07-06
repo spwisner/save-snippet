@@ -28,7 +28,7 @@ export default class SnippetRecord extends React.Component {
 
   viewCode(event) {
     event.preventDefault();
-    this.setState({
+    return this.setState({
       code: "active",
       description: "",
       notes: "",
@@ -38,7 +38,7 @@ export default class SnippetRecord extends React.Component {
 
   viewDescription(event) {
     event.preventDefault();
-    this.setState({
+    return this.setState({
       code: "",
       description: "active",
       notes: "",
@@ -48,7 +48,7 @@ export default class SnippetRecord extends React.Component {
 
   viewNotes(event) {
     event.preventDefault();
-    this.setState({
+    return this.setState({
       code: "",
       description: "",
       notes: "active",
@@ -68,9 +68,8 @@ export default class SnippetRecord extends React.Component {
       return this.props.record.description;
     } else if (notesState === active) {
       return this.props.record.notes;
-    } else {
-      console.log('error');
     }
+    return;
   }
 
   editSnippetData(event) {
@@ -84,15 +83,18 @@ export default class SnippetRecord extends React.Component {
   showSnippets(event) {
     event.preventDefault();
     this.props.showHideComponent(["showSnippets", "showHomepage", "showSnippet", "showCreate", "showUpdate", "showSearchResults"]);
+    return;
   }
 
   deleteSnippetSuccess() {
     this.props.loadSnippets();
     this.props.showHideComponent(["showSnippets", "showHomepage", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
+    return;
   }
 
   deleteSnippetFail() {
-    console.log('deleteSnippetFail');
+    console.log('failed to delete');
+    return;
   }
 
   deleteSnippetData(event) {

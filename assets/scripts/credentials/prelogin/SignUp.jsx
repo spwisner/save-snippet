@@ -15,15 +15,15 @@ export default class SignUp extends React.Component {
 
   signUpSuccess() {
     this.props.signUpErrorMessage(false);
-    this.props.loginStatus(true);
+    return this.props.loginStatus(true);
   }
 
   signUpFail() {
-    this.props.signUpErrorMessage(true)
+    return this.props.signUpErrorMessage(true)
   }
 
   signUpServerFail() {
-    this.props.signUpErrorMessage(true);
+    return this.props.signUpErrorMessage(true);
   }
 
   signUpRequest(data) {
@@ -71,7 +71,7 @@ export default class SignUp extends React.Component {
       }
     };
 
-    this.signUpRequest(data);
+    return this.signUpRequest(data);
   }
 
   render() {

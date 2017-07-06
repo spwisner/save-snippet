@@ -67,11 +67,11 @@ export default class Prelogin extends React.Component {
 
   signUpErrorMessage(bool) {
     if (bool) {
-      this.setState({
+      return this.setState({
         signUpError: true
       })
     } else {
-      this.setState({
+      return this.setState({
         signUpError: false
       })
     }
