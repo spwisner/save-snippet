@@ -18,7 +18,7 @@ export default class Navigation extends React.Component {
             </div>
             <div>
               {postLoginDisplay ? <Navlinks showHideComponent={this.props.showHideComponent} /> : null}
-              {postLoginDisplay ? <Search findSearchResults={this.props.findSearchResults}/> : null}
+              {postLoginDisplay ? <Search snippetsExist={this.props.snippetsExist} findSearchResults={this.props.findSearchResults}/> : null}
               {postLoginDisplay ? <Postlogin loginStatus={this.props.loginStatus} /> : <Prelogin loginStatus={this.props.loginStatus}/> }
           </div>
         </div>

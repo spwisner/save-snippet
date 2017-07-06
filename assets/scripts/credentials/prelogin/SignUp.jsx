@@ -14,18 +14,15 @@ export default class SignUp extends React.Component {
   }
 
   signUpSuccess() {
-    console.log('signUpSuccess');
     this.props.signUpErrorMessage(false);
     this.props.loginStatus(true);
   }
 
   signUpFail() {
-    console.log('signUpFail');
     this.props.signUpErrorMessage(true)
   }
 
   signUpServerFail() {
-    console.log('server fail');
     this.props.signUpErrorMessage(true);
   }
 
@@ -53,12 +50,12 @@ export default class SignUp extends React.Component {
         });
       } else {
         response.json().then(error => {
-          console.log("Failed to add issue: " + error.message);
+          console.log("Failed to sign-up: " + error.message);
           this.signUpFail();
         });
       }
-    }).catch(err => {
-      console.log("Error in sending data to server: " + err.message);
+    }).catch(error => {
+      console.log("Error in sending data to server: " + error.message);
       this.signUpServerFail();
     });
   }

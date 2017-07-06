@@ -45,16 +45,13 @@ export default class Prelogin extends React.Component {
   }
 
   signInSuccess() {
-    console.log('signInSuccess');
     this.setState({
       signInError: false
     })
-    this.props.loginStatus(true);
-    return;
+    return this.props.loginStatus(true);
   }
 
   signInFail() {
-    console.log('signInFail');
     this.setState({
       signInError: true
     })
@@ -62,7 +59,6 @@ export default class Prelogin extends React.Component {
   }
 
   signInServerFail() {
-    console.log('server fail');
     this.setState({
       signInError: true
     })

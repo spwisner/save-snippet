@@ -17,15 +17,28 @@ export default class SnippetList extends React.Component {
     this.props.showHideComponent(["showCreate", "showHomepage", "showSnippet", "showUpdate", "showSnippets", "showSearchResults"]);
   }
 
+  snippetCount(snippets) {
+    let snippetLength = snippets.length;
+
+    if (snippetLength > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   render() {
     const snippets = this.snippetRows();
+    const snippetsExist = this.snippetCount(snippets);
     return (
       <div>
         <h3 className="text-underline">Saved Snippets</h3>
+
+        {snippetsExist ?
+
         <table className="table table-striped">
           <thead>
             <tr>
-              <th>Id</th>
               <th>Title</th>
               <th>Created</th>
               <th>Library</th>
@@ -34,9 +47,11 @@ export default class SnippetList extends React.Component {
           </thead>
           <tbody>{snippets}</tbody>
         </table>
-        <button type="button" className="btn btn-success btn-md" onClick={this.createOnClick}>
-          Create
-        </button>
+
+      : <p>No snippets found.</p> }
+      <button type="button" className="btn btn-success btn-md" onClick={this.createOnClick}>
+        Create
+      </button>
       </div>
     )
   }
@@ -70,7 +85,6 @@ class SnippetRow extends React.Component {
   render() {
     return (
       <tr>
-        <td>{this.props.snippet.id}</td>
         <td>{this.props.snippet.title}</td>
         <td>{this.props.snippet.created.toDateString()}</td>
         <td>{this.props.snippet.library}</td>

@@ -8,8 +8,11 @@ export default class Homepage extends React.Component {
       <div className="container">
         <h1>Save Snippet</h1>
         <p>
-          Save Snippet is an application in which a user can store code for
-        future reference
+          Save Snippet is a single page web application which allows users to store code for
+        future reference.
+        </p>
+        <p>
+          Please login to begin.
         </p>
       </div>
     )

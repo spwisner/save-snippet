@@ -29,7 +29,6 @@ export default class SignIn extends React.Component {
 
   render() {
     const signInError = this.props.signInErrorStatus;
-    console.log(signInError);
     return (
       <div className="container-fluid">
         <h2>Sign-In</h2>

@@ -100,7 +100,7 @@ export default class ChangePasswordForm extends React.Component {
     this.setState({
       passwordError: false
     });
-    this.props.changeOpenState(true);
+    return this.props.changeOpenState(true);
   }
 
   render() {

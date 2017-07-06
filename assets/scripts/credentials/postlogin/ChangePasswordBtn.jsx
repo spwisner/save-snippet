@@ -13,6 +13,7 @@ export default class ChangePasswordBtn extends React.Component {
   handleCPClick(event) {
     event.preventDefault();
     this.props.changeDisplayState(true);
+    return;
   }
 
   render() {

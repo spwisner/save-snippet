@@ -18,6 +18,8 @@ export default class Search extends React.Component {
 
     // Clear the form for the next input
     form.searchInput.value = "";
+
+    return;
   }
 
   render() {

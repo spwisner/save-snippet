@@ -13,8 +13,7 @@ export default class SignOut extends React.Component {
   }
 
   signOutSuccess() {
-    console.log('sign-out success');
-    this.props.loginStatus(false);
+    return this.props.loginStatus(false);
   }
 
   signOutRequest(event) {
