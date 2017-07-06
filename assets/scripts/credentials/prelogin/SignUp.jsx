@@ -2,10 +2,15 @@
 
 import React from 'react';
 
-export default class SignIn extends React.Component {
+const store = require('../../store');
+const config = require('../../config');
+const api = config.apiOrigins.production;
+
+export default class SignUp extends React.Component {
   constructor() {
     super();
 
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   signUpSuccess() {
@@ -22,10 +27,13 @@ export default class SignIn extends React.Component {
   }
 
   signUpRequest(data) {
+    console.log('in request');
     this.signUpSuccess = this.signUpSuccess.bind(this);
     this.signUpFail = this.signUpFail.bind(this);
     this.signUpServerFail = this.signUpServerFail.bind(this);
-    fetch(`${api}/sign-in`, {
+    store.signUpEmail = data.credentials.email;
+    store.signUpPassword = data.credentials.password;
+    fetch(`${api}/sign-up`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -36,7 +44,7 @@ export default class SignIn extends React.Component {
           console.log(json);
           store.user = json.user;
           console.log(store.user);
-          this.signUpSuccess();
+          // this.signUpSuccess();
           return;
         });
       } else {
@@ -51,25 +59,39 @@ export default class SignIn extends React.Component {
     });
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    const form = document.forms.signUpForm;
+
+    const data = {
+      credentials: {
+        email: form.email.value,
+        password: form.password.value,
+      }
+    };
+
+    console.log(data);
+    this.signUpRequest(data);
+  }
 
   render() {
     return (
       <div className="container-fluid">
         <h2>Sign-Up</h2>
-        <form className="form login-form">
+        <form className="form login-form" name="signUpForm" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label>Email:</label>
-            <input type="text" className="form-control" id="usr" />
+            <input type="text" className="form-control" name="email" />
           </div>
           <div className="form-group">
             <label>Password:</label>
-            <input type="password" className="form-control"/>
+            <input type="password" className="form-control" name="password" />
           </div>
           <div className="form-group">
             <label>Confirm Password:</label>
-            <input type="password" className="form-control"/>
+            <input type="password" className="form-control" name="password-confirmation" />
           </div>
-          <button type="button" id="btnLogin" className="btn btn-block btn-lg btn-success">Sign-Up</button>
+          <input type="submit" className="btn btn-block btn-lg btn-success" value="Sign-Up" />
           <div className="register-bg">
             <div className="register-text-container">
               <a className="register-text" onClick={this.props.credentialSwitch}>Already a member?</a><button className="btn btn-primary" onClick={this.props.credentialSwitch}>Sign-In</button>

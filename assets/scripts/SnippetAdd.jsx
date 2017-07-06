@@ -88,7 +88,7 @@ export default class SnippetAdd extends React.Component {
         notes: form.notes.value,
         created: new Date(),
         }
-      }
+      };
 
       this.createSnippet(data);
     // });
