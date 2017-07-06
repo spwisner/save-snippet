@@ -2,8 +2,8 @@
 
 const config = {
   apiOrigins: {
-    production: 'http://localhost:4741'
-  }
-}
+    production: 'https://save-snippet-api.herokuapp.com'
+  },
+};
 
-module.exports = config
+module.exports = config;
