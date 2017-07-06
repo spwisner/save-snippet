@@ -6,7 +6,30 @@ export default class Navlinks extends React.Component {
   constructor() {
     super();
 
+    this.activeClass = this.activeClass.bind(this);
+    this.snippetsOnClick = this.snippetsOnClick.bind(this);
+    this.createOnClick = this.createOnClick.bind(this);
   };
+
+  activeClass(currentState) {
+    if (currentState) {
+      return "active";
+    } else {
+      return "";
+    }
+  }
+
+  snippetsOnClick(event) {
+    event.preventDefault();
+    this.props.showHideComponent(["showSnippets", "showHomepage", "showUpdate", "showSnippet", "showCreate", "showSearchResults"]);
+    return;
+  }
+
+  createOnClick(event) {
+    event.preventDefault();
+    this.props.showHideComponent(["showCreate", "showHomepage", "showUpdate", "showSnippet", "showSnippets", "showSearchResults"]);
+    return;
+  }
 
   render() {
     return (
