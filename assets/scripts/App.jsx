@@ -217,7 +217,12 @@ class SnippetApp extends React.Component {
         });
         this.loadSnippets();
       } else {
+        // Remove content on sign-out
         this.setState({
+          snippets: [],
+          record: [],
+          editRecord: [],
+          searchResults: [],
           userSignedIn: false
         });
         this.showHideComponent(["showHomepage", "showSnippets", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
@@ -233,7 +238,6 @@ class SnippetApp extends React.Component {
   //   this.setState(emptyObj);
   //   this.showHideComponent(["showSnippet", "showSnippets", "showHomepage", "showUpdate", "showCreate", "showSearchResults"]);
   // }
-
 
   render() {
     const showUpdate = this.displayStatus(this.state.showUpdate);
