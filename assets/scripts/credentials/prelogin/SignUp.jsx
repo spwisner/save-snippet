@@ -42,9 +42,12 @@ export default class SignUp extends React.Component {
       if (response.ok) {
         response.json().then((json) => {
           console.log(json);
-          store.user = json.user;
-          console.log(store.user);
-          // this.signUpSuccess();
+          this.props.signInRequest({
+            credentials: {
+              email: store.signUpEmail,
+              password: store.signUpPassword
+            }
+          });
           return;
         });
       } else {
