@@ -59,13 +59,12 @@ class SnippetApp extends React.Component {
     fetch(`${api}/snippets`).then(response =>
       response.json()
     ).then(data => {
-      console.log(data);
       data.snippets.forEach(snippet => {
         snippet.created = new Date(snippet.createdAt);
       });
       this.setState({ snippets: data.snippets });
-    }).catch(err => {
-      console.log(err);
+    }).catch(error => {
+      console.log(error);
     });
   }
 
@@ -181,8 +180,6 @@ class SnippetApp extends React.Component {
 /////End Search Bar
 
   showHideComponent(stateArr) {
-
-    console.log(stateArr[0]);
     const trueVal = stateArr[0];
     let emptyFalse;
     let emptyTrue;
@@ -230,14 +227,6 @@ class SnippetApp extends React.Component {
       }
     }
   }
-
-  //////Update
-  // updateRecordState(data) {
-  //   emptyObj = {};
-  //   emptyObj["record"] = data;
-  //   this.setState(emptyObj);
-  //   this.showHideComponent(["showSnippet", "showSnippets", "showHomepage", "showUpdate", "showCreate", "showSearchResults"]);
-  // }
 
   render() {
     const showUpdate = this.displayStatus(this.state.showUpdate);

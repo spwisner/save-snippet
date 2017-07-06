@@ -23,7 +23,6 @@ export default class Prelogin extends React.Component {
     const currentShowState = this.state.showSignIn;
     const stateObject = {};
     stateObject.showSignIn = !currentShowState;
-    console.log(stateObject);
     this.setState(stateObject);
   }
 
@@ -52,9 +51,7 @@ export default class Prelogin extends React.Component {
     .then(response => {
       if (response.ok) {
         response.json().then((json) => {
-          console.log(json);
           store.user = json.user;
-          console.log(store.user);
           this.signInSuccess();
           return;
         });

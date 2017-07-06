@@ -52,39 +52,6 @@ export default class SnippetUpdate extends React.Component {
     });
   }
 
-  // updateSnippet(data) {
-  //   console.log(data);
-  //   fetch(`${api}/snippets/${this.props.snippet.id}`, {
-  //     method: 'PATCH',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': `Token token=${store.user.token}`
-  //     },
-  //     body: JSON.stringify(data),
-  //   }).then(response => {
-  //     if (response.ok) {
-  //       response.json().then((json) => {
-  //         console.log(json);
-  //         // this.props.updateRecordState
-  //         // updatedSnippet.created = new Date(updatedSnippet.created);
-  //         // if (updatedSnippet.completionDate) {
-  //         //   updatedSnippet.completionDate = new Date(updatedSnippet.
-  //         //     completionDate);
-  //         //   }
-  //         //   this.props.updateRecordState
-  //         //   this.setState({ snippet: updatedSnippet });
-  //         //   console.log('Updated snippet successfully.');
-  //         });
-  //       } else {
-  //         response.json().then(error => {
-  //           console.log(`Failed to update snippet: ${error.message}`);
-  //         });
-  //       }
-  //     }).catch(err => {
-  //       console.log(`Error in sending data to server: ${err.message}`);
-  //     });
-  //   }
-
   handleSubmit(event) {
     event.preventDefault();
     const form = document.forms.snippetUpdate;
@@ -112,12 +79,7 @@ export default class SnippetUpdate extends React.Component {
 
   cancelUpdate(event) {
     event.preventDefault();
-    this.props.showHideComponent(["showSnippet", "showHomepage", "showUpdate", "showCreate", "showSnippets", "showSearchResults"]);
-    // this.props.displayComponent("showSnippets", false);
-    // this.props.displayComponent("showSnippet", true);
-    // this.props.displayComponent("showUpdate", false);
-    // this.props.displayComponent("showCreate", false);
-    // this.props.displayComponent("showSearchResults", false);
+    return this.props.showHideComponent(["showSnippet", "showHomepage", "showUpdate", "showCreate", "showSnippets", "showSearchResults"]);
   }
 
   render() {

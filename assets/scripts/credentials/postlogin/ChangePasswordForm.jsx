@@ -16,7 +16,6 @@ export default class ChangePasswordForm extends React.Component {
 
   ChangePasswordSuccess() {
     this.props.changeOpenState(true);
-    // this.props.showHideComponent(["showSnippets", "showHomepage", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
     console.log('success');
   }
 

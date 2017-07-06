@@ -11,27 +11,16 @@ export default class SnippetAdd extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
-    // this.createSnippet = this.createSnippet.bind(this);
   }
 
   handleCancel(event) {
     event.preventDefault();
     this.props.showHideComponent(["showSnippets", "showHomepage", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
-    // this.props.displayComponent("showSnippets", true);
-    // this.props.displayComponent("showSnippet", false);
-    // this.props.displayComponent("showUpdate", false);
-    // this.props.displayComponent("showCreate", false);
-    // this.props.displayComponent("showSearchResults", false);
   }
 
   createSnippetSuccess() {
     this.props.loadSnippets();
     this.props.showHideComponent(["showSnippets", "showHomepage", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
-    // this.props.displayComponent("showSnippet", false);
-    // this.props.displayComponent("showUpdate", false);
-    // this.props.displayComponent("showCreate", false);
-    // this.props.displayComponent("showSearchResults", false);
-    // this.props.displayComponent("showSnippets", true);
   }
 
   createSnippetFail() {
@@ -46,7 +35,6 @@ export default class SnippetAdd extends React.Component {
     this.createSnippetSuccess = this.createSnippetSuccess.bind(this);
     this.createSnippetFail = this.createSnippetFail.bind(this);
     this.createSnippetServerFail = this.createSnippetServerFail.bind(this);
-    console.log(store.user.token);
     fetch(`${api}/snippets`, {
       method: 'POST',
       headers: {
@@ -86,18 +74,13 @@ export default class SnippetAdd extends React.Component {
       };
 
       this.createSnippet(data);
-    // });
 
-
-
-    // Clear the form for the next input
-    form.title.value = "";
-    form.library.value = "";
-    form.description.value = "";
-    form.code.value = "";
-    form.notes.value = "";
-
-
+      // Clear the form for the next input
+      form.title.value = "";
+      form.library.value = "";
+      form.description.value = "";
+      form.code.value = "";
+      form.notes.value = "";
   }
 
   render() {

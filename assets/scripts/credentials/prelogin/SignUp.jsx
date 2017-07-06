@@ -27,7 +27,6 @@ export default class SignUp extends React.Component {
   }
 
   signUpRequest(data) {
-    console.log('in request');
     this.signUpSuccess = this.signUpSuccess.bind(this);
     this.signUpFail = this.signUpFail.bind(this);
     this.signUpServerFail = this.signUpServerFail.bind(this);
@@ -41,7 +40,6 @@ export default class SignUp extends React.Component {
     .then(response => {
       if (response.ok) {
         response.json().then((json) => {
-          console.log(json);
           this.props.signInRequest({
             credentials: {
               email: store.signUpEmail,
@@ -73,7 +71,6 @@ export default class SignUp extends React.Component {
       }
     };
 
-    console.log(data);
     this.signUpRequest(data);
   }
 

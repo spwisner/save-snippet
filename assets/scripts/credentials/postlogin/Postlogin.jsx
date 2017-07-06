@@ -34,7 +34,6 @@ export default class PostLogin extends React.Component {
 
   render() {
     const displayForm = this.state.displayCPForm;
-    console.log(displayForm);
     return (
       <div>
           {displayForm ? <ChangePasswordForm changeOpenState={this.changeOpenState} changeDisplayState={this.changeDisplayState} /> : <ChangePasswordBtn loginStatus={this.props.loginStatus} changeDisplayState={this.changeDisplayState} /> }

@@ -26,7 +26,7 @@ export default class SignOut extends React.Component {
       })
       .then(response => {
         if (!response.ok) {
-          console.log('Failed to delete issue');
+          console.log('Failed to Sign-out');
         } else {
           this.signOutSuccess();
         }

@@ -13,29 +13,6 @@ export default class SignIn extends React.Component {
     this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
   }
 
-  // signInRequest(data) {
-  //   fetch(`${api}/sign-in`, {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify(data),
-  //   })
-  //   .then(function(response) {
-  //     if (response.status !== 200) {
-  //       console.log('note 200');
-  //       this.signInFail();
-  //       return;
-  //     } else {
-  //       response.json()
-  //       .then(function(json) {
-  //         console.log(json);
-  //         store.user = json.user;
-  //         return store.user;
-  //       });
-  //     }
-  //   });
-  // }
-
-
   handleLoginSubmit(event) {
     event.preventDefault();
     const form = document.forms.signInForm;

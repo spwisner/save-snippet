@@ -57,7 +57,6 @@ export default class SnippetRecord extends React.Component {
   }
 
   tabContent() {
-    console.log(this.props.record);
     const codeState = this.state.code;
     const descriptionState = this.state.description;
     const notesState = this.state.notes;
@@ -79,22 +78,12 @@ export default class SnippetRecord extends React.Component {
     const currentRecord = this.props.record;
     this.props.snippetEdit(currentRecord);
     this.props.showHideComponent(["showUpdate", "showHomepage", "showSnippet", "showCreate", "showSnippets", "showSearchResults"]);
-    // this.props.displayComponent("showSnippets", false);
-    // this.props.displayComponent("showSnippet", false);
-    // this.props.displayComponent("showUpdate", true);
-    // this.props.displayComponent("showCreate", false);
-    // this.props.displayComponent("showSearchResults", false);
     return;
   }
 
   showSnippets(event) {
     event.preventDefault();
     this.props.showHideComponent(["showSnippets", "showHomepage", "showSnippet", "showCreate", "showUpdate", "showSearchResults"]);
-    // this.props.displayComponent("showSnippets", true);
-    // this.props.displayComponent("showSnippet", false);
-    // this.props.displayComponent("showUpdate", false);
-    // this.props.displayComponent("showCreate", false);
-    // this.props.displayComponent("showSearchResults", false);
   }
 
   deleteSnippetSuccess() {
@@ -110,9 +99,6 @@ export default class SnippetRecord extends React.Component {
     event.preventDefault();
     this.deleteSnippetSuccess = this.deleteSnippetSuccess.bind(this);
     this.deleteSnippetFail = this.deleteSnippetFail.bind(this);
-    console.log(api);
-    console.log(store.user._id)
-    console.log(store.user.token);
     const recordID = this.props.record.id;
     fetch(`${api}/snippets/${recordID}`,
       { method: 'DELETE' ,
@@ -129,13 +115,6 @@ export default class SnippetRecord extends React.Component {
         }
     });
   }
-
-  // deleteSnippetData(event) {
-  //   event.preventDefault();
-  //   const currentRecord = this.props.record;
-  //   this.props.snippetDelete(currentRecord);
-  //   return;
-  // }
 
   render() {
     const tabContent = this.tabContent();
