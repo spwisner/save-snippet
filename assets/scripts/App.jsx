@@ -219,6 +219,8 @@ class SnippetApp extends React.Component {
         this.setState({
           userSignedIn: false
         });
+        this.showHideComponent(["showHomepage", "showSnippets", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
+        return;
       }
     }
   }

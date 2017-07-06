@@ -78,7 +78,7 @@ export default class Navigation extends React.Component {
                 </div>
                 <button type="submit" className="btn btn-default">Submit</button>
               </form>
-              {postLoginDisplay ? <Postlogin /> : <Prelogin loginStatus={this.props.loginStatus}/> }
+              {postLoginDisplay ? <Postlogin loginStatus={this.props.loginStatus} /> : <Prelogin loginStatus={this.props.loginStatus}/> }
           </div>
         </div>
       </nav>

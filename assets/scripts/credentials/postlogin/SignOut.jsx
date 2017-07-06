@@ -12,17 +12,23 @@ export default class SignOut extends React.Component {
     this.signOutRequest = this.signOutRequest.bind(this);
   }
 
+  signOutSuccess() {
+    console.log('sign-out success');
+    this.props.loginStatus(false);
+  }
+
   signOutRequest(event) {
     event.preventDefault();
+    this.signOutSuccess = this.signOutSuccess.bind(this);
     fetch(`${api}/sign-out/${store.user.id}`,
       { method: 'DELETE' ,
         headers: {'Authorization': 'Token token=' + store.user.token,}
       })
       .then(response => {
         if (!response.ok) {
-          alert('Failed to delete issue');
+          console.log('Failed to delete issue');
         } else {
-          console.log(response);
+          this.signOutSuccess();
         }
     });
   }

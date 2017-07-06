@@ -24,7 +24,7 @@ export default class ChangePasswordBtn extends React.Component {
               <span className="caret"></span></a>
               <ul className="dropdown-menu">
                 <li><a href="#" onClick={this.handleCPClick}>Change Password</a></li>
-                <SignOut />
+                <SignOut loginStatus={this.props.loginStatus}/>
               </ul>
             </li>
           </ul>
