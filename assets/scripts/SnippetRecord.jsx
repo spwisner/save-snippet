@@ -96,8 +96,19 @@ export default class SnippetRecord extends React.Component {
     // this.props.displayComponent("showSearchResults", false);
   }
 
+  deleteSnippetSuccess() {
+    this.props.loadSnippets();
+    this.props.showHideComponent(["showSnippets", "showHomepage", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
+  }
+
+  deleteSnippetFail() {
+    console.log('deleteSnippetFail');
+  }
+
   deleteSnippetData(event) {
     event.preventDefault();
+    this.deleteSnippetSuccess = this.deleteSnippetSuccess.bind(this);
+    this.deleteSnippetFail = this.deleteSnippetFail.bind(this);
     console.log(api);
     console.log(store.user._id)
     console.log(store.user.token);
@@ -111,11 +122,9 @@ export default class SnippetRecord extends React.Component {
       })
       .then(response => {
         if (!response.ok) {
-          let contentType = response.headers.get("content-type");
-          console.log(contentType);
-          alert('Failed to delete snippet');
+          return this.deleteSnippetFail();
         } else {
-          console.log(response);
+          return this.deleteSnippetSuccess();
         }
     });
   }

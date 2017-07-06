@@ -25,7 +25,7 @@ export default class SnippetAdd extends React.Component {
   }
 
   createSnippetSuccess() {
-    this.props.snippetsLoad();
+    this.props.loadSnippets();
     this.props.showHideComponent(["showSnippets", "showHomepage", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
     // this.props.displayComponent("showSnippet", false);
     // this.props.displayComponent("showUpdate", false);
@@ -57,13 +57,8 @@ export default class SnippetAdd extends React.Component {
     })
     .then(response => {
       if (response.ok) {
-        response.json().then((json) => {
-          console.log(json);
-          store.user = json.user;
-          console.log(store.user);
           this.createSnippetSuccess();
           return;
-        });
       } else {
         response.json().then(error => {
           console.log("Failed to add snippet: " + error.message);
