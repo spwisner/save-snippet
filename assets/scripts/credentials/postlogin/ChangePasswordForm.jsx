@@ -85,7 +85,7 @@ export default class ChangePasswordForm extends React.Component {
       <div>
         <ul className="nav navbar-nav navbar-right">
           <li className="dropdown open">
-            <a className="dropdown-toggle" data-toggle="dropdown" href="#">Options <span className="glyphicon glyphicon-log-in"></span></a>
+            <a className="dropdown-toggle" data-toggle="dropdown" href="#">Options <span className="glyphicon glyphicon-list"></span></a>
             <div className="dropdown-menu">
               <div className="container-fluid">
                 <h2>Change Password</h2>
