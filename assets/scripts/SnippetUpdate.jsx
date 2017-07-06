@@ -2,6 +2,10 @@
 
 import React from 'react';
 
+const store = require('./store');
+const config = require('./config');
+const api = config.apiOrigins.production;
+
 /////////////Update Snippet
 export default class SnippetUpdate extends React.Component {
   constructor() {
@@ -11,19 +15,93 @@ export default class SnippetUpdate extends React.Component {
     this.cancelUpdate = this.cancelUpdate.bind(this);
   }
 
+  updateSuccess() {
+    this.props.loadSnippets();
+    this.props.showHideComponent(["showSnippets", "showHomepage", "showSnippet", "showUpdate", "showCreate", "showSearchResults"]);
+  }
+
+  updateFail() {
+    console.log('updateFail');
+  }
+
+  updateServerFail() {
+    console.log('usf');
+  }
+
+  updateSnippet(data) {
+    this.updateSuccess = this.updateSuccess.bind(this);
+    this.updateFail = this.updateFail.bind(this);
+    this.updateServerFail = this.updateServerFail.bind(this);
+    fetch(`${api}/snippets/${this.props.snippet.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Token token=${store.user.token}`
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => {
+      if (response.ok) {
+        this.updateSuccess();
+      } else {
+        this.updateFail();
+      }
+    }).catch(error => {
+      console.log("Error in sending data to server: " + error.message);
+      this.updateServerFail();
+    });
+  }
+
+  // updateSnippet(data) {
+  //   console.log(data);
+  //   fetch(`${api}/snippets/${this.props.snippet.id}`, {
+  //     method: 'PATCH',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': `Token token=${store.user.token}`
+  //     },
+  //     body: JSON.stringify(data),
+  //   }).then(response => {
+  //     if (response.ok) {
+  //       response.json().then((json) => {
+  //         console.log(json);
+  //         // this.props.updateRecordState
+  //         // updatedSnippet.created = new Date(updatedSnippet.created);
+  //         // if (updatedSnippet.completionDate) {
+  //         //   updatedSnippet.completionDate = new Date(updatedSnippet.
+  //         //     completionDate);
+  //         //   }
+  //         //   this.props.updateRecordState
+  //         //   this.setState({ snippet: updatedSnippet });
+  //         //   console.log('Updated snippet successfully.');
+  //         });
+  //       } else {
+  //         response.json().then(error => {
+  //           console.log(`Failed to update snippet: ${error.message}`);
+  //         });
+  //       }
+  //     }).catch(err => {
+  //       console.log(`Error in sending data to server: ${err.message}`);
+  //     });
+  //   }
+
   handleSubmit(event) {
     event.preventDefault();
-    var form = document.forms.snippetUpdate;
+    const form = document.forms.snippetUpdate;
 
-    this.props.updateSnippet({
-      id: this.props.snippet.id,
-      title: form.title.value,
-      library: form.library.value,
-      description: form.description.value,
-      code: form.code.value,
-      notes: form.notes.value,
-      created: new Date(),
-    });
+    const data = {
+      snippet: {
+        id: this.props.snippet.id,
+        title: form.title.value,
+        library: form.library.value,
+        description: form.description.value,
+        code: form.code.value,
+        notes: form.notes.value,
+        created: new Date(),
+      }
+    }
+
+    this.updateSnippet(data);
 
     form.title.value = "";
     form.library.value = "";

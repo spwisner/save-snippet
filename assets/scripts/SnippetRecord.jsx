@@ -57,6 +57,7 @@ export default class SnippetRecord extends React.Component {
   }
 
   tabContent() {
+    console.log(this.props.record);
     const codeState = this.state.code;
     const descriptionState = this.state.description;
     const notesState = this.state.notes;

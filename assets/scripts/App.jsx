@@ -226,6 +226,14 @@ class SnippetApp extends React.Component {
     }
   }
 
+  //////Update
+  // updateRecordState(data) {
+  //   emptyObj = {};
+  //   emptyObj["record"] = data;
+  //   this.setState(emptyObj);
+  //   this.showHideComponent(["showSnippet", "showSnippets", "showHomepage", "showUpdate", "showCreate", "showSearchResults"]);
+  // }
+
 
   render() {
     const showUpdate = this.displayStatus(this.state.showUpdate);
@@ -243,7 +251,7 @@ class SnippetApp extends React.Component {
         {showSnippets ? <SnippetList showHideComponent={this.showHideComponent} snippets={this.state.snippets} userSignedIn={this.state.userSignedIn} snippetRecord={this.snippetRecord} displayComponent={this.displayComponent} /> : null }
         {showCreate ?  <SnippetAdd showHideComponent={this.showHideComponent} createSnippet={this.createSnippet} showCreate={this.state.showCreate} displayComponent={this.displayComponent} loadSnippets={this.loadSnippets}/> : null }
         {showSnippet ?  <SnippetRecord loadSnippets={this.loadSnippets} showHideComponent={this.showHideComponent} record={this.state.record} snippetEdit={this.snippetEdit} snippetDelete={this.snippetDelete} showSnippet={this.state.showSnippet} displayComponent={this.displayComponent} /> : null }
-        {showUpdate ?  <SnippetUpdate showHideComponent={this.showHideComponent} updateSnippet={this.updateSnippet} snippet={this.state.editRecord} showUpdate={this.state.showUpdate} displayComponent={this.displayComponent} /> : null }
+        {showUpdate ?  <SnippetUpdate loadSnippets={this.loadSnippets} showHideComponent={this.showHideComponent} updateSnippet={this.updateSnippet} snippet={this.state.editRecord} showUpdate={this.state.showUpdate} displayComponent={this.displayComponent} /> : null }
         {showSearchResults ? <SnippetList showHideComponent={this.showHideComponent} snippets={this.state.searchResults} snippetRecord={this.snippetRecord} displayComponent={this.displayComponent} /> : null }
       </div>
     );
