@@ -9,7 +9,7 @@ Link to the live application: [https://spwisner.github.io/save-snippet](https://
 Link to the API Source: [https://github.com/spwisner/save-snippet-api](https://github.com/spwisner/save-snippet-api).
 
 Application Screenshot:
-![alt text]("https://user-images.githubusercontent.com/13546265/28041611-1d2afc2a-6598-11e7-806f-8c24b1b36e60.png" "Application Screenshot")
+![Application Screenshot](https://user-images.githubusercontent.com/13546265/28041611-1d2afc2a-6598-11e7-806f-8c24b1b36e60.png)
 
 ## Technologies Used
 
